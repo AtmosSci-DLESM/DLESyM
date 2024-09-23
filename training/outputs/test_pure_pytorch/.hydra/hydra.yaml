@@ -1,0 +1,198 @@
+hydra:
+  run:
+    dir: /home/quicksilver/nacc/pure_pytorch/zephyr/training/outputs/test_pure_pytorch
+  sweep:
+    dir: multirun/${now:%Y-%m-%d}/${now:%H-%M-%S}
+    subdir: ${hydra.job.num}
+  launcher:
+    _target_: hydra._internal.core_plugins.basic_launcher.BasicLauncher
+  sweeper:
+    _target_: hydra._internal.core_plugins.basic_sweeper.BasicSweeper
+    max_batch_size: null
+    params: null
+  help:
+    app_name: ${hydra.job.name}
+    header: '${hydra.help.app_name} is powered by Hydra.
+
+      '
+    footer: 'Powered by Hydra (https://hydra.cc)
+
+      Use --hydra-help to view Hydra specific help
+
+      '
+    template: '${hydra.help.header}
+
+      == Configuration groups ==
+
+      Compose your configuration from those groups (group=option)
+
+
+      $APP_CONFIG_GROUPS
+
+
+      == Config ==
+
+      Override anything in the config (foo.bar=value)
+
+
+      $CONFIG
+
+
+      ${hydra.help.footer}
+
+      '
+  hydra_help:
+    template: 'Hydra (${hydra.runtime.version})
+
+      See https://hydra.cc for more info.
+
+
+      == Flags ==
+
+      $FLAGS_HELP
+
+
+      == Configuration groups ==
+
+      Compose your configuration from those groups (For example, append hydra/job_logging=disabled
+      to command line)
+
+
+      $HYDRA_CONFIG_GROUPS
+
+
+      Use ''--cfg hydra'' to Show the Hydra config.
+
+      '
+    hydra_help: ???
+  hydra_logging:
+    version: 1
+    formatters:
+      simple:
+        format: '[%(asctime)s][HYDRA] %(message)s'
+    handlers:
+      console:
+        class: logging.StreamHandler
+        formatter: simple
+        stream: ext://sys.stdout
+    root:
+      level: INFO
+      handlers:
+      - console
+    loggers:
+      logging_example:
+        level: DEBUG
+    disable_existing_loggers: false
+  job_logging:
+    version: 1
+    formatters:
+      simple:
+        format: '[%(asctime)s][%(name)s][%(levelname)s] - %(message)s'
+    handlers:
+      console:
+        class: logging.StreamHandler
+        formatter: simple
+        stream: ext://sys.stdout
+      file:
+        class: logging.FileHandler
+        formatter: simple
+        filename: ${hydra.runtime.output_dir}/${hydra.job.name}.log
+    root:
+      level: INFO
+      handlers:
+      - console
+      - file
+    disable_existing_loggers: false
+  env: {}
+  mode: RUN
+  searchpath: []
+  callbacks: {}
+  output_subdir: .hydra
+  overrides:
+    hydra:
+    - hydra.run.dir=/home/quicksilver/nacc/pure_pytorch/zephyr/training/outputs/test_pure_pytorch
+    - hydra.mode=RUN
+    task:
+    - num_workers=8
+    - port=29452
+    - learning_rate=2e-4
+    - batch_size=16
+    - experiment_name=test
+    - model=hpx_rec_unet
+    - model/modules/blocks@model.encoder.conv_block=conv_next_block
+    - model/modules/blocks@model.decoder.conv_block=conv_next_block
+    - model.encoder.n_channels=[64,32,16]
+    - model.decoder.n_channels=[16,32,64]
+    - trainer.max_epochs=300
+    - data=era5_hpx32_7var_6h_24h
+    - data.src_directory=/home/quicksilver2/karlbam/Data/DLWP/HPX32
+    - data/splits=debug_val
+    - data.dst_directory=/home/quicksilver2/karlbam/Data/DLWP/HPX32
+    - data.prefix=era5_1deg_3h_HPX32_1979-2021_
+    - data.prebuilt_dataset=True
+    - data.module.drop_last=True
+    - trainer/lr_scheduler=cosine
+    - trainer/optimizer=adam
+    - model.enable_healpixpad=True
+  job:
+    name: train
+    chdir: null
+    override_dirname: batch_size=16,data.dst_directory=/home/quicksilver2/karlbam/Data/DLWP/HPX32,data.module.drop_last=True,data.prebuilt_dataset=True,data.prefix=era5_1deg_3h_HPX32_1979-2021_,data.src_directory=/home/quicksilver2/karlbam/Data/DLWP/HPX32,data/splits=debug_val,data=era5_hpx32_7var_6h_24h,experiment_name=test,learning_rate=2e-4,model.decoder.n_channels=[16,32,64],model.enable_healpixpad=True,model.encoder.n_channels=[64,32,16],model/modules/blocks@model.decoder.conv_block=conv_next_block,model/modules/blocks@model.encoder.conv_block=conv_next_block,model=hpx_rec_unet,num_workers=8,port=29452,trainer.max_epochs=300,trainer/lr_scheduler=cosine,trainer/optimizer=adam
+    id: ???
+    num: ???
+    config_name: config
+    env_set: {}
+    env_copy: []
+    config:
+      override_dirname:
+        kv_sep: '='
+        item_sep: ','
+        exclude_keys: []
+  runtime:
+    version: 1.2.0
+    version_base: '1.2'
+    cwd: /home/quicksilver/nacc/pure_pytorch/zephyr
+    config_sources:
+    - path: hydra.conf
+      schema: pkg
+      provider: hydra
+    - path: /home/quicksilver/nacc/pure_pytorch/zephyr/training/configs
+      schema: file
+      provider: main
+    - path: ''
+      schema: structured
+      provider: schema
+    output_dir: /home/quicksilver/nacc/pure_pytorch/zephyr/training/outputs/test_pure_pytorch
+    choices:
+      trainer: default
+      trainer/lr_scheduler: cosine
+      trainer/optimizer: adam
+      trainer/criterion: mse
+      model: hpx_rec_unet
+      model/modules/decoder@model.decoder: rec_unet_dec
+      model/modules/blocks@model.decoder.output_layer: output_layer
+      model/modules/blocks/activation@model.decoder.output_layer.activation: null
+      model/modules/blocks@model.decoder.recurrent_block: conv_gru_block
+      model/modules/blocks@model.decoder.up_sampling_block: transposed_conv_upsample
+      model/modules/activations@model.decoder.up_sampling_block.activation: capped_gelu
+      model/modules/blocks@model.decoder.conv_block: conv_next_block
+      model/modules/activations@model.decoder.conv_block.activation: capped_gelu
+      model/modules/encoder@model.encoder: rec_unet_enc
+      model/modules/blocks@model.encoder.recurrent_block: conv_gru_block
+      model/modules/blocks@model.encoder.down_sampling_block: avg_pool
+      model/modules/blocks@model.encoder.conv_block: conv_next_block
+      model/modules/activations@model.encoder.conv_block.activation: capped_gelu
+      data: era5_hpx32_7var_6h_24h
+      data/splits: debug_val
+      data/scaling: classic
+      data/module: time_series
+      hydra/env: default
+      hydra/callbacks: null
+      hydra/job_logging: default
+      hydra/hydra_logging: default
+      hydra/hydra_help: default
+      hydra/help: default
+      hydra/sweeper: basic
+      hydra/launcher: basic
+      hydra/output: default
+  verbose: true

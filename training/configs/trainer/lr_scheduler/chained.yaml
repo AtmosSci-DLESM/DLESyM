@@ -1,0 +1,44 @@
+_target_: torch.optim.lr_scheduler.ChainedScheduler
+schedulers:
+  - _target_: training.dlwp.trainer.CustomLRSchedulers.LinearLR
+    optimizer: ${model.optimizer}
+    start_epoch: 0
+    end_epoch: 10
+    start_lr: 1e-10
+    end_lr: 1e-3
+  - _target_: training.dlwp.trainer.CustomLRSchedulers.CosineLR
+    optimizer: ${model.optimizer}
+    start_epoch: 10
+    end_epoch: 110
+    start_lr: 1e-3
+    end_lr: 1e-4
+  - _target_: training.dlwp.trainer.CustomLRSchedulers.CosineLR
+    optimizer: ${model.optimizer}
+    start_epoch: 110
+    end_epoch: 210
+    start_lr: 5e-4
+    end_lr: 1e-5
+  - _target_: training.dlwp.trainer.CustomLRSchedulers.CosineLR
+    optimizer: ${model.optimizer}
+    start_epoch: 210
+    end_epoch: 310
+    start_lr: 2.5e-4
+    end_lr: 1e-6
+  - _target_: training.dlwp.trainer.CustomLRSchedulers.CosineLR
+    optimizer: ${model.optimizer}
+    start_epoch: 310
+    end_epoch: 410
+    start_lr: 1.25e-4
+    end_lr: 1e-7
+  - _target_: training.dlwp.trainer.CustomLRSchedulers.CosineLR
+    optimizer: ${model.optimizer}
+    start_epoch: 410
+    end_epoch: 510
+    start_lr: 6.125e-5
+    end_lr: 1e-8
+  - _target_: training.dlwp.trainer.CustomLRSchedulers.CosineLR
+    optimizer: ${model.optimizer}
+    start_epoch: 510
+    end_epoch: 610
+    start_lr: 3.0625e-5
+    end_lr: 0

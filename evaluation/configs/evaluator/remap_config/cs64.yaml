@@ -1,0 +1,4 @@
+path_to_remapper: /home/disk/brume/nacc/tempestremap/bin
+map_files: 
+  - /home/disk/brass/nacc/map_files/O2/map_LL181x360_CS64.nc
+  - /home/disk/brass/nacc/map_files/O2/map_CS64_LL181x360.nc

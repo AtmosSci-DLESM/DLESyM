@@ -1,0 +1,21 @@
+name: evaluation
+channels:
+  - defaults
+  - conda-forge
+  - pytorch-lts
+dependencies:
+  - healpy
+  - numpy=1.21.2
+  - hdf5=1.10.4
+  - matplotlib
+  - xarray
+  - tqdm
+  - hydra-core
+  - netcdf4
+  - pandas
+  - omegaconf
+  - reproject
+  - pytorch=1.8.2
+  - cudatoolkit=10.2
+  - einops
+prefix: /home/disk/brume/karlbam/anaconda3/envs/evaluation

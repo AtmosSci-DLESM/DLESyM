@@ -1,0 +1,25 @@
+defaults:
+  - module: sst-z1000-ws-olr_unet3plus
+  - scaling: hpx64_1983-2017
+  - splits: train_1983-2017
+
+src_directory: /home/disk/rhodium/dlwp/data/HPX64/
+dst_directory: /home/disk/mercury2/nacc/data/HPX64/
+dataset_name: hpx64_1983-2017_3h_1varCoupledOcean-z1000-ws10-olr 
+prefix: null
+suffix: null
+data_format: classic
+input_variables:
+  - sst
+output_variables: null
+constants:
+  land_sea_mask: lsm
+input_time_dim: 2
+output_time_dim: 4
+data_time_step: 3H
+time_step: 48H
+gap: 48H
+add_insolation: true
+nside: 64
+cube_dim: ${data.nside}
+prebuilt_dataset: true

@@ -1,0 +1,10 @@
+_target_: training.dlwp.trainer.criterion.WeightedMSE 
+weights: 
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+  - 1.0
+

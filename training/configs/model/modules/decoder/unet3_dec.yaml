@@ -1,0 +1,17 @@
+defaults:
+  - /model/modules/blocks@conv_block: basic_conv_block
+  - /model/modules/blocks@down_sampling_block: avg_pool
+  - /model/modules/blocks@up_sampling_block: transposed_conv_upsample
+  - /model/modules/blocks@skip_block: skip_block
+  - /model/modules/blocks@output_layer: output_layer
+
+_target_: training.dlwp.model.models.unet.UNet3Decoder
+_recursive_: false
+n_channels:
+  - 256
+  - 128
+  - 64
+dilations:
+  - 4
+  - 2
+  - 1

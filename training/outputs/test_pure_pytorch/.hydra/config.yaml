@@ -1,0 +1,206 @@
+experiment_name: test
+output_dir: outputs/${experiment_name}
+checkpoint_name: null
+load_weights_only: false
+seed: 0
+batch_size: 16
+learning_rate: 0.0002
+num_workers: 8
+port: 29452
+master_address: localhost
+data:
+  module:
+    _target_: training.dlwp.data.modules.TimeSeriesDataModule
+    src_directory: ${data.src_directory}
+    dst_directory: ${data.dst_directory}
+    dataset_name: ${data.dataset_name}
+    prefix: ${data.prefix}
+    suffix: ${data.suffix}
+    data_format: ${data.data_format}
+    batch_size: ${batch_size}
+    drop_last: true
+    input_variables: ${data.input_variables}
+    output_variables: ${data.output_variables}
+    constants: ${data.constants}
+    scaling: ${data.scaling}
+    splits: ${data.splits}
+    presteps: ${model.presteps}
+    input_time_dim: ${data.input_time_dim}
+    output_time_dim: ${data.output_time_dim}
+    data_time_step: ${data.data_time_step}
+    time_step: ${data.time_step}
+    gap: ${data.gap}
+    shuffle: true
+    add_insolation: ${data.add_insolation}
+    cube_dim: ${data.cube_dim}
+    num_workers: ${num_workers}
+    pin_memory: true
+    prebuilt_dataset: ${data.prebuilt_dataset}
+  scaling:
+    t2m0:
+      mean: 287.8665771484375
+      std: 14.86227798461914
+    t850:
+      mean: 281.2710266113281
+      std: 12.04991626739502
+    tau300-700:
+      mean: 61902.72265625
+      std: 2559.8408203125
+    tcwv0:
+      mean: 24.034976959228516
+      std: 16.411935806274414
+    z1000:
+      mean: 952.1435546875
+      std: 895.7516479492188
+    z250:
+      mean: 101186.28125
+      std: 5551.77978515625
+    z500:
+      mean: 55625.9609375
+      std: 2681.712890625
+    tp6:
+      mean: 0.0
+      std: 1.0
+      log_epsilon: 1.0e-06
+  splits:
+    train_date_start: '2012-11-30'
+    train_date_end: 2012-12-31T18:00
+    val_date_start: '2013-01-01'
+    val_date_end: 2016-12-31T18:00
+    test_date_start: '2017-01-01'
+    test_date_end: 2018-12-31T18:00
+  src_directory: /home/quicksilver2/karlbam/Data/DLWP/HPX32
+  dst_directory: /home/quicksilver2/karlbam/Data/DLWP/HPX32
+  dataset_name: era5_hpx32_7var_6h_24h
+  prefix: era5_1deg_3h_HPX32_1979-2021_
+  suffix: ''
+  data_format: classic
+  input_variables:
+  - z500
+  - tau300-700
+  - z1000
+  - t2m0
+  - tcwv0
+  - t850
+  - z250
+  output_variables: null
+  constants:
+    land_sea_mask: lsm
+    topography: z
+  input_time_dim: 2
+  output_time_dim: 4
+  data_time_step: 3H
+  time_step: 6H
+  gap: 6H
+  add_insolation: true
+  nside: 32
+  cube_dim: ${data.nside}
+  prebuilt_dataset: true
+model:
+  encoder:
+    conv_block:
+      activation:
+        _target_: training.dlwp.model.modules.activations.CappedGELU
+        cap_value: 10
+      _target_: training.dlwp.model.modules.blocks.ConvNeXtBlock
+      _recursive_: true
+      in_channels: 3
+      out_channels: 1
+      kernel_size: 3
+      dilation: 1
+      upscale_factor: 4
+    down_sampling_block:
+      _target_: training.dlwp.model.modules.blocks.AvgPool
+      pooling: 2
+    recurrent_block:
+      _target_: training.dlwp.model.modules.blocks.ConvGRUBlock
+      _recursive_: false
+      in_channels: 3
+      kernel_size: 1
+      downscale_factor: 4
+    _target_: training.dlwp.model.modules.encoder.UNetEncoder
+    _recursive_: false
+    n_channels:
+    - 64
+    - 32
+    - 16
+    dilations:
+    - 1
+    - 2
+    - 4
+  decoder:
+    conv_block:
+      activation:
+        _target_: training.dlwp.model.modules.activations.CappedGELU
+        cap_value: 10
+      _target_: training.dlwp.model.modules.blocks.ConvNeXtBlock
+      _recursive_: true
+      in_channels: 3
+      out_channels: 1
+      kernel_size: 3
+      dilation: 1
+      upscale_factor: 4
+    up_sampling_block:
+      activation:
+        _target_: training.dlwp.model.modules.activations.CappedGELU
+        cap_value: 10
+      _target_: training.dlwp.model.modules.blocks.TransposedConvUpsample
+      in_channels: 3
+      out_channels: 1
+      upsampling: 2
+    recurrent_block:
+      _target_: training.dlwp.model.modules.blocks.ConvGRUBlock
+      _recursive_: false
+      in_channels: 3
+      kernel_size: 1
+      downscale_factor: 4
+    output_layer:
+      _target_: training.dlwp.model.modules.blocks.BasicConvBlock
+      in_channels: 3
+      out_channels: 2
+      kernel_size: 1
+      dilation: 1
+      n_layers: 1
+    _target_: training.dlwp.model.modules.decoder.UNetDecoder
+    _recursive_: false
+    n_channels:
+    - 16
+    - 32
+    - 64
+    dilations:
+    - 4
+    - 2
+    - 1
+  _target_: training.dlwp.model.models.unet.HEALPixRecUNet
+  _recursive_: false
+  presteps: 1
+  input_time_dim: ${data.input_time_dim}
+  output_time_dim: ${data.output_time_dim}
+  delta_time: ${data.time_step}
+  input_channels: 7
+  output_channels: 7
+  n_constants: 2
+  decoder_input_channels: 1
+  enable_nhwc: false
+  enable_healpixpad: true
+trainer:
+  criterion:
+    _target_: torch.nn.MSELoss
+  optimizer:
+    _target_: torch.optim.Adam
+    lr: ${learning_rate}
+  lr_scheduler:
+    _target_: torch.optim.lr_scheduler.CosineAnnealingLR
+    optimizer: ${model.optimizer}
+    T_max: ${trainer.max_epochs}
+    eta_min: 0
+    last_epoch: -1
+    verbose: false
+  _target_: training.dlwp.trainer.trainer.Trainer
+  _recursive_: true
+  max_epochs: 300
+  min_epochs: 1
+  early_stopping_patience: null
+  amp_mode: fp16
+  graph_mode: train_eval
+  output_dir: ${output_dir}

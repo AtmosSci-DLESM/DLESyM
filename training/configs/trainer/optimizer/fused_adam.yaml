@@ -1,0 +1,2 @@
+_target_: apex.optimizers.FusedAdam
+lr: ${learning_rate}

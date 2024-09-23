@@ -1,0 +1,63 @@
+[2023-07-06 19:04:29,847][__main__][INFO] - experiment working directory: /home/disk/quicksilver/nacc/dlesm/zephyr
+[2023-07-06 19:04:29,848][__main__][INFO] - experiment working directory: /home/disk/quicksilver/nacc/dlesm/zephyr
+[2023-07-06 19:04:32,055][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 1
+[2023-07-06 19:04:32,057][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 0
+[2023-07-06 19:04:32,058][torch.distributed.distributed_c10d][INFO] - Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 2 nodes.
+[2023-07-06 19:04:32,065][torch.distributed.distributed_c10d][INFO] - Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 2 nodes.
+[2023-07-06 19:04:32,212][numexpr.utils][INFO] - Note: NumExpr detected 64 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+[2023-07-06 19:04:32,212][numexpr.utils][INFO] - NumExpr defaulting to 8 threads.
+[2023-07-06 19:04:32,212][numexpr.utils][INFO] - Note: NumExpr detected 64 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+[2023-07-06 19:04:32,212][numexpr.utils][INFO] - NumExpr defaulting to 8 threads.
+[2023-07-06 19:04:32,778][training.dlwp.data.data_loading][INFO] - opening input datasets
+[2023-07-06 19:04:32,836][numcodecs][DEBUG] - Registering codec 'zlib'
+[2023-07-06 19:04:32,838][numcodecs][DEBUG] - Registering codec 'gzip'
+[2023-07-06 19:04:32,838][numcodecs][DEBUG] - Registering codec 'bz2'
+[2023-07-06 19:04:32,839][numcodecs][DEBUG] - Registering codec 'lzma'
+[2023-07-06 19:04:32,841][numcodecs][DEBUG] - Registering codec 'blosc'
+[2023-07-06 19:04:32,842][numcodecs][DEBUG] - Registering codec 'zstd'
+[2023-07-06 19:04:32,843][numcodecs][DEBUG] - Registering codec 'lz4'
+[2023-07-06 19:04:32,844][numcodecs][DEBUG] - Registering codec 'astype'
+[2023-07-06 19:04:32,845][numcodecs][DEBUG] - Registering codec 'delta'
+[2023-07-06 19:04:32,845][numcodecs][DEBUG] - Registering codec 'quantize'
+[2023-07-06 19:04:32,846][numcodecs][DEBUG] - Registering codec 'fixedscaleoffset'
+[2023-07-06 19:04:32,847][numcodecs][DEBUG] - Registering codec 'packbits'
+[2023-07-06 19:04:32,847][numcodecs][DEBUG] - Registering codec 'categorize'
+[2023-07-06 19:04:32,848][numcodecs][DEBUG] - Registering codec 'pickle'
+[2023-07-06 19:04:32,849][numcodecs][DEBUG] - Registering codec 'base64'
+[2023-07-06 19:04:32,850][numcodecs][DEBUG] - Registering codec 'shuffle'
+[2023-07-06 19:04:32,851][numcodecs][DEBUG] - Registering codec 'bitround'
+[2023-07-06 19:04:32,856][numcodecs][DEBUG] - Registering codec 'msgpack2'
+[2023-07-06 19:04:32,857][numcodecs][DEBUG] - Registering codec 'crc32'
+[2023-07-06 19:04:32,857][numcodecs][DEBUG] - Registering codec 'adler32'
+[2023-07-06 19:04:32,857][numcodecs][DEBUG] - Registering codec 'json2'
+[2023-07-06 19:04:32,858][numcodecs][DEBUG] - Registering codec 'vlen-utf8'
+[2023-07-06 19:04:32,858][numcodecs][DEBUG] - Registering codec 'vlen-bytes'
+[2023-07-06 19:04:32,858][numcodecs][DEBUG] - Registering codec 'vlen-array'
+[2023-07-06 19:04:32,877][numcodecs][DEBUG] - Registering codec 'n5_wrapper'
+[2023-07-06 19:04:44,322][numcodecs][DEBUG] - Registering codec 'zlib'
+[2023-07-06 19:04:44,323][numcodecs][DEBUG] - Registering codec 'gzip'
+[2023-07-06 19:04:44,323][numcodecs][DEBUG] - Registering codec 'bz2'
+[2023-07-06 19:04:44,323][numcodecs][DEBUG] - Registering codec 'lzma'
+[2023-07-06 19:04:44,325][numcodecs][DEBUG] - Registering codec 'blosc'
+[2023-07-06 19:04:44,325][numcodecs][DEBUG] - Registering codec 'zstd'
+[2023-07-06 19:04:44,326][numcodecs][DEBUG] - Registering codec 'lz4'
+[2023-07-06 19:04:44,326][numcodecs][DEBUG] - Registering codec 'astype'
+[2023-07-06 19:04:44,326][numcodecs][DEBUG] - Registering codec 'delta'
+[2023-07-06 19:04:44,326][numcodecs][DEBUG] - Registering codec 'quantize'
+[2023-07-06 19:04:44,327][numcodecs][DEBUG] - Registering codec 'fixedscaleoffset'
+[2023-07-06 19:04:44,327][numcodecs][DEBUG] - Registering codec 'packbits'
+[2023-07-06 19:04:44,327][numcodecs][DEBUG] - Registering codec 'categorize'
+[2023-07-06 19:04:44,327][numcodecs][DEBUG] - Registering codec 'pickle'
+[2023-07-06 19:04:44,327][numcodecs][DEBUG] - Registering codec 'base64'
+[2023-07-06 19:04:44,328][numcodecs][DEBUG] - Registering codec 'shuffle'
+[2023-07-06 19:04:44,328][numcodecs][DEBUG] - Registering codec 'bitround'
+[2023-07-06 19:04:44,330][numcodecs][DEBUG] - Registering codec 'msgpack2'
+[2023-07-06 19:04:44,330][numcodecs][DEBUG] - Registering codec 'crc32'
+[2023-07-06 19:04:44,330][numcodecs][DEBUG] - Registering codec 'adler32'
+[2023-07-06 19:04:44,330][numcodecs][DEBUG] - Registering codec 'json2'
+[2023-07-06 19:04:44,330][numcodecs][DEBUG] - Registering codec 'vlen-utf8'
+[2023-07-06 19:04:44,331][numcodecs][DEBUG] - Registering codec 'vlen-bytes'
+[2023-07-06 19:04:44,331][numcodecs][DEBUG] - Registering codec 'vlen-array'
+[2023-07-06 19:04:44,339][numcodecs][DEBUG] - Registering codec 'n5_wrapper'
+[2023-07-06 19:05:04,217][torch.nn.parallel.distributed][INFO] - Reducer buckets have been rebuilt in this iteration.
+[2023-07-06 19:05:04,217][torch.nn.parallel.distributed][INFO] - Reducer buckets have been rebuilt in this iteration.

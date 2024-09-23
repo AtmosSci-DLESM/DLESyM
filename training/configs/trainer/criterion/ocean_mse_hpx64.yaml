@@ -1,0 +1,2 @@
+_target_: training.dlwp.trainer.criterion.OceanMSE
+lsm_file: /home/disk/rhodium/dlwp/data/HPX64/hpx64_1979-2022_3h_1varCoupledOcean-z1000-ws10.zarr

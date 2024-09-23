@@ -1,0 +1,77 @@
+[2023-11-09 15:58:15,995][__main__][INFO] - experiment working directory: /home/disk/quicksilver/nacc/dlesm/zephyr
+[2023-11-09 15:58:16,013][__main__][INFO] - experiment working directory: /home/disk/quicksilver/nacc/dlesm/zephyr
+[2023-11-09 15:58:16,457][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 1
+[2023-11-09 15:58:26,466][torch.distributed.distributed_c10d][INFO] - Waiting in store based barrier to initialize process group for rank: 1, key: store_based_barrier_key:1 (world_size=2, worker_count=3, timeout=0:30:00)
+[2023-11-09 15:58:36,467][torch.distributed.distributed_c10d][INFO] - Waiting in store based barrier to initialize process group for rank: 1, key: store_based_barrier_key:1 (world_size=2, worker_count=3, timeout=0:30:00)
+[2023-11-09 15:58:46,470][torch.distributed.distributed_c10d][INFO] - Waiting in store based barrier to initialize process group for rank: 1, key: store_based_barrier_key:1 (world_size=2, worker_count=3, timeout=0:30:00)
+[2023-11-09 15:58:56,481][torch.distributed.distributed_c10d][INFO] - Waiting in store based barrier to initialize process group for rank: 1, key: store_based_barrier_key:1 (world_size=2, worker_count=3, timeout=0:30:00)
+[2023-11-09 15:59:06,486][torch.distributed.distributed_c10d][INFO] - Waiting in store based barrier to initialize process group for rank: 1, key: store_based_barrier_key:1 (world_size=2, worker_count=3, timeout=0:30:00)
+[2023-11-09 15:59:16,489][torch.distributed.distributed_c10d][INFO] - Waiting in store based barrier to initialize process group for rank: 1, key: store_based_barrier_key:1 (world_size=2, worker_count=3, timeout=0:30:00)
+[2023-11-09 15:59:26,491][torch.distributed.distributed_c10d][INFO] - Waiting in store based barrier to initialize process group for rank: 1, key: store_based_barrier_key:1 (world_size=2, worker_count=3, timeout=0:30:00)
+[2023-11-09 15:59:36,502][torch.distributed.distributed_c10d][INFO] - Waiting in store based barrier to initialize process group for rank: 1, key: store_based_barrier_key:1 (world_size=2, worker_count=3, timeout=0:30:00)
+[2023-11-09 15:59:46,505][torch.distributed.distributed_c10d][INFO] - Waiting in store based barrier to initialize process group for rank: 1, key: store_based_barrier_key:1 (world_size=2, worker_count=3, timeout=0:30:00)
+[2023-11-09 15:59:59,697][__main__][INFO] - experiment working directory: /home/disk/quicksilver/nacc/dlesm/zephyr
+[2023-11-09 15:59:59,697][__main__][INFO] - experiment working directory: /home/disk/quicksilver/nacc/dlesm/zephyr
+[2023-11-09 16:00:01,210][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 1
+[2023-11-09 16:00:01,212][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 0
+[2023-11-09 16:00:01,212][torch.distributed.distributed_c10d][INFO] - Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 2 nodes.
+[2023-11-09 16:00:01,221][torch.distributed.distributed_c10d][INFO] - Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 2 nodes.
+[2023-11-09 16:00:01,472][numexpr.utils][INFO] - Note: detected 128 virtual cores but NumExpr set to maximum of 64, check "NUMEXPR_MAX_THREADS" environment variable.
+[2023-11-09 16:00:01,472][numexpr.utils][INFO] - Note: NumExpr detected 128 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+[2023-11-09 16:00:01,472][numexpr.utils][INFO] - NumExpr defaulting to 8 threads.
+[2023-11-09 16:00:01,504][numexpr.utils][INFO] - Note: detected 128 virtual cores but NumExpr set to maximum of 64, check "NUMEXPR_MAX_THREADS" environment variable.
+[2023-11-09 16:00:01,504][numexpr.utils][INFO] - Note: NumExpr detected 128 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+[2023-11-09 16:00:01,504][numexpr.utils][INFO] - NumExpr defaulting to 8 threads.
+[2023-11-09 16:00:02,279][training.dlwp.data.data_loading][INFO] - opening input datasets
+[2023-11-09 16:00:02,372][numcodecs][DEBUG] - Registering codec 'zlib'
+[2023-11-09 16:00:02,374][numcodecs][DEBUG] - Registering codec 'gzip'
+[2023-11-09 16:00:02,375][numcodecs][DEBUG] - Registering codec 'bz2'
+[2023-11-09 16:00:02,376][numcodecs][DEBUG] - Registering codec 'lzma'
+[2023-11-09 16:00:02,379][numcodecs][DEBUG] - Registering codec 'blosc'
+[2023-11-09 16:00:02,379][numcodecs][DEBUG] - Registering codec 'zstd'
+[2023-11-09 16:00:02,379][numcodecs][DEBUG] - Registering codec 'lz4'
+[2023-11-09 16:00:02,382][numcodecs][DEBUG] - Registering codec 'astype'
+[2023-11-09 16:00:02,383][numcodecs][DEBUG] - Registering codec 'delta'
+[2023-11-09 16:00:02,385][numcodecs][DEBUG] - Registering codec 'quantize'
+[2023-11-09 16:00:02,386][numcodecs][DEBUG] - Registering codec 'fixedscaleoffset'
+[2023-11-09 16:00:02,387][numcodecs][DEBUG] - Registering codec 'packbits'
+[2023-11-09 16:00:02,389][numcodecs][DEBUG] - Registering codec 'categorize'
+[2023-11-09 16:00:02,390][numcodecs][DEBUG] - Registering codec 'pickle'
+[2023-11-09 16:00:02,392][numcodecs][DEBUG] - Registering codec 'base64'
+[2023-11-09 16:00:02,394][numcodecs][DEBUG] - Registering codec 'shuffle'
+[2023-11-09 16:00:02,395][numcodecs][DEBUG] - Registering codec 'bitround'
+[2023-11-09 16:00:02,404][numcodecs][DEBUG] - Registering codec 'msgpack2'
+[2023-11-09 16:00:02,406][numcodecs][DEBUG] - Registering codec 'crc32'
+[2023-11-09 16:00:02,406][numcodecs][DEBUG] - Registering codec 'adler32'
+[2023-11-09 16:00:02,407][numcodecs][DEBUG] - Registering codec 'json2'
+[2023-11-09 16:00:02,408][numcodecs][DEBUG] - Registering codec 'vlen-utf8'
+[2023-11-09 16:00:02,408][numcodecs][DEBUG] - Registering codec 'vlen-bytes'
+[2023-11-09 16:00:02,408][numcodecs][DEBUG] - Registering codec 'vlen-array'
+[2023-11-09 16:00:02,449][numcodecs][DEBUG] - Registering codec 'n5_wrapper'
+[2023-11-09 16:00:05,402][numcodecs][DEBUG] - Registering codec 'zlib'
+[2023-11-09 16:00:05,403][numcodecs][DEBUG] - Registering codec 'gzip'
+[2023-11-09 16:00:05,403][numcodecs][DEBUG] - Registering codec 'bz2'
+[2023-11-09 16:00:05,403][numcodecs][DEBUG] - Registering codec 'lzma'
+[2023-11-09 16:00:05,405][numcodecs][DEBUG] - Registering codec 'blosc'
+[2023-11-09 16:00:05,405][numcodecs][DEBUG] - Registering codec 'zstd'
+[2023-11-09 16:00:05,405][numcodecs][DEBUG] - Registering codec 'lz4'
+[2023-11-09 16:00:05,406][numcodecs][DEBUG] - Registering codec 'astype'
+[2023-11-09 16:00:05,406][numcodecs][DEBUG] - Registering codec 'delta'
+[2023-11-09 16:00:05,406][numcodecs][DEBUG] - Registering codec 'quantize'
+[2023-11-09 16:00:05,407][numcodecs][DEBUG] - Registering codec 'fixedscaleoffset'
+[2023-11-09 16:00:05,407][numcodecs][DEBUG] - Registering codec 'packbits'
+[2023-11-09 16:00:05,407][numcodecs][DEBUG] - Registering codec 'categorize'
+[2023-11-09 16:00:05,407][numcodecs][DEBUG] - Registering codec 'pickle'
+[2023-11-09 16:00:05,407][numcodecs][DEBUG] - Registering codec 'base64'
+[2023-11-09 16:00:05,410][numcodecs][DEBUG] - Registering codec 'shuffle'
+[2023-11-09 16:00:05,410][numcodecs][DEBUG] - Registering codec 'bitround'
+[2023-11-09 16:00:05,412][numcodecs][DEBUG] - Registering codec 'msgpack2'
+[2023-11-09 16:00:05,412][numcodecs][DEBUG] - Registering codec 'crc32'
+[2023-11-09 16:00:05,412][numcodecs][DEBUG] - Registering codec 'adler32'
+[2023-11-09 16:00:05,412][numcodecs][DEBUG] - Registering codec 'json2'
+[2023-11-09 16:00:05,413][numcodecs][DEBUG] - Registering codec 'vlen-utf8'
+[2023-11-09 16:00:05,413][numcodecs][DEBUG] - Registering codec 'vlen-bytes'
+[2023-11-09 16:00:05,413][numcodecs][DEBUG] - Registering codec 'vlen-array'
+[2023-11-09 16:00:05,422][numcodecs][DEBUG] - Registering codec 'n5_wrapper'
+[2023-11-09 16:00:19,702][torch.nn.parallel.distributed][INFO] - Reducer buckets have been rebuilt in this iteration.
+[2023-11-09 16:00:19,702][torch.nn.parallel.distributed][INFO] - Reducer buckets have been rebuilt in this iteration.

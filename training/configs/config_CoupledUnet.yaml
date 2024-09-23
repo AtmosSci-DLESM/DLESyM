@@ -1,0 +1,25 @@
+defaults:
+  - _self_
+  - data: hpx32_coupled-unet 
+  - model: coupled_unet
+  - trainer: default
+
+experiment_name: ${now:%Y-%m-%d}/${now:%H-%M-%S}
+output_dir: outputs/${experiment_name}
+checkpoint_name: null
+load_weights_only: false
+seed: 0
+
+# Training specifications
+batch_size: 32
+learning_rate: 1e-4
+num_workers: 8
+
+# Distributed setup (multi GPU)
+port: 29440
+master_address: localhost
+
+hydra:
+  verbose: true
+  run:
+    dir: ${output_dir}

@@ -1,0 +1,9 @@
+latitudes: 181
+longitudes: 360
+nside: 32
+order: "biquadratic"
+resolution_factor: 1.0
+prefix: "forecast"
+model_name: ${model_name}
+poolsize: ${poolsize}
+to_netcdf: False

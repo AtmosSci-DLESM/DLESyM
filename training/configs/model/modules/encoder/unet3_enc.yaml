@@ -1,0 +1,18 @@
+defaults:
+  - /model/modules/blocks@conv_block: basic_conv_block
+  - /model/modules/blocks@down_sampling_block: avg_pool
+
+_target_: training.dlwp.model.modules.encoder.UNet3Encoder
+_recursive_: false
+n_channels:
+  - 64
+  - 128
+  - 256
+n_layers:
+  - 2
+  - 2
+  - 1
+dilations:
+  - 1
+  - 2
+  - 4

@@ -1,0 +1,211 @@
+experiment_name: ${now:%Y-%m-%d}/${now:%H-%M-%S}
+output_dir: outputs/${experiment_name}
+checkpoint_name: null
+load_weights_only: false
+seed: 0
+batch_size: 32
+learning_rate: 0.0001
+num_workers: 8
+port: 29440
+master_address: localhost
+data:
+  module:
+    _target_: training.dlwp.data.modules.TimeSeriesDataModule
+    src_directory: ${data.src_directory}
+    dst_directory: ${data.dst_directory}
+    dataset_name: ${data.dataset_name}
+    prefix: ${data.prefix}
+    suffix: ${data.suffix}
+    data_format: ${data.data_format}
+    batch_size: ${batch_size}
+    drop_last: true
+    input_variables: ${data.input_variables}
+    output_variables: ${data.output_variables}
+    constants: ${data.constants}
+    scaling: ${data.scaling}
+    splits: ${data.splits}
+    presteps: ${model.presteps}
+    input_time_dim: ${data.input_time_dim}
+    output_time_dim: ${data.output_time_dim}
+    data_time_step: ${data.data_time_step}
+    time_step: ${data.time_step}
+    gap: ${data.gap}
+    shuffle: true
+    add_insolation: ${data.add_insolation}
+    cube_dim: ${data.cube_dim}
+    num_workers: ${num_workers}
+    pin_memory: true
+    prebuilt_dataset: ${data.prebuilt_dataset}
+  scaling:
+    t2m0:
+      mean: 287.8665771484375
+      std: 14.86227798461914
+    t850:
+      mean: 281.2710266113281
+      std: 12.04991626739502
+    tau300-700:
+      mean: 61902.72265625
+      std: 2559.8408203125
+    tcwv0:
+      mean: 24.034976959228516
+      std: 16.411935806274414
+    z1000:
+      mean: 952.1435546875
+      std: 895.7516479492188
+    z1000-48H:
+      mean: 934.4945
+      std: 842.1188
+    ws10-48H:
+      mean: 6.081215
+      std: 3.1224248
+    z250:
+      mean: 101186.28125
+      std: 5551.77978515625
+    z500:
+      mean: 55625.9609375
+      std: 2681.712890625
+    sst-ti:
+      mean: 290.53864
+      std: 10.5835
+    sst:
+      mean: 290.64487
+      std: 10.5792
+    tp6:
+      mean: 0.0
+      std: 1.0
+    z1000-24H:
+      mean: 936.7376098632812
+      std: 883.0859375
+    ws10-24H:
+      mean: 6.15248966217041
+      std: 3.321399688720703
+  splits:
+    train_date_start: '1950-01-01'
+    train_date_end: 2012-12-31T18:00
+    val_date_start: '2013-01-01'
+    val_date_end: 2014-12-31T18:00
+    test_date_start: '2015-01-01'
+    test_date_end: 2021-12-31T18:00
+  src_directory: /home/quicksilver2/nacc/Data/pipeline_dev
+  dst_directory: /home/quicksilver2/nacc/Data/pipeline_dev
+  dataset_name: hpx32_1950-2022_3h_sst-only
+  prefix: era5_1deg_3h_HPX32_1950-2022_
+  suffix: ''
+  data_format: classic
+  input_variables:
+  - sst
+  output_variables: null
+  constants:
+    land_sea_mask: lsm
+  input_time_dim: 2
+  output_time_dim: 4
+  data_time_step: 3H
+  time_step: 48H
+  gap: 48H
+  add_insolation: true
+  nside: 32
+  cube_dim: ${data.nside}
+  prebuilt_dataset: true
+model:
+  atmos_encoder:
+    _target_: training.dlwp.model.models.unet3plus.Unet3plusEncoder
+    _recursive_: false
+    n_channels:
+    - 64
+    - 128
+    - 256
+    dilations:
+    - 1
+    - 2
+    - 4
+    convolutions_per_depth: 2
+    kernel_size: 3
+    pooling_type: torch.nn.MaxPool2d
+    pooling: 2
+    activation:
+      _target_: training.dlwp.model.modules.activations.CappedGELU
+      cap_value: 10.0
+  atmos_decoder:
+    _target_: training.dlwp.model.models.unet3plus.Unet3plusDecoder
+    _recursive_: false
+    n_channels:
+    - 256
+    - 128
+    - 64
+    convolutions_per_depth: 2
+    kernel_size: 3
+    dilations:
+    - 4
+    - 2
+    - 1
+    upsampling_type: interpolate
+    upsampling: 2
+    activation:
+      _target_: training.dlwp.model.modules.activations.CappedGELU
+      cap_value: 10.0
+  ocean_encoder:
+    _target_: training.dlwp.model.models.unet3plus.Unet3plusEncoder
+    _recursive_: false
+    n_channels:
+    - 64
+    - 128
+    - 256
+    dilations:
+    - 1
+    - 2
+    - 4
+    convolutions_per_depth: 2
+    kernel_size: 3
+    pooling_type: torch.nn.MaxPool2d
+    pooling: 2
+    activation:
+      _target_: training.dlwp.model.modules.activations.CappedGELU
+      cap_value: 10.0
+  ocean_decoder:
+    _target_: training.dlwp.model.models.unet3plus.Unet3plusDecoder
+    _recursive_: false
+    n_channels:
+    - 256
+    - 128
+    - 64
+    convolutions_per_depth: 2
+    kernel_size: 3
+    dilations:
+    - 4
+    - 2
+    - 1
+    upsampling_type: interpolate
+    upsampling: 2
+    activation:
+      _target_: training.dlwp.model.modules.activations.CappedGELU
+      cap_value: 10.0
+  _target_: training.dlwp.model.models.double_unet.CoupledUnet
+  _recursive_: false
+  input_time_dim: ${data.input_time_dim}
+  output_time_dim: ${data.output_time_dim}
+  nside: ${data.nside}
+  input_channels: 1
+  output_channels: 1
+  n_constants: 1
+  decoder_input_channels: 1
+trainer:
+  criterion:
+    _target_: training.dlwp.trainer.criterion.BaseMSE
+  optimizer:
+    _target_: torch.optim.Adam
+    lr: ${learning_rate}
+  lr_scheduler:
+    _target_: torch.optim.lr_scheduler.CosineAnnealingLR
+    optimizer: ${model.optimizer}
+    T_max: ${trainer.max_epochs}
+    eta_min: 0
+    last_epoch: -1
+    verbose: false
+  _target_: training.dlwp.trainer.trainer.Trainer
+  _recursive_: true
+  max_epochs: 50
+  min_epochs: 1
+  early_stopping_patience: null
+  amp_mode: fp16
+  graph_mode: train_eval
+  output_dir: ${output_dir}

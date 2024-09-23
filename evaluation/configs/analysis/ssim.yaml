@@ -1,0 +1,8 @@
+name: SSIM
+on_latlon: True
+method: get_ssim
+arguments:
+  mean: False
+  scale_file_path: ${paths.scale_file}
+plot_method: plot_ssim
+skip: False

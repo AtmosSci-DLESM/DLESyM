@@ -1,0 +1,2 @@
+_target_: training.dlwp.trainer.criterion.OceanMSE
+lsm_file: /home/disk/quicksilver2/nacc/Data/pipeline_dev/hpx32_1950-2022_3h_sst-only.zarr

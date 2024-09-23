@@ -1,0 +1,8 @@
+# Original LatLon verification
+verification_ll: /home/disk/rhodium/dlwp/data/era5/1deg/1979-2021_era5_1deg_3h_ 
+
+# Verification remapped to geometry (CS, HPX, ...)
+verification: /home/rhodium/dlwp/data/HPX32/era5_1deg_3h_HPX32_1979-2018_
+
+# Scaling file
+scale_file: training/configs/data/scaling/classic.yaml

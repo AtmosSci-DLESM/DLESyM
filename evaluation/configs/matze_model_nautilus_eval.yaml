@@ -1,0 +1,34 @@
+# Analyses to perform
+analyses:
+  - rmse
+  - acc
+
+# Variables to evaluate
+evaluate_variables_in_parallel: True
+variables:
+  - t2m0
+  - z500
+  - t850
+  - z1000
+
+# Path where the results are written to
+evaluation_directory: /home/disk/brume/nacc/WeeklyNotebooks/2023.10.09/nautilus_MatzeModel_seed0
+
+# Forecasts and overrides
+forecasts:
+  src_path: /home/disk/brass/nacc/forecasts
+  global_overrides:  # Applied to all models/forecasts and all analyses
+    - evaluator.times="2017-01-01--2018-12-31"
+  
+  models:
+    Matze Model:
+      forecast_path: hpx64_unet_136-68-34_cnxt_skip_dil_gru_6h_300/forecast_hpx64_unet_136-68-34_cnxt_skip_dil_gru_6h_300.nc 
+      forecast_overrides:  # Applied to all analyses of this model/forecast
+        - paths.verification=/home/rhodium/dlwp/data/HPX64/era5_1deg_3h_HPX64_1979-2018_
+        - evaluator/remap_config=hpx64  # Use the hpx64 instead of the hpx32 remap config in the evaluator
+    Matze Model (Nautilus):  # Name of the model for plots and target directory determination
+      forecast_path: MatzeModel_nautlilus_seed0/forecast_nautlilus_MatzeModel.nc 
+      forecast_overrides:  # Applied to all analyses of this model/forecast
+        - paths.verification=/home/rhodium/dlwp/data/HPX64/era5_1deg_3h_HPX64_1979-2018_
+        - evaluator/remap_config=hpx64  # Use the hpx64 instead of the hpx32 remap config in the evaluator
+

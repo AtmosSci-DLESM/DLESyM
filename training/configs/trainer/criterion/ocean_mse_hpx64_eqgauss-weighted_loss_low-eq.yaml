@@ -1,0 +1,2 @@
+_target_: training.dlwp.trainer.criterion.OceanMSE
+lsm_file: /home/disk/rhodium/dlwp/data/HPX64/hpx64_eq-centered-gauss-lsm_low-eq.zarr

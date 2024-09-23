@@ -1,0 +1,17 @@
+_target_: training.dlwp.model.models.unet3plus.Unet3plusEncoder
+_recursive_: false
+n_channels:
+  - 64
+  - 128
+  - 256
+dilations:
+  - 1
+  - 2
+  - 4
+convolutions_per_depth: 2
+kernel_size: 3
+pooling_type: torch.nn.MaxPool2d
+pooling: 2
+activation:
+  _target_: training.dlwp.model.modules.activations.CappedGELU
+  cap_value: 10.0

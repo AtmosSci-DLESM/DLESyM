@@ -1,0 +1,3 @@
+_target_: training.dlwp.trainer.optimizer.DAdam.DAdam
+lr: ${learning_rate}
+amsgrad: False

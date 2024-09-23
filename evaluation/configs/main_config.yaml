@@ -1,0 +1,455 @@
+analyses:
+  #- ssim
+  - acc
+  - rmse
+  #- rmse_per_face
+  #- image_series_native
+
+evaluate_variables_in_parallel: True
+variables:
+  #- t2m0
+  #- tcwv0
+  - z500
+  #- z1000
+  #- sst
+
+evaluation_directory: evaluation/outputs/tmp
+
+
+forecasts:
+  src_path: /home/disk/brume/karlbam
+  global_overrides:
+    #- evaluator.times="2018-12-10--2018-12-31"
+    - transfer_das=True
+    - analysis.on_latlon=True
+    #- paths.verification=/home/rhodium/dlwp/data/HPX32/era5_1deg_3h_HPX32_1979-2021_
+  
+  models:
+
+    UNet:
+      forecast_path: DELUSioN/evaluation/forecasts/forecast_06-02-02_unet_gelu_ep300_vNone.nc
+      forecast_overrides:  
+        - evaluator=cs
+        - paths.verification_ll=/home/disk/quicksilver/nacc/Data/ERA5/1deg/1979-2022_era5_1deg_3h_
+        - rescale_das=True
+      analysis_overrides:
+        acc:
+          - analysis.arguments.climatology_path=null
+    UNet3+:
+      forecast_path: DELUSioN/evaluation/forecasts/forecast_06-02-02_unet3plus_bs64_c64-128-256_vNone.nc
+      forecast_overrides:  
+        - evaluator=cs
+        - paths.verification_ll=/home/disk/quicksilver/nacc/Data/ERA5/1deg/1979-2022_era5_1deg_3h_
+        - rescale_das=True
+      analysis_overrides:
+        acc:
+          - analysis.arguments.climatology_path=null
+
+    #Conventional:
+    #  forecast_path: DELUSioN/evaluation/forecasts/forecast_06-02-02_hpx_u3p_c90-180-360_bs64_ep300_vNone.nc
+    #Inverted Channels:
+    #  forecast_path: DELUSioN/evaluation/forecasts/forecast_06-02-02_hpx_u3p_c360-180-90_bs64_ep300_vNone.nc
+
+
+
+    #HPX32 1° (baseline, old data):
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_baseline_vNone.nc
+    #  analysis_overrides:
+    #    image_series_native:
+    #      - analysis.arguments.f_idx=6
+    #HPX32 7var 0.25° new scaling:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_0.25deg_classic-hpx32_vNone.nc
+    #HPX32 7var 1° (baseline):
+    #  forecast_path: DELUSioN/evaluation/forecasts/forecast_06-02-02_hpx_u3p_c90-180-360_bs32_vNone.nc
+    #HPX32 5var 0.25°:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_0.25deg_5var_classic_vNone.nc
+    #HPX32 5var 0.25° new scaling:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_0.25deg_5var_classic-hpx32_vNone.nc
+    #HPX32 1°:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_1deg_vNone.nc
+    #  forecast_overrides:
+    #    - paths.verification=/home/rhodium/dlwp/data/HPX32/era5_1deg_3h_HPX32_1979-2021_
+    #HPX32: # 0.25°:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_0.25deg_vNone.nc
+    #  forecast_overrides:
+    #    - paths.verification=/home/rhodium/dlwp/data/HPX32/era5_1deg_3h_HPX32_1979-2021_
+    #    - transfer_das=True
+    #HPX64 1°:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx64_u3p_c90_1deg_vNone.nc
+    #  forecast_overrides:
+    #    - paths.verification=/home/rhodium/dlwp/data/HPX64/era5_1deg_3h_HPX64_1979-2021_
+    #    - evaluator/remap_config=hpx64
+    #  analysis_overrides:
+    #    acc:
+    #      - analysis.arguments.climatology_path=null
+    #HPX64: # 0.25°:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx64_u3p_c90_0.25deg_vNone.nc
+    #  forecast_overrides:
+    #    - paths.verification=/home/rhodium/dlwp/data/HPX64/era5_0.25deg_3h_HPX64_1979-2021_
+    #    - evaluator/remap_config=hpx64
+    #    - transfer_das=True
+
+
+
+    #HPX32 7var (baseline):
+    #  forecast_path: DELUSioN/evaluation/forecasts/forecast_06-02-02_hpx_u3p_c90-180-360_bs32_vNone.nc
+    #HPX32 no-tcwv:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_no-tcwv_vNone.nc
+
+    #HPX32 cgru70 (baseline):
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c70_cgru_clip_vNone.nc
+    #HPX32 cgru80:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c80_cgru_clip_vNone.nc
+    #HPX32 distana75:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c75_distana_clip_vNone.nc
+    
+    #HPX32 UNet3+ inverted 300 epochs:
+    #  forecast_path: DELUSioN/evaluation/forecasts/forecast_06-02-02_hpx_u3p_c360-180-90_bs64_ep300_vNone.nc
+    #HPX32 UNet3+ inverted GRU 300 epochs:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_03-02-02_hpx32_u3p_c360_cgru_ep300_vNone.nc
+
+    #HPX32 6dh (baseline):
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_clstm_clip_vNone.nc
+    #HPX32 3dh:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_03-02-02_hpx32_u3p_c360_cgru_ep300_vNone.nc
+    #HPX32 3dh:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_03-02-02_hpx32_u3p_c70_clstm_clip_3dh_vNone.nc
+    #HPX32 3dh-1:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_03-01-01_hpx32_u3p_c70_clstm_clip_3dh-1_vNone.nc
+
+    #HPX32 rec l123 (baseline):
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_clstm_clip_vNone.nc
+    #HPX32 rec l1:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_clstm-l1_clip_vNone.nc
+    #HPX32 rec l2:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c85_clstm-l2_clip_vNone.nc
+    #HPX32 rec l3:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c75_clstm-l3_clip_vNone.nc
+    #HPX32 rec l12:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c85_clstm-l12_clip_vNone.nc
+    #HPX32 rec l13:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c75_clstm-l13_clip_vNone.nc
+    #HPX32 rec l23:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c75_clstm-l23_clip_vNone.nc
+
+    #HPX32 conv-interpolate(nn) (baseline):
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_6h-24h_vNone.nc
+    #HPX32 conv-interpolate(bilin):
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_interp-bilin_vNone.nc
+    #HPX32 interpolate(nn)-conv:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_interp-r_vNone.nc
+    #HPX32 transposed-conv:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_interp-transp_vNone.nc
+
+    #HPX32 no residuals (baseline):
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_6h-24h_vNone.nc
+    #HPX32 residual encoder:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_res-enc-1_vNone.nc
+    #HPX32 residual decoder:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_res-dec-2_vNone.nc
+    #HPX32 residual enc & dec:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_res-enc-dec-2_vNone.nc
+
+    #HPX32 7 variables (baseline):
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_6h-24h_vNone.nc
+    #HPX32 sst input only:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_sst-in_vNone.nc
+    #HPX32 sst in and out:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_sst-in-out_vNone.nc
+    #HPX32 sst in and out loss:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_sst-in-out_loss_vNone.nc
+
+    #HPX32 no recurrence (baseline):
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_6h-24h_vNone.nc
+    #####HPX32 no recurrence clip 24h (baseline):
+    #####  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_clip_vNone.nc
+    #HPX32 c90 clip clstm 24h no-init no-reset:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_clstm_clip_no-init_no-reset_vNone.nc
+    #HPX32 c90 clip clstm 24h no-init:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_clstm_clip_no-init_vNone.nc
+    #HPX32 c90 clip clstm 48h no-init no-reset:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_clstm_clip_48h_no-init_no-reset_vNone.nc
+    #HPX32 c90 clip clstm 24h:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_clstm_clip_vNone.nc
+    #HPX32 c90 clip clstm 48h no-init:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_clstm_clip_48h_no-init_vNone.nc
+    #####HPX32 c70 clip clstm:
+    #####  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c70_clstm_clip_vNone.nc
+    #####  #forecast_overrides:
+    #####  #  - transfer_das=True
+    #HPX32 c70 clip clstm 24h no-init reset:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c70_clstm_clip_no-init_vNone.nc
+    #HPX32 c70 clip clstm 24h init no-reset:  # grows faster
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c70_clstm_clip_no-reset_vNone.nc
+    #HPX32 c70 clip clstm 24h no-init no-reset: # blows
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c70_clstm_clip_no-init_no-reset_vNone.nc
+    #HPX32 c70 clip clstm 96h init reset:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c70_clstm_clip_96h_vNone.nc
+    #HPX32 c70 clip clstm 96h no-init reset:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c70_clstm_clip_96h_no-init_vNone.nc
+    #HPX32 c70 clip clstm 96h init no-reset:  # !
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c70_clstm_clip_96h_no-reset_vNone.nc
+    #HPX32 c70 clip clstm 96h no-init no-reset:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c70_clstm_clip_96h_no-init_no-reset_vNone.nc
+    #HPX32 c70 clip clstm 48h no-init reset:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c70_clstm_clip_48h_no-init_vNone.nc
+    #HPX32 c70 clip clstm 48h no-init no-reset:  # !
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c70_clstm_clip_48h_no-init_no-reset_vNone.nc
+    #####HPX32 c70 clip cgru:
+    #####  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c70_cgru_clip_vNone.nc
+    #HPX32 c70 clip clstm 3dh 24h reset:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_03-02-02_hpx32_u3p_c70_clstm_clip_3dh_vNone.nc
+    #  analysis_overrides:
+    #    acc:
+    #      - analysis.arguments.climatology_path=null
+    #HPX32 c70 clip clstm 3dh 24h no-reset:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_03-02-02_hpx32_u3p_c70_clstm_clip_3dh_no-reset_vNone.nc
+    #  analysis_overrides:
+    #    acc:
+    #      - analysis.arguments.climatology_path=null
+
+    
+    #Baseline:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_6h-24h_vNone.nc
+    #Latitude code:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_latcode_vNone.nc
+    #No TISR:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_no-tisr_vNone.nc
+
+
+    #HPX32 6h-24h (UNet3+ Baseline):
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_6h-24h_vNone.nc
+    #HPX32 6h-48h:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_6h-48h_vNone.nc
+    #HPX32 3h-24h:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_03-02-02_hpx32_u3p_c90_3h-24h_vNone.nc
+    #  analysis_overrides:
+    #    acc:
+    #      - analysis.arguments.climatology_path=null
+    #HPX32 12h-24h:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_12-02-02_hpx32_u3p_c90_12h-24h_vNone.nc
+    #  analysis_overrides:
+    #    acc:
+    #      - analysis.arguments.climatology_path=null
+    #HPX32 12h-48h:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_12-02-02_hpx32_u3p_c90_12h-48h_vNone.nc
+    #  analysis_overrides:
+    #    acc:
+    #      - analysis.arguments.climatology_path=null
+    #HPX32 24h-48h:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_24-02-02_hpx32_u3p_c90_24h-48h_vNone.nc
+    #  analysis_overrides:
+    #    acc:
+    #      - analysis.arguments.climatology_path=null
+    #HPX32 24h-96h:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_24-02-02_hpx32_u3p_c90_24h-96h_vNone.nc
+    #  analysis_overrides:
+    #    acc:
+    #      - analysis.arguments.climatology_path=null
+    #HPX64 6h-24h:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx64_u3p_c90_6h-24h_vNone.nc
+    #  forecast_overrides:
+    #    - paths.verification_ll=/home/disk/quicksilver/nacc/Data/ERA5/1deg/1979-2022_era5_1deg_3h_
+    #    - evaluator/remap_config=hpx64
+    #  analysis_overrides:
+    #    acc:
+    #      - analysis.arguments.climatology_path=null
+    #HPX64 3h-24h:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_03-02-02_hpx64_u3p_c90_3h-24h_vNone.nc
+    #  forecast_overrides:
+    #    - paths.verification_ll=/home/disk/quicksilver/nacc/Data/ERA5/1deg/1979-2022_era5_1deg_3h_
+    #    - evaluator/remap_config=hpx64
+    #  analysis_overrides:
+    #    acc:
+    #      - analysis.arguments.climatology_path=null
+
+    #HPX UNet3+ inverted 50 epochs:
+    #  forecast_path: DELUSioN/evaluation/forecasts/forecast_06-02-02_hpx_u3p_c360-180-90_bs64_lr4e-4_vNone.nc
+    #  forecast_overrides:
+    #    - transfer_das=True
+    #HPX UNet3+ inverted 300 epochs:
+    #  forecast_path: DELUSioN/evaluation/forecasts/forecast_06-02-02_hpx_u3p_c360-180-90_bs64_ep300_vNone.nc
+    #  forecast_overrides:
+    #    - transfer_das=True
+    #HPX64 300 epochs plateau UNet3+ inverted:
+    #  forecast_path: DELUSioN/evaluation/forecasts/forecast_06-02-02_hpx64_u3p_c360_lr2e-4_plat_ep300_vNone.nc
+    #  forecast_overrides:
+    #    - evaluator/remap_config=hpx64
+
+    #Current Best (CS128) 500 epochs:
+    #  forecast_path: brass/nacc/forecasts/10-46-48/forecast_10-46-48_vNone_ckpt487.nc
+    #  forecast_overrides:
+    #    - evaluator=cs
+    #    - evaluator/remap_config=cs128
+    #    #- paths.verification=/home/disk/brume/karlbam/Data/DLWP/CS128/era5_1deg_3h_CS128S-O2_1979-2022_
+    #  analysis_overrides:
+    #    acc:
+    #      - analysis.arguments.climatology_path=null
+    #HPX32 50 epochs UNet3+ inverted:
+    #  forecast_path: brume/karlbam/DELUSioN/evaluation/forecasts/forecast_06-02-02_hpx_u3p_c360-180-90_bs64_lr4e-4_vNone.nc
+    #HPX64 300 epochs plateau UNet3+ inverted:
+    #  forecast_path: brume/karlbam/DELUSioN/evaluation/forecasts/forecast_06-02-02_hpx64_u3p_c360_lr2e-4_plat_ep300_vNone.nc
+    #  forecast_overrides:
+    #    - evaluator/remap_config=hpx64
+    #HPX64 300 epochs plateau clipped Unet3+ inverted:
+    #  forecast_path: brass/nacc/forecasts/16-35-33/forecast_16-35-33_vNone.nc
+    #  forecast_overrides:
+    #    - evaluator/remap_config=hpx64
+    #    - transfer_das=True
+
+    
+    #HPX32 Baro c90 state-state:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_baro_state-state_vNone.nc
+    #HPX32 Baro c360 state-state:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c360_baro_state-state_vNone.nc
+    #HPX32 Baro c90 delta-state:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_c90_baro_delta-state_vNone.nc
+
+      
+    # Replication
+    #Baseline (CS64):
+    #  forecast_path: brass/nacc/forecasts/10-18-58/forecast_10-18-58_vNone_ckpt484.nc  
+    #  forecast_overrides:
+    #    - evaluator=cs
+    #    - paths.verification_ll=/home/disk/quicksilver/nacc/Data/ERA5/1deg/1979-2022_era5_1deg_3h_
+    #    - paths.verification=/home/disk/brume/karlbam/Data/DLWP/CS64/era5_1deg_3h_CS64S_1979-2018_
+    #    - rescale_das=True
+    #    - evaluator.unit_conversion=9.81
+    #    - UNCOMMENT THE FORECAST RESCALING
+    #  analysis_overrides:
+    #    acc:
+    #      - analysis.arguments.climatology_path=null
+    #Current Best (CS128):
+    #  forecast_path: brass/nacc/forecasts/10-46-48/forecast_10-46-48_vNone_ckpt487.nc
+    #  forecast_overrides:
+    #    - evaluator=cs
+    #    - evaluator/remap_config=cs128
+    #    - paths.verification_ll=/home/disk/quicksilver/nacc/Data/ERA5/1deg/1979-2022_era5_1deg_3h_
+    #    - paths.verification=/home/disk/brume/karlbam/Data/DLWP/CS128/era5_1deg_3h_CS128S-O2_1979-2022_
+    #  analysis_overrides:
+    #    acc:
+    #      - analysis.arguments.climatology_path=null
+
+
+    # Model improvements
+    #CS UNet:
+    #  forecast_path: DELUSioN/evaluation/forecasts/forecast_06-02-00_h6_2x2_t-orig_vNone.nc
+    #  forecast_overrides:
+    #    - evaluator=cs
+    #    - paths.verification_ll=/home/disk/quicksilver/nacc/Data/ERA5/1deg/1979-2022_era5_1deg_3h_
+    #    - paths.verification=/home/disk/brume/karlbam/Data/DLWP/CS64/era5_1deg_3h_CS64S_1979-2018_
+    #    - rescale_das=True
+    #    - analysis.on_latlon=True
+    #  analysis_overrides:
+    #    acc:
+    #      - analysis.arguments.climatology_path=null
+    #CS64 UNet3+:
+    #  forecast_path: DELUSioN/evaluation/forecasts/forecast_06-02-02_unet3_vNone.nc
+    #  forecast_overrides:
+    #    - evaluator=cs
+    #    - paths.verification_ll=/home/disk/quicksilver/nacc/Data/ERA5/1deg/1979-2022_era5_1deg_3h_
+    #    - paths.verification=/home/disk/brume/karlbam/Data/DLWP/CS64/era5_1deg_3h_CS64S_1979-2018_
+    #    - rescale_das=True
+    #    #- transfer_das=True
+    #    - analysis.on_latlon=True
+    #  analysis_overrides:
+    #    acc:
+    #      - analysis.arguments.climatology_path=null
+    #HPX32 UNet3+:
+    #  forecast_path: DELUSioN/evaluation/forecasts/forecast_06-02-02_hpx_u3p_c90-180-360_bs64_vNone.nc
+    #  forecast_overrides:
+    #    - analysis.on_latlon=True
+    #HPX UNet3+ inverted:
+    #  forecast_path: DELUSioN/evaluation/forecasts/forecast_06-02-02_hpx_u3p_c360-180-90_bs64_lr4e-4_vNone.nc
+    #  forecast_overrides:
+    #    - transfer_das=True
+    #    - analysis.on_latlon=True
+
+
+    #LL181x360:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_ll181_u3p_baro_vNone.nc
+    #  forecast_overrides:
+    #    - evaluator=ll
+    #    - analysis.on_latlon=True
+    #    - paths.verification_ll=/home/disk/quicksilver/nacc/Data/ERA5/1deg/1979-2022_era5_1deg_3h_
+    #CS64:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_cs64_u3p_baro_vNone.nc
+    #  forecast_overrides:
+    #    - evaluator=cs
+    #    - paths.verification=/home/disk/brume/karlbam/Data/DLWP/CS64/era5_1deg_3h_CS64S_1979-2018_
+    #    - paths.verification_ll=/home/disk/quicksilver/nacc/Data/ERA5/1deg/1979-2022_era5_1deg_3h_
+    #    - rescale_das=True
+    #    - transfer_das=False
+    #  analysis_overrides:
+    #    acc:
+    #      - analysis.arguments.climatology_path=null
+    #CS64 native:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_cs64_u3p_baro_vNone.nc
+    #  forecast_overrides:
+    #    - evaluator=cs
+    #    - paths.verification=/home/disk/brume/karlbam/Data/DLWP/CS64/era5_1deg_3h_CS64S_1979-2018_
+    #    - paths.verification_ll=/home/disk/quicksilver/nacc/Data/ERA5/1deg/1979-2022_era5_1deg_3h_
+    #    - analysis.on_latlon=False
+    #    - rescale_das=True
+    #HPX32:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_baro_vNone.nc
+    #  forecast_overrides:
+    #    - paths.verification_ll=/home/disk/quicksilver/nacc/Data/ERA5/1deg/1979-2022_era5_1deg_3h_
+    #HPX32 native:
+    #  forecast_path: dunet3/evaluation/forecasts/forecast_06-02-02_hpx32_u3p_baro_vNone.nc
+    #  forecast_overrides:
+    #    - analysis.on_latlon=False
+    #    - paths.verification=/home/disk/brume/karlbam/Data/DLWP/HPX32_old/era5_1deg_3h_HPX32_1979-2018_
+
+
+    #HPX64 c360 plateau 300 epochs z1000:
+    #  forecast_path: DELUSioN/evaluation/forecasts/forecast_06-02-02_hpx64_u3p_c360_lr2e-4_plat_ep300_vNone.nc
+    #  forecast_overrides:
+    #    - transfer_das=False
+    #    - paths.verification_ll=/home/disk/quicksilver/nacc/Data/ERA5/1deg/1979-2022_era5_1deg_3h_
+    #    - evaluator/remap_config=hpx64
+    #    - evaluator.remap_config.to_netcdf=True
+
+    #HPX64 c360 cosine 100 epochs:
+    #  forecast_path: DELUSioN/evaluation/forecasts/forecast_06-02-02_hpx64_u3p_c360-180-90_ep100_vNone.nc
+    #  forecast_overrides:
+    #    - transfer_das=True
+    #    - verbose=False
+    #    - paths.verification_ll=/home/rhodium/dlwp/data/HPX64/era5_1deg_3h_HPX64_1979-2018_
+    #    - evaluator/remap_config=hpx64
+
+    #HPX32 c360 cosine 300 epochs:
+    #  forecast_path: DELUSioN/evaluation/forecasts/forecast_06-02-02_hpx_u3p_c360-180-90_bs64_ep300_vNone.nc
+    #  forecast_overrides:
+    #    - verbose=False
+    #    - analysis.on_latlon=True
+
+
+    #CS64 gelu:
+    #  forecast_path: DELUSioN/evaluation/forecasts/forecast_06-02-02_unet_gelu_ep300_vNone.nc
+    #  forecast_overrides:
+    #    - verbose=False
+    #    - rescale_das=True
+    #    - evaluator=cs
+    #    - analysis.on_latlon=True
+    #    - paths.verification_ll=/home/disk/brume/karlbam/Data/DLWP/CS64/era5_1deg_3h_CS64S_1979-2018_
+
+    #HPX32 6var c90:
+    #  forecast_path: DELUSioN/evaluation/forecasts/forecast_06-02-02_hpx_u3p_6var_c90-180-360_vNone.nc
+    #  forecast_overrides:  # Applied to every analysis
+    #    - verbose=True
+    #  analysis_overrides:  # Applied to a specific analysis only
+    #    acc:
+    #      - analysis.on_latlon=True
+    #    rmse:
+    #      - analysis.on_latlon=True
+
+    #HPX32 6var c90 b:
+    #  forecast_path: DELUSioN/evaluation/forecasts/forecast_06-02-02_hpx_u3p_6var_c90-180-360_vNone.nc
+    #  forecast_overrides:
+    #    - transfer_das=True  # Use the same verification and climatology file as for the previous model
+    #    - verbose=False
+    #  analysis_overrides:
+    #    rmse_per_face:
+    #      - analysis.skip=True
+

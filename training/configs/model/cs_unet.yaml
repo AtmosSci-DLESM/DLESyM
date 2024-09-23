@@ -1,0 +1,43 @@
+_target_: training.dlwp.model.models.unet.CubeSphereUNet
+_recursive_: false
+
+encoder:
+  _target_: training.dlwp.model.modules.encoder.CubeSphereUNetEncoder
+  _recursive_: true
+  n_channels:
+    - 64
+    - 128
+    - 256
+  convolutions_per_depth: 2
+  kernel_size: 3
+  pooling_type: torch.nn.MaxPool2d
+  pooling: 2
+  activation:
+    _target_: torch.nn.LeakyReLU
+  add_polar_layer: true
+  flip_north_pole: true
+  
+decoder:
+  _target_: training.dlwp.model.modules.decoder.CubeSphereUNetDecoder
+  _recursive_: true
+  n_channels:
+    - 256
+    - 128
+    - 64
+  convolutions_per_depth: 2
+  kernel_size: 3
+  upsampling_type: interpolate
+  upsampling: 2
+  activation:
+    _target_: torch.nn.LeakyReLU
+  add_polar_layer: true
+  flip_north_pole: true
+
+input_time_dim: ${data.input_time_dim}
+output_time_dim: ${data.output_time_dim}
+
+# Parameters automatically overridden in train code
+input_channels: 7
+output_channels: 7
+n_constants: 2
+decoder_input_channels: 1

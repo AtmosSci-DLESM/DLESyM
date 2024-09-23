@@ -1,0 +1,7 @@
+name: RMSE
+on_latlon: True
+method: get_rmse
+arguments:
+  mean: False
+plot_method: plot_rmse
+skip: False

@@ -1,0 +1,6 @@
+train_date_start: 1983-07-02
+train_date_end: 2016-06-30T22:00
+val_date_start: 2016-07-01
+val_date_end: 2017-06-30T22:00
+test_date_start: 2016-07-01
+test_date_end: 2017-06-30T22:00

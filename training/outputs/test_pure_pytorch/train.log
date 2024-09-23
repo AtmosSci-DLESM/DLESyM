@@ -1,0 +1,581 @@
+[2023-04-20 15:29:18,658][__main__][INFO] - experiment working directory: /home/quicksilver/nacc/pure_pytorch/zephyr
+[2023-04-20 15:29:21,317][asyncio][DEBUG] - Using selector: EpollSelector
+[2023-04-20 15:29:21,629][training.dlwp.data.data_loading][INFO] - merging input datasets
+[2023-04-20 15:29:21,630][training.dlwp.data.data_loading][DEBUG] - open nc dataset /home/mercury2/karlbam/Data/DLWP/HPX32/era5_1deg_3h_HPX32_1979-2021_t2m0.nc
+[2023-04-20 15:31:02,238][__main__][INFO] - experiment working directory: /home/quicksilver/nacc/pure_pytorch/zephyr
+[2023-04-20 15:31:14,667][asyncio][DEBUG] - Using selector: EpollSelector
+[2023-04-20 15:31:15,118][training.dlwp.data.data_loading][INFO] - merging input datasets
+[2023-04-20 15:31:15,118][training.dlwp.data.data_loading][DEBUG] - open nc dataset /home/mercury2/karlbam/Data/DLWP/HPX32/era5_1deg_3h_HPX32_1979-2021_t2m0.nc
+[2023-04-20 15:32:26,426][__main__][INFO] - experiment working directory: /home/quicksilver/nacc/pure_pytorch/zephyr
+[2023-04-20 15:32:35,747][asyncio][DEBUG] - Using selector: EpollSelector
+[2023-04-20 15:32:36,056][training.dlwp.data.data_loading][INFO] - merging input datasets
+[2023-04-20 15:32:36,056][training.dlwp.data.data_loading][DEBUG] - open nc dataset /home/mercury2/karlbam/Data/DLWP/HPX32/era5_1deg_3h_HPX32_1979-2021_t2m0.nc
+[2023-04-20 15:35:00,690][__main__][INFO] - experiment working directory: /home/quicksilver/nacc/pure_pytorch/zephyr
+[2023-04-20 15:35:16,047][asyncio][DEBUG] - Using selector: EpollSelector
+[2023-04-20 15:35:17,285][training.dlwp.data.data_loading][INFO] - opening input datasets
+[2023-04-20 15:43:43,176][__main__][INFO] - experiment working directory: /home/quicksilver/nacc/pure_pytorch/zephyr
+[2023-04-20 15:43:44,556][asyncio][DEBUG] - Using selector: EpollSelector
+[2023-04-20 15:43:44,921][training.dlwp.data.data_loading][INFO] - opening input datasets
+[2023-04-25 09:43:59,402][__main__][INFO] - experiment working directory: /home/quicksilver/nacc/pure_pytorch/zephyr
+[2023-04-25 09:44:01,508][asyncio][DEBUG] - Using selector: EpollSelector
+[2023-04-25 09:44:02,079][training.dlwp.data.data_loading][INFO] - opening input datasets
+[2023-05-01 16:30:41,937][__main__][INFO] - experiment working directory: /home/quicksilver/nacc/pure_pytorch/zephyr
+[2023-05-01 16:31:08,196][__main__][INFO] - experiment working directory: /home/quicksilver/nacc/pure_pytorch/zephyr
+[2023-05-01 16:31:10,895][numexpr.utils][INFO] - Note: detected 128 virtual cores but NumExpr set to maximum of 64, check "NUMEXPR_MAX_THREADS" environment variable.
+[2023-05-01 16:31:10,895][numexpr.utils][INFO] - Note: NumExpr detected 128 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+[2023-05-01 16:31:10,896][numexpr.utils][INFO] - NumExpr defaulting to 8 threads.
+[2023-05-01 16:31:17,036][training.dlwp.data.data_loading][INFO] - opening input datasets
+[2023-05-01 16:31:17,938][numcodecs][DEBUG] - Registering codec 'zlib'
+[2023-05-01 16:31:17,940][numcodecs][DEBUG] - Registering codec 'gzip'
+[2023-05-01 16:31:17,941][numcodecs][DEBUG] - Registering codec 'bz2'
+[2023-05-01 16:31:17,943][numcodecs][DEBUG] - Registering codec 'lzma'
+[2023-05-01 16:31:18,045][numcodecs][DEBUG] - Registering codec 'blosc'
+[2023-05-01 16:31:18,068][numcodecs][DEBUG] - Registering codec 'zstd'
+[2023-05-01 16:31:18,081][numcodecs][DEBUG] - Registering codec 'lz4'
+[2023-05-01 16:31:18,084][numcodecs][DEBUG] - Registering codec 'astype'
+[2023-05-01 16:31:18,086][numcodecs][DEBUG] - Registering codec 'delta'
+[2023-05-01 16:31:18,088][numcodecs][DEBUG] - Registering codec 'quantize'
+[2023-05-01 16:31:18,089][numcodecs][DEBUG] - Registering codec 'fixedscaleoffset'
+[2023-05-01 16:31:18,091][numcodecs][DEBUG] - Registering codec 'packbits'
+[2023-05-01 16:31:18,092][numcodecs][DEBUG] - Registering codec 'categorize'
+[2023-05-01 16:31:18,094][numcodecs][DEBUG] - Registering codec 'pickle'
+[2023-05-01 16:31:18,095][numcodecs][DEBUG] - Registering codec 'base64'
+[2023-05-01 16:31:18,101][numcodecs][DEBUG] - Registering codec 'shuffle'
+[2023-05-01 16:31:18,103][numcodecs][DEBUG] - Registering codec 'bitround'
+[2023-05-01 16:31:18,122][numcodecs][DEBUG] - Registering codec 'msgpack2'
+[2023-05-01 16:31:18,124][numcodecs][DEBUG] - Registering codec 'crc32'
+[2023-05-01 16:31:18,124][numcodecs][DEBUG] - Registering codec 'adler32'
+[2023-05-01 16:31:18,125][numcodecs][DEBUG] - Registering codec 'json2'
+[2023-05-01 16:31:18,145][numcodecs][DEBUG] - Registering codec 'vlen-utf8'
+[2023-05-01 16:31:18,145][numcodecs][DEBUG] - Registering codec 'vlen-bytes'
+[2023-05-01 16:31:18,145][numcodecs][DEBUG] - Registering codec 'vlen-array'
+[2023-05-01 16:31:18,276][numcodecs][DEBUG] - Registering codec 'n5_wrapper'
+[2023-05-01 16:32:32,149][__main__][INFO] - experiment working directory: /home/quicksilver/nacc/pure_pytorch/zephyr
+[2023-05-01 16:32:32,529][numexpr.utils][INFO] - Note: detected 128 virtual cores but NumExpr set to maximum of 64, check "NUMEXPR_MAX_THREADS" environment variable.
+[2023-05-01 16:32:32,529][numexpr.utils][INFO] - Note: NumExpr detected 128 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+[2023-05-01 16:32:32,529][numexpr.utils][INFO] - NumExpr defaulting to 8 threads.
+[2023-05-01 16:32:33,205][training.dlwp.data.data_loading][INFO] - opening input datasets
+[2023-05-01 16:32:33,267][numcodecs][DEBUG] - Registering codec 'zlib'
+[2023-05-01 16:32:33,268][numcodecs][DEBUG] - Registering codec 'gzip'
+[2023-05-01 16:32:33,269][numcodecs][DEBUG] - Registering codec 'bz2'
+[2023-05-01 16:32:33,270][numcodecs][DEBUG] - Registering codec 'lzma'
+[2023-05-01 16:32:33,272][numcodecs][DEBUG] - Registering codec 'blosc'
+[2023-05-01 16:32:33,273][numcodecs][DEBUG] - Registering codec 'zstd'
+[2023-05-01 16:32:33,273][numcodecs][DEBUG] - Registering codec 'lz4'
+[2023-05-01 16:32:33,275][numcodecs][DEBUG] - Registering codec 'astype'
+[2023-05-01 16:32:33,276][numcodecs][DEBUG] - Registering codec 'delta'
+[2023-05-01 16:32:33,277][numcodecs][DEBUG] - Registering codec 'quantize'
+[2023-05-01 16:32:33,277][numcodecs][DEBUG] - Registering codec 'fixedscaleoffset'
+[2023-05-01 16:32:33,278][numcodecs][DEBUG] - Registering codec 'packbits'
+[2023-05-01 16:32:33,279][numcodecs][DEBUG] - Registering codec 'categorize'
+[2023-05-01 16:32:33,280][numcodecs][DEBUG] - Registering codec 'pickle'
+[2023-05-01 16:32:33,281][numcodecs][DEBUG] - Registering codec 'base64'
+[2023-05-01 16:32:33,282][numcodecs][DEBUG] - Registering codec 'shuffle'
+[2023-05-01 16:32:33,283][numcodecs][DEBUG] - Registering codec 'bitround'
+[2023-05-01 16:32:33,288][numcodecs][DEBUG] - Registering codec 'msgpack2'
+[2023-05-01 16:32:33,289][numcodecs][DEBUG] - Registering codec 'crc32'
+[2023-05-01 16:32:33,289][numcodecs][DEBUG] - Registering codec 'adler32'
+[2023-05-01 16:32:33,290][numcodecs][DEBUG] - Registering codec 'json2'
+[2023-05-01 16:32:33,291][numcodecs][DEBUG] - Registering codec 'vlen-utf8'
+[2023-05-01 16:32:33,291][numcodecs][DEBUG] - Registering codec 'vlen-bytes'
+[2023-05-01 16:32:33,291][numcodecs][DEBUG] - Registering codec 'vlen-array'
+[2023-05-01 16:32:33,311][numcodecs][DEBUG] - Registering codec 'n5_wrapper'
+[2023-05-02 10:35:35,106][__main__][INFO] - experiment working directory: /home/quicksilver/nacc/pure_pytorch/zephyr
+[2023-05-02 10:35:35,576][numexpr.utils][INFO] - Note: detected 128 virtual cores but NumExpr set to maximum of 64, check "NUMEXPR_MAX_THREADS" environment variable.
+[2023-05-02 10:35:35,576][numexpr.utils][INFO] - Note: NumExpr detected 128 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+[2023-05-02 10:35:35,576][numexpr.utils][INFO] - NumExpr defaulting to 8 threads.
+[2023-05-02 10:35:36,684][training.dlwp.data.data_loading][INFO] - opening input datasets
+[2023-05-02 10:35:36,807][numcodecs][DEBUG] - Registering codec 'zlib'
+[2023-05-02 10:35:36,808][numcodecs][DEBUG] - Registering codec 'gzip'
+[2023-05-02 10:35:36,809][numcodecs][DEBUG] - Registering codec 'bz2'
+[2023-05-02 10:35:36,811][numcodecs][DEBUG] - Registering codec 'lzma'
+[2023-05-02 10:35:36,813][numcodecs][DEBUG] - Registering codec 'blosc'
+[2023-05-02 10:35:36,814][numcodecs][DEBUG] - Registering codec 'zstd'
+[2023-05-02 10:35:36,815][numcodecs][DEBUG] - Registering codec 'lz4'
+[2023-05-02 10:35:36,817][numcodecs][DEBUG] - Registering codec 'astype'
+[2023-05-02 10:35:36,818][numcodecs][DEBUG] - Registering codec 'delta'
+[2023-05-02 10:35:36,820][numcodecs][DEBUG] - Registering codec 'quantize'
+[2023-05-02 10:35:36,821][numcodecs][DEBUG] - Registering codec 'fixedscaleoffset'
+[2023-05-02 10:35:36,822][numcodecs][DEBUG] - Registering codec 'packbits'
+[2023-05-02 10:35:36,823][numcodecs][DEBUG] - Registering codec 'categorize'
+[2023-05-02 10:35:36,824][numcodecs][DEBUG] - Registering codec 'pickle'
+[2023-05-02 10:35:36,826][numcodecs][DEBUG] - Registering codec 'base64'
+[2023-05-02 10:35:36,827][numcodecs][DEBUG] - Registering codec 'shuffle'
+[2023-05-02 10:35:36,829][numcodecs][DEBUG] - Registering codec 'bitround'
+[2023-05-02 10:35:36,839][numcodecs][DEBUG] - Registering codec 'msgpack2'
+[2023-05-02 10:35:36,840][numcodecs][DEBUG] - Registering codec 'crc32'
+[2023-05-02 10:35:36,840][numcodecs][DEBUG] - Registering codec 'adler32'
+[2023-05-02 10:35:36,841][numcodecs][DEBUG] - Registering codec 'json2'
+[2023-05-02 10:35:36,842][numcodecs][DEBUG] - Registering codec 'vlen-utf8'
+[2023-05-02 10:35:36,842][numcodecs][DEBUG] - Registering codec 'vlen-bytes'
+[2023-05-02 10:35:36,842][numcodecs][DEBUG] - Registering codec 'vlen-array'
+[2023-05-02 10:35:36,874][numcodecs][DEBUG] - Registering codec 'n5_wrapper'
+[2023-05-03 13:14:55,031][__main__][INFO] - experiment working directory: /home/quicksilver/nacc/pure_pytorch/zephyr
+[2023-05-03 13:14:58,280][numexpr.utils][INFO] - Note: detected 128 virtual cores but NumExpr set to maximum of 64, check "NUMEXPR_MAX_THREADS" environment variable.
+[2023-05-03 13:14:58,280][numexpr.utils][INFO] - Note: NumExpr detected 128 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+[2023-05-03 13:14:58,280][numexpr.utils][INFO] - NumExpr defaulting to 8 threads.
+[2023-05-03 13:15:06,211][training.dlwp.data.data_loading][INFO] - opening input datasets
+[2023-05-03 13:15:07,400][numcodecs][DEBUG] - Registering codec 'zlib'
+[2023-05-03 13:15:07,403][numcodecs][DEBUG] - Registering codec 'gzip'
+[2023-05-03 13:15:07,405][numcodecs][DEBUG] - Registering codec 'bz2'
+[2023-05-03 13:15:07,407][numcodecs][DEBUG] - Registering codec 'lzma'
+[2023-05-03 13:15:07,527][numcodecs][DEBUG] - Registering codec 'blosc'
+[2023-05-03 13:15:07,548][numcodecs][DEBUG] - Registering codec 'zstd'
+[2023-05-03 13:15:07,558][numcodecs][DEBUG] - Registering codec 'lz4'
+[2023-05-03 13:15:07,562][numcodecs][DEBUG] - Registering codec 'astype'
+[2023-05-03 13:15:07,564][numcodecs][DEBUG] - Registering codec 'delta'
+[2023-05-03 13:15:07,566][numcodecs][DEBUG] - Registering codec 'quantize'
+[2023-05-03 13:15:07,568][numcodecs][DEBUG] - Registering codec 'fixedscaleoffset'
+[2023-05-03 13:15:07,570][numcodecs][DEBUG] - Registering codec 'packbits'
+[2023-05-03 13:15:07,572][numcodecs][DEBUG] - Registering codec 'categorize'
+[2023-05-03 13:15:07,574][numcodecs][DEBUG] - Registering codec 'pickle'
+[2023-05-03 13:15:07,577][numcodecs][DEBUG] - Registering codec 'base64'
+[2023-05-03 13:15:07,583][numcodecs][DEBUG] - Registering codec 'shuffle'
+[2023-05-03 13:15:07,585][numcodecs][DEBUG] - Registering codec 'bitround'
+[2023-05-03 13:15:07,692][numcodecs][DEBUG] - Registering codec 'msgpack2'
+[2023-05-03 13:15:07,709][numcodecs][DEBUG] - Registering codec 'crc32'
+[2023-05-03 13:15:07,709][numcodecs][DEBUG] - Registering codec 'adler32'
+[2023-05-03 13:15:07,711][numcodecs][DEBUG] - Registering codec 'json2'
+[2023-05-03 13:15:07,717][numcodecs][DEBUG] - Registering codec 'vlen-utf8'
+[2023-05-03 13:15:07,717][numcodecs][DEBUG] - Registering codec 'vlen-bytes'
+[2023-05-03 13:15:07,717][numcodecs][DEBUG] - Registering codec 'vlen-array'
+[2023-05-03 13:15:07,943][numcodecs][DEBUG] - Registering codec 'n5_wrapper'
+[2023-05-03 13:17:10,661][__main__][INFO] - experiment working directory: /home/quicksilver/nacc/pure_pytorch/zephyr
+[2023-05-03 13:17:11,786][numexpr.utils][INFO] - Note: detected 128 virtual cores but NumExpr set to maximum of 64, check "NUMEXPR_MAX_THREADS" environment variable.
+[2023-05-03 13:17:11,786][numexpr.utils][INFO] - Note: NumExpr detected 128 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+[2023-05-03 13:17:11,786][numexpr.utils][INFO] - NumExpr defaulting to 8 threads.
+[2023-05-03 13:17:12,648][training.dlwp.data.data_loading][INFO] - opening input datasets
+[2023-05-03 13:17:12,827][numcodecs][DEBUG] - Registering codec 'zlib'
+[2023-05-03 13:17:12,829][numcodecs][DEBUG] - Registering codec 'gzip'
+[2023-05-03 13:17:12,830][numcodecs][DEBUG] - Registering codec 'bz2'
+[2023-05-03 13:17:12,831][numcodecs][DEBUG] - Registering codec 'lzma'
+[2023-05-03 13:17:12,834][numcodecs][DEBUG] - Registering codec 'blosc'
+[2023-05-03 13:17:12,835][numcodecs][DEBUG] - Registering codec 'zstd'
+[2023-05-03 13:17:12,835][numcodecs][DEBUG] - Registering codec 'lz4'
+[2023-05-03 13:17:12,862][numcodecs][DEBUG] - Registering codec 'astype'
+[2023-05-03 13:17:12,863][numcodecs][DEBUG] - Registering codec 'delta'
+[2023-05-03 13:17:12,864][numcodecs][DEBUG] - Registering codec 'quantize'
+[2023-05-03 13:17:12,866][numcodecs][DEBUG] - Registering codec 'fixedscaleoffset'
+[2023-05-03 13:17:12,867][numcodecs][DEBUG] - Registering codec 'packbits'
+[2023-05-03 13:17:12,868][numcodecs][DEBUG] - Registering codec 'categorize'
+[2023-05-03 13:17:12,869][numcodecs][DEBUG] - Registering codec 'pickle'
+[2023-05-03 13:17:12,870][numcodecs][DEBUG] - Registering codec 'base64'
+[2023-05-03 13:17:12,872][numcodecs][DEBUG] - Registering codec 'shuffle'
+[2023-05-03 13:17:12,873][numcodecs][DEBUG] - Registering codec 'bitround'
+[2023-05-03 13:17:12,884][numcodecs][DEBUG] - Registering codec 'msgpack2'
+[2023-05-03 13:17:12,885][numcodecs][DEBUG] - Registering codec 'crc32'
+[2023-05-03 13:17:12,885][numcodecs][DEBUG] - Registering codec 'adler32'
+[2023-05-03 13:17:12,886][numcodecs][DEBUG] - Registering codec 'json2'
+[2023-05-03 13:17:12,887][numcodecs][DEBUG] - Registering codec 'vlen-utf8'
+[2023-05-03 13:17:12,887][numcodecs][DEBUG] - Registering codec 'vlen-bytes'
+[2023-05-03 13:17:12,887][numcodecs][DEBUG] - Registering codec 'vlen-array'
+[2023-05-03 13:17:12,922][numcodecs][DEBUG] - Registering codec 'n5_wrapper'
+[2023-05-03 13:18:08,664][__main__][INFO] - experiment working directory: /home/quicksilver/nacc/pure_pytorch/zephyr
+[2023-05-03 13:18:09,391][numexpr.utils][INFO] - Note: detected 128 virtual cores but NumExpr set to maximum of 64, check "NUMEXPR_MAX_THREADS" environment variable.
+[2023-05-03 13:18:09,391][numexpr.utils][INFO] - Note: NumExpr detected 128 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+[2023-05-03 13:18:09,391][numexpr.utils][INFO] - NumExpr defaulting to 8 threads.
+[2023-05-03 13:18:09,915][training.dlwp.data.data_loading][INFO] - opening input datasets
+[2023-05-03 13:18:09,938][numcodecs][DEBUG] - Registering codec 'zlib'
+[2023-05-03 13:18:09,939][numcodecs][DEBUG] - Registering codec 'gzip'
+[2023-05-03 13:18:09,939][numcodecs][DEBUG] - Registering codec 'bz2'
+[2023-05-03 13:18:09,940][numcodecs][DEBUG] - Registering codec 'lzma'
+[2023-05-03 13:18:09,941][numcodecs][DEBUG] - Registering codec 'blosc'
+[2023-05-03 13:18:09,942][numcodecs][DEBUG] - Registering codec 'zstd'
+[2023-05-03 13:18:09,942][numcodecs][DEBUG] - Registering codec 'lz4'
+[2023-05-03 13:18:09,943][numcodecs][DEBUG] - Registering codec 'astype'
+[2023-05-03 13:18:09,944][numcodecs][DEBUG] - Registering codec 'delta'
+[2023-05-03 13:18:09,944][numcodecs][DEBUG] - Registering codec 'quantize'
+[2023-05-03 13:18:09,945][numcodecs][DEBUG] - Registering codec 'fixedscaleoffset'
+[2023-05-03 13:18:09,945][numcodecs][DEBUG] - Registering codec 'packbits'
+[2023-05-03 13:18:09,946][numcodecs][DEBUG] - Registering codec 'categorize'
+[2023-05-03 13:18:09,946][numcodecs][DEBUG] - Registering codec 'pickle'
+[2023-05-03 13:18:09,947][numcodecs][DEBUG] - Registering codec 'base64'
+[2023-05-03 13:18:09,947][numcodecs][DEBUG] - Registering codec 'shuffle'
+[2023-05-03 13:18:09,948][numcodecs][DEBUG] - Registering codec 'bitround'
+[2023-05-03 13:18:09,951][numcodecs][DEBUG] - Registering codec 'msgpack2'
+[2023-05-03 13:18:09,951][numcodecs][DEBUG] - Registering codec 'crc32'
+[2023-05-03 13:18:09,952][numcodecs][DEBUG] - Registering codec 'adler32'
+[2023-05-03 13:18:09,952][numcodecs][DEBUG] - Registering codec 'json2'
+[2023-05-03 13:18:09,952][numcodecs][DEBUG] - Registering codec 'vlen-utf8'
+[2023-05-03 13:18:09,952][numcodecs][DEBUG] - Registering codec 'vlen-bytes'
+[2023-05-03 13:18:09,952][numcodecs][DEBUG] - Registering codec 'vlen-array'
+[2023-05-03 13:18:09,966][numcodecs][DEBUG] - Registering codec 'n5_wrapper'
+[2023-05-03 13:18:44,535][__main__][INFO] - experiment working directory: /home/quicksilver/nacc/pure_pytorch/zephyr
+[2023-05-03 13:18:45,540][numexpr.utils][INFO] - Note: detected 128 virtual cores but NumExpr set to maximum of 64, check "NUMEXPR_MAX_THREADS" environment variable.
+[2023-05-03 13:18:45,540][numexpr.utils][INFO] - Note: NumExpr detected 128 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+[2023-05-03 13:18:45,540][numexpr.utils][INFO] - NumExpr defaulting to 8 threads.
+[2023-05-03 13:18:46,322][training.dlwp.data.data_loading][INFO] - opening input datasets
+[2023-05-03 13:18:46,349][numcodecs][DEBUG] - Registering codec 'zlib'
+[2023-05-03 13:18:46,349][numcodecs][DEBUG] - Registering codec 'gzip'
+[2023-05-03 13:18:46,350][numcodecs][DEBUG] - Registering codec 'bz2'
+[2023-05-03 13:18:46,350][numcodecs][DEBUG] - Registering codec 'lzma'
+[2023-05-03 13:18:46,352][numcodecs][DEBUG] - Registering codec 'blosc'
+[2023-05-03 13:18:46,352][numcodecs][DEBUG] - Registering codec 'zstd'
+[2023-05-03 13:18:46,352][numcodecs][DEBUG] - Registering codec 'lz4'
+[2023-05-03 13:18:46,353][numcodecs][DEBUG] - Registering codec 'astype'
+[2023-05-03 13:18:46,354][numcodecs][DEBUG] - Registering codec 'delta'
+[2023-05-03 13:18:46,354][numcodecs][DEBUG] - Registering codec 'quantize'
+[2023-05-03 13:18:46,355][numcodecs][DEBUG] - Registering codec 'fixedscaleoffset'
+[2023-05-03 13:18:46,355][numcodecs][DEBUG] - Registering codec 'packbits'
+[2023-05-03 13:18:46,356][numcodecs][DEBUG] - Registering codec 'categorize'
+[2023-05-03 13:18:46,356][numcodecs][DEBUG] - Registering codec 'pickle'
+[2023-05-03 13:18:46,357][numcodecs][DEBUG] - Registering codec 'base64'
+[2023-05-03 13:18:46,358][numcodecs][DEBUG] - Registering codec 'shuffle'
+[2023-05-03 13:18:46,358][numcodecs][DEBUG] - Registering codec 'bitround'
+[2023-05-03 13:18:46,361][numcodecs][DEBUG] - Registering codec 'msgpack2'
+[2023-05-03 13:18:46,362][numcodecs][DEBUG] - Registering codec 'crc32'
+[2023-05-03 13:18:46,362][numcodecs][DEBUG] - Registering codec 'adler32'
+[2023-05-03 13:18:46,362][numcodecs][DEBUG] - Registering codec 'json2'
+[2023-05-03 13:18:46,363][numcodecs][DEBUG] - Registering codec 'vlen-utf8'
+[2023-05-03 13:18:46,363][numcodecs][DEBUG] - Registering codec 'vlen-bytes'
+[2023-05-03 13:18:46,363][numcodecs][DEBUG] - Registering codec 'vlen-array'
+[2023-05-03 13:18:46,377][numcodecs][DEBUG] - Registering codec 'n5_wrapper'
+[2023-05-03 13:19:51,194][__main__][INFO] - experiment working directory: /home/quicksilver/nacc/pure_pytorch/zephyr
+[2023-05-03 13:19:52,010][numexpr.utils][INFO] - Note: detected 128 virtual cores but NumExpr set to maximum of 64, check "NUMEXPR_MAX_THREADS" environment variable.
+[2023-05-03 13:19:52,010][numexpr.utils][INFO] - Note: NumExpr detected 128 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+[2023-05-03 13:19:52,010][numexpr.utils][INFO] - NumExpr defaulting to 8 threads.
+[2023-05-03 13:19:52,600][training.dlwp.data.data_loading][INFO] - opening input datasets
+[2023-05-03 13:19:52,660][numcodecs][DEBUG] - Registering codec 'zlib'
+[2023-05-03 13:19:52,661][numcodecs][DEBUG] - Registering codec 'gzip'
+[2023-05-03 13:19:52,661][numcodecs][DEBUG] - Registering codec 'bz2'
+[2023-05-03 13:19:52,662][numcodecs][DEBUG] - Registering codec 'lzma'
+[2023-05-03 13:19:52,664][numcodecs][DEBUG] - Registering codec 'blosc'
+[2023-05-03 13:19:52,664][numcodecs][DEBUG] - Registering codec 'zstd'
+[2023-05-03 13:19:52,664][numcodecs][DEBUG] - Registering codec 'lz4'
+[2023-05-03 13:19:52,665][numcodecs][DEBUG] - Registering codec 'astype'
+[2023-05-03 13:19:52,666][numcodecs][DEBUG] - Registering codec 'delta'
+[2023-05-03 13:19:52,666][numcodecs][DEBUG] - Registering codec 'quantize'
+[2023-05-03 13:19:52,667][numcodecs][DEBUG] - Registering codec 'fixedscaleoffset'
+[2023-05-03 13:19:52,667][numcodecs][DEBUG] - Registering codec 'packbits'
+[2023-05-03 13:19:52,668][numcodecs][DEBUG] - Registering codec 'categorize'
+[2023-05-03 13:19:52,668][numcodecs][DEBUG] - Registering codec 'pickle'
+[2023-05-03 13:19:52,669][numcodecs][DEBUG] - Registering codec 'base64'
+[2023-05-03 13:19:52,670][numcodecs][DEBUG] - Registering codec 'shuffle'
+[2023-05-03 13:19:52,670][numcodecs][DEBUG] - Registering codec 'bitround'
+[2023-05-03 13:19:52,674][numcodecs][DEBUG] - Registering codec 'msgpack2'
+[2023-05-03 13:19:52,675][numcodecs][DEBUG] - Registering codec 'crc32'
+[2023-05-03 13:19:52,675][numcodecs][DEBUG] - Registering codec 'adler32'
+[2023-05-03 13:19:52,676][numcodecs][DEBUG] - Registering codec 'json2'
+[2023-05-03 13:19:52,676][numcodecs][DEBUG] - Registering codec 'vlen-utf8'
+[2023-05-03 13:19:52,676][numcodecs][DEBUG] - Registering codec 'vlen-bytes'
+[2023-05-03 13:19:52,676][numcodecs][DEBUG] - Registering codec 'vlen-array'
+[2023-05-03 13:19:52,725][numcodecs][DEBUG] - Registering codec 'n5_wrapper'
+[2023-05-04 08:13:09,269][__main__][INFO] - experiment working directory: /home/quicksilver/nacc/pure_pytorch/zephyr
+[2023-05-04 08:13:11,060][numexpr.utils][INFO] - Note: detected 128 virtual cores but NumExpr set to maximum of 64, check "NUMEXPR_MAX_THREADS" environment variable.
+[2023-05-04 08:13:11,060][numexpr.utils][INFO] - Note: NumExpr detected 128 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+[2023-05-04 08:13:11,060][numexpr.utils][INFO] - NumExpr defaulting to 8 threads.
+[2023-05-04 08:13:15,076][training.dlwp.data.data_loading][INFO] - opening input datasets
+[2023-05-04 08:13:15,599][numcodecs][DEBUG] - Registering codec 'zlib'
+[2023-05-04 08:13:15,601][numcodecs][DEBUG] - Registering codec 'gzip'
+[2023-05-04 08:13:15,602][numcodecs][DEBUG] - Registering codec 'bz2'
+[2023-05-04 08:13:15,604][numcodecs][DEBUG] - Registering codec 'lzma'
+[2023-05-04 08:13:15,675][numcodecs][DEBUG] - Registering codec 'blosc'
+[2023-05-04 08:13:15,696][numcodecs][DEBUG] - Registering codec 'zstd'
+[2023-05-04 08:13:15,714][numcodecs][DEBUG] - Registering codec 'lz4'
+[2023-05-04 08:13:15,718][numcodecs][DEBUG] - Registering codec 'astype'
+[2023-05-04 08:13:15,719][numcodecs][DEBUG] - Registering codec 'delta'
+[2023-05-04 08:13:15,721][numcodecs][DEBUG] - Registering codec 'quantize'
+[2023-05-04 08:13:15,723][numcodecs][DEBUG] - Registering codec 'fixedscaleoffset'
+[2023-05-04 08:13:15,732][numcodecs][DEBUG] - Registering codec 'packbits'
+[2023-05-04 08:13:15,734][numcodecs][DEBUG] - Registering codec 'categorize'
+[2023-05-04 08:13:15,741][numcodecs][DEBUG] - Registering codec 'pickle'
+[2023-05-04 08:13:15,743][numcodecs][DEBUG] - Registering codec 'base64'
+[2023-05-04 08:13:15,750][numcodecs][DEBUG] - Registering codec 'shuffle'
+[2023-05-04 08:13:15,752][numcodecs][DEBUG] - Registering codec 'bitround'
+[2023-05-04 08:13:15,784][numcodecs][DEBUG] - Registering codec 'msgpack2'
+[2023-05-04 08:13:15,786][numcodecs][DEBUG] - Registering codec 'crc32'
+[2023-05-04 08:13:15,786][numcodecs][DEBUG] - Registering codec 'adler32'
+[2023-05-04 08:13:15,788][numcodecs][DEBUG] - Registering codec 'json2'
+[2023-05-04 08:13:15,794][numcodecs][DEBUG] - Registering codec 'vlen-utf8'
+[2023-05-04 08:13:15,794][numcodecs][DEBUG] - Registering codec 'vlen-bytes'
+[2023-05-04 08:13:15,794][numcodecs][DEBUG] - Registering codec 'vlen-array'
+[2023-05-04 08:13:15,908][numcodecs][DEBUG] - Registering codec 'n5_wrapper'
+[2023-05-04 08:24:00,485][__main__][INFO] - experiment working directory: /home/quicksilver/nacc/pure_pytorch/zephyr
+[2023-05-04 08:24:00,498][__main__][INFO] - experiment working directory: /home/quicksilver/nacc/pure_pytorch/zephyr
+[2023-05-04 08:24:00,943][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 0
+[2023-05-04 08:24:00,944][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 1
+[2023-05-04 08:24:00,944][torch.distributed.distributed_c10d][INFO] - Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 2 nodes.
+[2023-05-04 08:24:00,953][torch.distributed.distributed_c10d][INFO] - Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 2 nodes.
+[2023-05-04 08:24:01,162][numexpr.utils][INFO] - Note: detected 128 virtual cores but NumExpr set to maximum of 64, check "NUMEXPR_MAX_THREADS" environment variable.
+[2023-05-04 08:24:01,162][numexpr.utils][INFO] - Note: NumExpr detected 128 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+[2023-05-04 08:24:01,162][numexpr.utils][INFO] - NumExpr defaulting to 8 threads.
+[2023-05-04 08:24:01,162][numexpr.utils][INFO] - Note: detected 128 virtual cores but NumExpr set to maximum of 64, check "NUMEXPR_MAX_THREADS" environment variable.
+[2023-05-04 08:24:01,162][numexpr.utils][INFO] - Note: NumExpr detected 128 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+[2023-05-04 08:24:01,162][numexpr.utils][INFO] - NumExpr defaulting to 8 threads.
+[2023-05-04 08:24:02,025][training.dlwp.data.data_loading][INFO] - opening input datasets
+[2023-05-04 08:24:02,115][numcodecs][DEBUG] - Registering codec 'zlib'
+[2023-05-04 08:24:02,116][numcodecs][DEBUG] - Registering codec 'gzip'
+[2023-05-04 08:24:02,118][numcodecs][DEBUG] - Registering codec 'bz2'
+[2023-05-04 08:24:02,119][numcodecs][DEBUG] - Registering codec 'lzma'
+[2023-05-04 08:24:02,123][numcodecs][DEBUG] - Registering codec 'blosc'
+[2023-05-04 08:24:02,124][numcodecs][DEBUG] - Registering codec 'zstd'
+[2023-05-04 08:24:02,125][numcodecs][DEBUG] - Registering codec 'lz4'
+[2023-05-04 08:24:02,127][numcodecs][DEBUG] - Registering codec 'astype'
+[2023-05-04 08:24:02,129][numcodecs][DEBUG] - Registering codec 'delta'
+[2023-05-04 08:24:02,130][numcodecs][DEBUG] - Registering codec 'quantize'
+[2023-05-04 08:24:02,131][numcodecs][DEBUG] - Registering codec 'fixedscaleoffset'
+[2023-05-04 08:24:02,133][numcodecs][DEBUG] - Registering codec 'packbits'
+[2023-05-04 08:24:02,134][numcodecs][DEBUG] - Registering codec 'categorize'
+[2023-05-04 08:24:02,135][numcodecs][DEBUG] - Registering codec 'pickle'
+[2023-05-04 08:24:02,137][numcodecs][DEBUG] - Registering codec 'base64'
+[2023-05-04 08:24:02,139][numcodecs][DEBUG] - Registering codec 'shuffle'
+[2023-05-04 08:24:02,140][numcodecs][DEBUG] - Registering codec 'bitround'
+[2023-05-04 08:24:02,149][numcodecs][DEBUG] - Registering codec 'msgpack2'
+[2023-05-04 08:24:02,150][numcodecs][DEBUG] - Registering codec 'crc32'
+[2023-05-04 08:24:02,150][numcodecs][DEBUG] - Registering codec 'adler32'
+[2023-05-04 08:24:02,151][numcodecs][DEBUG] - Registering codec 'json2'
+[2023-05-04 08:24:02,152][numcodecs][DEBUG] - Registering codec 'vlen-utf8'
+[2023-05-04 08:24:02,153][numcodecs][DEBUG] - Registering codec 'vlen-bytes'
+[2023-05-04 08:24:02,153][numcodecs][DEBUG] - Registering codec 'vlen-array'
+[2023-05-04 08:24:02,182][numcodecs][DEBUG] - Registering codec 'n5_wrapper'
+[2023-05-04 08:24:05,114][numcodecs][DEBUG] - Registering codec 'zlib'
+[2023-05-04 08:24:05,114][numcodecs][DEBUG] - Registering codec 'gzip'
+[2023-05-04 08:24:05,114][numcodecs][DEBUG] - Registering codec 'bz2'
+[2023-05-04 08:24:05,114][numcodecs][DEBUG] - Registering codec 'lzma'
+[2023-05-04 08:24:05,116][numcodecs][DEBUG] - Registering codec 'blosc'
+[2023-05-04 08:24:05,116][numcodecs][DEBUG] - Registering codec 'zstd'
+[2023-05-04 08:24:05,116][numcodecs][DEBUG] - Registering codec 'lz4'
+[2023-05-04 08:24:05,117][numcodecs][DEBUG] - Registering codec 'astype'
+[2023-05-04 08:24:05,117][numcodecs][DEBUG] - Registering codec 'delta'
+[2023-05-04 08:24:05,117][numcodecs][DEBUG] - Registering codec 'quantize'
+[2023-05-04 08:24:05,117][numcodecs][DEBUG] - Registering codec 'fixedscaleoffset'
+[2023-05-04 08:24:05,118][numcodecs][DEBUG] - Registering codec 'packbits'
+[2023-05-04 08:24:05,118][numcodecs][DEBUG] - Registering codec 'categorize'
+[2023-05-04 08:24:05,118][numcodecs][DEBUG] - Registering codec 'pickle'
+[2023-05-04 08:24:05,118][numcodecs][DEBUG] - Registering codec 'base64'
+[2023-05-04 08:24:05,119][numcodecs][DEBUG] - Registering codec 'shuffle'
+[2023-05-04 08:24:05,119][numcodecs][DEBUG] - Registering codec 'bitround'
+[2023-05-04 08:24:05,121][numcodecs][DEBUG] - Registering codec 'msgpack2'
+[2023-05-04 08:24:05,121][numcodecs][DEBUG] - Registering codec 'crc32'
+[2023-05-04 08:24:05,121][numcodecs][DEBUG] - Registering codec 'adler32'
+[2023-05-04 08:24:05,121][numcodecs][DEBUG] - Registering codec 'json2'
+[2023-05-04 08:24:05,121][numcodecs][DEBUG] - Registering codec 'vlen-utf8'
+[2023-05-04 08:24:05,121][numcodecs][DEBUG] - Registering codec 'vlen-bytes'
+[2023-05-04 08:24:05,122][numcodecs][DEBUG] - Registering codec 'vlen-array'
+[2023-05-04 08:24:05,129][numcodecs][DEBUG] - Registering codec 'n5_wrapper'
+[2023-05-04 08:29:00,748][__main__][INFO] - experiment working directory: /home/quicksilver/nacc/pure_pytorch/zephyr
+[2023-05-04 08:29:00,752][__main__][INFO] - experiment working directory: /home/quicksilver/nacc/pure_pytorch/zephyr
+[2023-05-04 08:29:01,037][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 0
+[2023-05-04 08:29:01,038][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 1
+[2023-05-04 08:29:01,039][torch.distributed.distributed_c10d][INFO] - Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 2 nodes.
+[2023-05-04 08:29:01,047][torch.distributed.distributed_c10d][INFO] - Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 2 nodes.
+[2023-05-04 08:29:01,265][numexpr.utils][INFO] - Note: detected 128 virtual cores but NumExpr set to maximum of 64, check "NUMEXPR_MAX_THREADS" environment variable.
+[2023-05-04 08:29:01,265][numexpr.utils][INFO] - Note: NumExpr detected 128 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+[2023-05-04 08:29:01,265][numexpr.utils][INFO] - NumExpr defaulting to 8 threads.
+[2023-05-04 08:29:01,265][numexpr.utils][INFO] - Note: detected 128 virtual cores but NumExpr set to maximum of 64, check "NUMEXPR_MAX_THREADS" environment variable.
+[2023-05-04 08:29:01,265][numexpr.utils][INFO] - Note: NumExpr detected 128 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+[2023-05-04 08:29:01,265][numexpr.utils][INFO] - NumExpr defaulting to 8 threads.
+[2023-05-04 08:29:02,139][training.dlwp.data.data_loading][INFO] - opening input datasets
+[2023-05-04 08:29:02,228][numcodecs][DEBUG] - Registering codec 'zlib'
+[2023-05-04 08:29:02,230][numcodecs][DEBUG] - Registering codec 'gzip'
+[2023-05-04 08:29:02,231][numcodecs][DEBUG] - Registering codec 'bz2'
+[2023-05-04 08:29:02,232][numcodecs][DEBUG] - Registering codec 'lzma'
+[2023-05-04 08:29:02,236][numcodecs][DEBUG] - Registering codec 'blosc'
+[2023-05-04 08:29:02,237][numcodecs][DEBUG] - Registering codec 'zstd'
+[2023-05-04 08:29:02,238][numcodecs][DEBUG] - Registering codec 'lz4'
+[2023-05-04 08:29:02,241][numcodecs][DEBUG] - Registering codec 'astype'
+[2023-05-04 08:29:02,242][numcodecs][DEBUG] - Registering codec 'delta'
+[2023-05-04 08:29:02,243][numcodecs][DEBUG] - Registering codec 'quantize'
+[2023-05-04 08:29:02,245][numcodecs][DEBUG] - Registering codec 'fixedscaleoffset'
+[2023-05-04 08:29:02,246][numcodecs][DEBUG] - Registering codec 'packbits'
+[2023-05-04 08:29:02,247][numcodecs][DEBUG] - Registering codec 'categorize'
+[2023-05-04 08:29:02,248][numcodecs][DEBUG] - Registering codec 'pickle'
+[2023-05-04 08:29:02,250][numcodecs][DEBUG] - Registering codec 'base64'
+[2023-05-04 08:29:02,252][numcodecs][DEBUG] - Registering codec 'shuffle'
+[2023-05-04 08:29:02,253][numcodecs][DEBUG] - Registering codec 'bitround'
+[2023-05-04 08:29:02,262][numcodecs][DEBUG] - Registering codec 'msgpack2'
+[2023-05-04 08:29:02,263][numcodecs][DEBUG] - Registering codec 'crc32'
+[2023-05-04 08:29:02,263][numcodecs][DEBUG] - Registering codec 'adler32'
+[2023-05-04 08:29:02,264][numcodecs][DEBUG] - Registering codec 'json2'
+[2023-05-04 08:29:02,265][numcodecs][DEBUG] - Registering codec 'vlen-utf8'
+[2023-05-04 08:29:02,265][numcodecs][DEBUG] - Registering codec 'vlen-bytes'
+[2023-05-04 08:29:02,265][numcodecs][DEBUG] - Registering codec 'vlen-array'
+[2023-05-04 08:29:02,296][numcodecs][DEBUG] - Registering codec 'n5_wrapper'
+[2023-05-04 08:29:06,068][numcodecs][DEBUG] - Registering codec 'zlib'
+[2023-05-04 08:29:06,068][numcodecs][DEBUG] - Registering codec 'gzip'
+[2023-05-04 08:29:06,068][numcodecs][DEBUG] - Registering codec 'bz2'
+[2023-05-04 08:29:06,068][numcodecs][DEBUG] - Registering codec 'lzma'
+[2023-05-04 08:29:06,070][numcodecs][DEBUG] - Registering codec 'blosc'
+[2023-05-04 08:29:06,070][numcodecs][DEBUG] - Registering codec 'zstd'
+[2023-05-04 08:29:06,070][numcodecs][DEBUG] - Registering codec 'lz4'
+[2023-05-04 08:29:06,071][numcodecs][DEBUG] - Registering codec 'astype'
+[2023-05-04 08:29:06,071][numcodecs][DEBUG] - Registering codec 'delta'
+[2023-05-04 08:29:06,071][numcodecs][DEBUG] - Registering codec 'quantize'
+[2023-05-04 08:29:06,071][numcodecs][DEBUG] - Registering codec 'fixedscaleoffset'
+[2023-05-04 08:29:06,071][numcodecs][DEBUG] - Registering codec 'packbits'
+[2023-05-04 08:29:06,072][numcodecs][DEBUG] - Registering codec 'categorize'
+[2023-05-04 08:29:06,072][numcodecs][DEBUG] - Registering codec 'pickle'
+[2023-05-04 08:29:06,072][numcodecs][DEBUG] - Registering codec 'base64'
+[2023-05-04 08:29:06,072][numcodecs][DEBUG] - Registering codec 'shuffle'
+[2023-05-04 08:29:06,073][numcodecs][DEBUG] - Registering codec 'bitround'
+[2023-05-04 08:29:06,074][numcodecs][DEBUG] - Registering codec 'msgpack2'
+[2023-05-04 08:29:06,075][numcodecs][DEBUG] - Registering codec 'crc32'
+[2023-05-04 08:29:06,075][numcodecs][DEBUG] - Registering codec 'adler32'
+[2023-05-04 08:29:06,075][numcodecs][DEBUG] - Registering codec 'json2'
+[2023-05-04 08:29:06,075][numcodecs][DEBUG] - Registering codec 'vlen-utf8'
+[2023-05-04 08:29:06,075][numcodecs][DEBUG] - Registering codec 'vlen-bytes'
+[2023-05-04 08:29:06,075][numcodecs][DEBUG] - Registering codec 'vlen-array'
+[2023-05-04 08:29:06,084][numcodecs][DEBUG] - Registering codec 'n5_wrapper'
+[2023-05-04 08:29:31,021][torch.nn.parallel.distributed][INFO] - Reducer buckets have been rebuilt in this iteration.
+[2023-05-04 08:29:31,021][torch.nn.parallel.distributed][INFO] - Reducer buckets have been rebuilt in this iteration.
+[2023-05-04 08:34:20,693][__main__][INFO] - experiment working directory: /home/quicksilver/nacc/pure_pytorch/zephyr
+[2023-05-04 08:34:20,708][__main__][INFO] - experiment working directory: /home/quicksilver/nacc/pure_pytorch/zephyr
+[2023-05-04 08:34:21,060][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 0
+[2023-05-04 08:34:21,062][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 1
+[2023-05-04 08:34:21,062][torch.distributed.distributed_c10d][INFO] - Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 2 nodes.
+[2023-05-04 08:34:21,071][torch.distributed.distributed_c10d][INFO] - Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 2 nodes.
+[2023-05-04 08:34:21,314][numexpr.utils][INFO] - Note: detected 128 virtual cores but NumExpr set to maximum of 64, check "NUMEXPR_MAX_THREADS" environment variable.
+[2023-05-04 08:34:21,314][numexpr.utils][INFO] - Note: NumExpr detected 128 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+[2023-05-04 08:34:21,314][numexpr.utils][INFO] - NumExpr defaulting to 8 threads.
+[2023-05-04 08:34:22,007][numexpr.utils][INFO] - Note: detected 128 virtual cores but NumExpr set to maximum of 64, check "NUMEXPR_MAX_THREADS" environment variable.
+[2023-05-04 08:34:22,007][numexpr.utils][INFO] - Note: NumExpr detected 128 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+[2023-05-04 08:34:22,007][numexpr.utils][INFO] - NumExpr defaulting to 8 threads.
+[2023-05-04 08:34:22,341][training.dlwp.data.data_loading][INFO] - opening input datasets
+[2023-05-04 08:34:22,427][numcodecs][DEBUG] - Registering codec 'zlib'
+[2023-05-04 08:34:22,429][numcodecs][DEBUG] - Registering codec 'gzip'
+[2023-05-04 08:34:22,430][numcodecs][DEBUG] - Registering codec 'bz2'
+[2023-05-04 08:34:22,431][numcodecs][DEBUG] - Registering codec 'lzma'
+[2023-05-04 08:34:22,435][numcodecs][DEBUG] - Registering codec 'blosc'
+[2023-05-04 08:34:22,436][numcodecs][DEBUG] - Registering codec 'zstd'
+[2023-05-04 08:34:22,437][numcodecs][DEBUG] - Registering codec 'lz4'
+[2023-05-04 08:34:22,440][numcodecs][DEBUG] - Registering codec 'astype'
+[2023-05-04 08:34:22,441][numcodecs][DEBUG] - Registering codec 'delta'
+[2023-05-04 08:34:22,442][numcodecs][DEBUG] - Registering codec 'quantize'
+[2023-05-04 08:34:22,443][numcodecs][DEBUG] - Registering codec 'fixedscaleoffset'
+[2023-05-04 08:34:22,445][numcodecs][DEBUG] - Registering codec 'packbits'
+[2023-05-04 08:34:22,446][numcodecs][DEBUG] - Registering codec 'categorize'
+[2023-05-04 08:34:22,447][numcodecs][DEBUG] - Registering codec 'pickle'
+[2023-05-04 08:34:22,448][numcodecs][DEBUG] - Registering codec 'base64'
+[2023-05-04 08:34:22,450][numcodecs][DEBUG] - Registering codec 'shuffle'
+[2023-05-04 08:34:22,452][numcodecs][DEBUG] - Registering codec 'bitround'
+[2023-05-04 08:34:22,460][numcodecs][DEBUG] - Registering codec 'msgpack2'
+[2023-05-04 08:34:22,461][numcodecs][DEBUG] - Registering codec 'crc32'
+[2023-05-04 08:34:22,461][numcodecs][DEBUG] - Registering codec 'adler32'
+[2023-05-04 08:34:22,463][numcodecs][DEBUG] - Registering codec 'json2'
+[2023-05-04 08:34:22,464][numcodecs][DEBUG] - Registering codec 'vlen-utf8'
+[2023-05-04 08:34:22,464][numcodecs][DEBUG] - Registering codec 'vlen-bytes'
+[2023-05-04 08:34:22,464][numcodecs][DEBUG] - Registering codec 'vlen-array'
+[2023-05-04 08:34:22,493][numcodecs][DEBUG] - Registering codec 'n5_wrapper'
+[2023-05-04 08:34:26,091][numcodecs][DEBUG] - Registering codec 'zlib'
+[2023-05-04 08:34:26,092][numcodecs][DEBUG] - Registering codec 'gzip'
+[2023-05-04 08:34:26,092][numcodecs][DEBUG] - Registering codec 'bz2'
+[2023-05-04 08:34:26,092][numcodecs][DEBUG] - Registering codec 'lzma'
+[2023-05-04 08:34:26,093][numcodecs][DEBUG] - Registering codec 'blosc'
+[2023-05-04 08:34:26,094][numcodecs][DEBUG] - Registering codec 'zstd'
+[2023-05-04 08:34:26,094][numcodecs][DEBUG] - Registering codec 'lz4'
+[2023-05-04 08:34:26,095][numcodecs][DEBUG] - Registering codec 'astype'
+[2023-05-04 08:34:26,095][numcodecs][DEBUG] - Registering codec 'delta'
+[2023-05-04 08:34:26,095][numcodecs][DEBUG] - Registering codec 'quantize'
+[2023-05-04 08:34:26,095][numcodecs][DEBUG] - Registering codec 'fixedscaleoffset'
+[2023-05-04 08:34:26,095][numcodecs][DEBUG] - Registering codec 'packbits'
+[2023-05-04 08:34:26,096][numcodecs][DEBUG] - Registering codec 'categorize'
+[2023-05-04 08:34:26,096][numcodecs][DEBUG] - Registering codec 'pickle'
+[2023-05-04 08:34:26,096][numcodecs][DEBUG] - Registering codec 'base64'
+[2023-05-04 08:34:26,096][numcodecs][DEBUG] - Registering codec 'shuffle'
+[2023-05-04 08:34:26,097][numcodecs][DEBUG] - Registering codec 'bitround'
+[2023-05-04 08:34:26,098][numcodecs][DEBUG] - Registering codec 'msgpack2'
+[2023-05-04 08:34:26,099][numcodecs][DEBUG] - Registering codec 'crc32'
+[2023-05-04 08:34:26,099][numcodecs][DEBUG] - Registering codec 'adler32'
+[2023-05-04 08:34:26,099][numcodecs][DEBUG] - Registering codec 'json2'
+[2023-05-04 08:34:26,099][numcodecs][DEBUG] - Registering codec 'vlen-utf8'
+[2023-05-04 08:34:26,099][numcodecs][DEBUG] - Registering codec 'vlen-bytes'
+[2023-05-04 08:34:26,099][numcodecs][DEBUG] - Registering codec 'vlen-array'
+[2023-05-04 08:34:26,108][numcodecs][DEBUG] - Registering codec 'n5_wrapper'
+[2023-05-04 08:34:34,712][torch.nn.parallel.distributed][INFO] - Reducer buckets have been rebuilt in this iteration.
+[2023-05-04 08:34:34,712][torch.nn.parallel.distributed][INFO] - Reducer buckets have been rebuilt in this iteration.
+[2023-05-04 08:42:32,719][__main__][INFO] - experiment working directory: /home/quicksilver/nacc/pure_pytorch/zephyr
+[2023-05-04 08:42:32,725][__main__][INFO] - experiment working directory: /home/quicksilver/nacc/pure_pytorch/zephyr
+[2023-05-04 08:42:33,807][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 0
+[2023-05-04 08:42:33,808][torch.distributed.distributed_c10d][INFO] - Added key: store_based_barrier_key:1 to store for rank: 1
+[2023-05-04 08:42:33,809][torch.distributed.distributed_c10d][INFO] - Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 2 nodes.
+[2023-05-04 08:42:33,818][torch.distributed.distributed_c10d][INFO] - Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 2 nodes.
+[2023-05-04 08:42:34,020][numexpr.utils][INFO] - Note: detected 128 virtual cores but NumExpr set to maximum of 64, check "NUMEXPR_MAX_THREADS" environment variable.
+[2023-05-04 08:42:34,020][numexpr.utils][INFO] - Note: detected 128 virtual cores but NumExpr set to maximum of 64, check "NUMEXPR_MAX_THREADS" environment variable.
+[2023-05-04 08:42:34,021][numexpr.utils][INFO] - Note: NumExpr detected 128 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+[2023-05-04 08:42:34,021][numexpr.utils][INFO] - NumExpr defaulting to 8 threads.
+[2023-05-04 08:42:34,021][numexpr.utils][INFO] - Note: NumExpr detected 128 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+[2023-05-04 08:42:34,021][numexpr.utils][INFO] - NumExpr defaulting to 8 threads.
+[2023-05-04 08:42:34,859][training.dlwp.data.data_loading][INFO] - opening input datasets
+[2023-05-04 08:42:34,891][numcodecs][DEBUG] - Registering codec 'zlib'
+[2023-05-04 08:42:34,892][numcodecs][DEBUG] - Registering codec 'gzip'
+[2023-05-04 08:42:34,894][numcodecs][DEBUG] - Registering codec 'bz2'
+[2023-05-04 08:42:34,895][numcodecs][DEBUG] - Registering codec 'lzma'
+[2023-05-04 08:42:34,898][numcodecs][DEBUG] - Registering codec 'blosc'
+[2023-05-04 08:42:34,899][numcodecs][DEBUG] - Registering codec 'zstd'
+[2023-05-04 08:42:34,900][numcodecs][DEBUG] - Registering codec 'lz4'
+[2023-05-04 08:42:34,903][numcodecs][DEBUG] - Registering codec 'astype'
+[2023-05-04 08:42:34,904][numcodecs][DEBUG] - Registering codec 'delta'
+[2023-05-04 08:42:34,905][numcodecs][DEBUG] - Registering codec 'quantize'
+[2023-05-04 08:42:34,906][numcodecs][DEBUG] - Registering codec 'fixedscaleoffset'
+[2023-05-04 08:42:34,908][numcodecs][DEBUG] - Registering codec 'packbits'
+[2023-05-04 08:42:34,909][numcodecs][DEBUG] - Registering codec 'categorize'
+[2023-05-04 08:42:34,910][numcodecs][DEBUG] - Registering codec 'pickle'
+[2023-05-04 08:42:34,911][numcodecs][DEBUG] - Registering codec 'base64'
+[2023-05-04 08:42:34,913][numcodecs][DEBUG] - Registering codec 'shuffle'
+[2023-05-04 08:42:34,915][numcodecs][DEBUG] - Registering codec 'bitround'
+[2023-05-04 08:42:34,922][numcodecs][DEBUG] - Registering codec 'msgpack2'
+[2023-05-04 08:42:34,923][numcodecs][DEBUG] - Registering codec 'crc32'
+[2023-05-04 08:42:34,924][numcodecs][DEBUG] - Registering codec 'adler32'
+[2023-05-04 08:42:34,925][numcodecs][DEBUG] - Registering codec 'json2'
+[2023-05-04 08:42:34,926][numcodecs][DEBUG] - Registering codec 'vlen-utf8'
+[2023-05-04 08:42:34,926][numcodecs][DEBUG] - Registering codec 'vlen-bytes'
+[2023-05-04 08:42:34,926][numcodecs][DEBUG] - Registering codec 'vlen-array'
+[2023-05-04 08:42:34,955][numcodecs][DEBUG] - Registering codec 'n5_wrapper'
+[2023-05-04 08:42:38,052][numcodecs][DEBUG] - Registering codec 'zlib'
+[2023-05-04 08:42:38,052][numcodecs][DEBUG] - Registering codec 'gzip'
+[2023-05-04 08:42:38,052][numcodecs][DEBUG] - Registering codec 'bz2'
+[2023-05-04 08:42:38,052][numcodecs][DEBUG] - Registering codec 'lzma'
+[2023-05-04 08:42:38,054][numcodecs][DEBUG] - Registering codec 'blosc'
+[2023-05-04 08:42:38,054][numcodecs][DEBUG] - Registering codec 'zstd'
+[2023-05-04 08:42:38,054][numcodecs][DEBUG] - Registering codec 'lz4'
+[2023-05-04 08:42:38,055][numcodecs][DEBUG] - Registering codec 'astype'
+[2023-05-04 08:42:38,055][numcodecs][DEBUG] - Registering codec 'delta'
+[2023-05-04 08:42:38,055][numcodecs][DEBUG] - Registering codec 'quantize'
+[2023-05-04 08:42:38,055][numcodecs][DEBUG] - Registering codec 'fixedscaleoffset'
+[2023-05-04 08:42:38,056][numcodecs][DEBUG] - Registering codec 'packbits'
+[2023-05-04 08:42:38,056][numcodecs][DEBUG] - Registering codec 'categorize'
+[2023-05-04 08:42:38,056][numcodecs][DEBUG] - Registering codec 'pickle'
+[2023-05-04 08:42:38,056][numcodecs][DEBUG] - Registering codec 'base64'
+[2023-05-04 08:42:38,057][numcodecs][DEBUG] - Registering codec 'shuffle'
+[2023-05-04 08:42:38,057][numcodecs][DEBUG] - Registering codec 'bitround'
+[2023-05-04 08:42:38,058][numcodecs][DEBUG] - Registering codec 'msgpack2'
+[2023-05-04 08:42:38,059][numcodecs][DEBUG] - Registering codec 'crc32'
+[2023-05-04 08:42:38,059][numcodecs][DEBUG] - Registering codec 'adler32'
+[2023-05-04 08:42:38,059][numcodecs][DEBUG] - Registering codec 'json2'
+[2023-05-04 08:42:38,059][numcodecs][DEBUG] - Registering codec 'vlen-utf8'
+[2023-05-04 08:42:38,059][numcodecs][DEBUG] - Registering codec 'vlen-bytes'
+[2023-05-04 08:42:38,059][numcodecs][DEBUG] - Registering codec 'vlen-array'
+[2023-05-04 08:42:38,067][numcodecs][DEBUG] - Registering codec 'n5_wrapper'
+[2023-05-04 08:42:46,382][torch.nn.parallel.distributed][INFO] - Reducer buckets have been rebuilt in this iteration.
+[2023-05-04 08:42:46,383][torch.nn.parallel.distributed][INFO] - Reducer buckets have been rebuilt in this iteration.
+[2023-05-08 12:26:19,006][__main__][INFO] - experiment working directory: /home/quicksilver/nacc/pure_pytorch/zephyr
+[2023-05-08 12:26:33,643][__main__][INFO] - experiment working directory: /home/quicksilver/nacc/pure_pytorch/zephyr
+[2023-05-08 12:26:34,355][numexpr.utils][INFO] - Note: detected 128 virtual cores but NumExpr set to maximum of 64, check "NUMEXPR_MAX_THREADS" environment variable.
+[2023-05-08 12:26:34,356][numexpr.utils][INFO] - Note: NumExpr detected 128 cores but "NUMEXPR_MAX_THREADS" not set, so enforcing safe limit of 8.
+[2023-05-08 12:26:34,356][numexpr.utils][INFO] - NumExpr defaulting to 8 threads.
+[2023-05-08 12:26:37,996][training.dlwp.data.data_loading][INFO] - opening input datasets
+[2023-05-08 12:26:38,413][numcodecs][DEBUG] - Registering codec 'zlib'
+[2023-05-08 12:26:38,419][numcodecs][DEBUG] - Registering codec 'gzip'
+[2023-05-08 12:26:38,424][numcodecs][DEBUG] - Registering codec 'bz2'
+[2023-05-08 12:26:38,430][numcodecs][DEBUG] - Registering codec 'lzma'
+[2023-05-08 12:26:38,441][numcodecs][DEBUG] - Registering codec 'blosc'
+[2023-05-08 12:26:38,445][numcodecs][DEBUG] - Registering codec 'zstd'
+[2023-05-08 12:26:38,448][numcodecs][DEBUG] - Registering codec 'lz4'
+[2023-05-08 12:26:38,459][numcodecs][DEBUG] - Registering codec 'astype'
+[2023-05-08 12:26:38,465][numcodecs][DEBUG] - Registering codec 'delta'
+[2023-05-08 12:26:38,470][numcodecs][DEBUG] - Registering codec 'quantize'
+[2023-05-08 12:26:38,476][numcodecs][DEBUG] - Registering codec 'fixedscaleoffset'
+[2023-05-08 12:26:38,482][numcodecs][DEBUG] - Registering codec 'packbits'
+[2023-05-08 12:26:38,488][numcodecs][DEBUG] - Registering codec 'categorize'
+[2023-05-08 12:26:38,494][numcodecs][DEBUG] - Registering codec 'pickle'
+[2023-05-08 12:26:38,500][numcodecs][DEBUG] - Registering codec 'base64'
+[2023-05-08 12:26:38,508][numcodecs][DEBUG] - Registering codec 'shuffle'
+[2023-05-08 12:26:38,514][numcodecs][DEBUG] - Registering codec 'bitround'
+[2023-05-08 12:26:38,563][numcodecs][DEBUG] - Registering codec 'msgpack2'
+[2023-05-08 12:26:38,570][numcodecs][DEBUG] - Registering codec 'crc32'
+[2023-05-08 12:26:38,570][numcodecs][DEBUG] - Registering codec 'adler32'
+[2023-05-08 12:26:38,576][numcodecs][DEBUG] - Registering codec 'json2'
+[2023-05-08 12:26:38,580][numcodecs][DEBUG] - Registering codec 'vlen-utf8'
+[2023-05-08 12:26:38,580][numcodecs][DEBUG] - Registering codec 'vlen-bytes'
+[2023-05-08 12:26:38,580][numcodecs][DEBUG] - Registering codec 'vlen-array'
+[2023-05-08 12:26:38,832][numcodecs][DEBUG] - Registering codec 'n5_wrapper'

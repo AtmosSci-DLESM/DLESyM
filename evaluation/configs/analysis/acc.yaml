@@ -1,0 +1,8 @@
+name: ACC
+on_latlon: True
+method: get_acc
+arguments:
+  mean: False
+  climatology_path: Null
+plot_method: plot_acc
+skip: False
