@@ -401,7 +401,6 @@ windspeed.main(windspeed_params)
 # tau calculation
 tau_calculation.main(tau_params)
 # scale topography
-exit()
 scale_topography.main(scale_topography_params)
 # Remap data to HPX mesh
 for hpx_param in hpx_params:
