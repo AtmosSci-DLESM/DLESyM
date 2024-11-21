@@ -16,11 +16,11 @@ from training.dlwp.model.modules.decoder import UNetDecoder, UNet3Decoder
 from training.dlwp.model.modules.blocks import FoldFaces, UnfoldFaces
 from training.dlwp.model.modules.losses import LossOnStep
 from training.dlwp.model.modules.utils import Interpolate
-from training.dlwp.model.models.unet3plus import HEALPixUNet3Plus
+from training.dlwp.model.models.unet import HEALPixUNet
 
 logger = logging.getLogger(__name__)
 
-class ocean_gt_model(HEALPixUNet3Plus):
+class ocean_gt_model(HEALPixUNet):
     def __init__(
             self,
             encoder: DictConfig,
@@ -31,10 +31,8 @@ class ocean_gt_model(HEALPixUNet3Plus):
             decoder_input_channels: int,
             input_time_dim: int,
             output_time_dim: int,
-            nside: int = 32,
-            n_coupled_inputs: int = 0,
-            enable_healpixpad = True,
-            enable_nhwc = False,
+            enable_nhwc: bool = False,
+            enable_healpixpad: bool = False,
             couplings: list = [],
             gt_dataset: str = None,
     ):
@@ -52,9 +50,6 @@ class ocean_gt_model(HEALPixUNet3Plus):
             for both inputs and outputs. If this is zero, no decoder inputs should be provided as inputs to `forward`.
         :param input_time_dim: number of time steps in the input array
         :param output_time_dim: number of time steps in the output array
-        :param nside: number of points on the side of a HEALPix face
-        :param n_coupled_inputs: Number of channels model will receive from another coupled model. Default 0 
-            assumes no coupling and performs similarly to traditional HEALPixUnet 
         :param couplings: sequence of dictionaries that describe coupling mechanisms
         """
         # Attribute declares this as a debuggin model for forecasting methods 
@@ -69,8 +64,6 @@ class ocean_gt_model(HEALPixUNet3Plus):
             decoder_input_channels,
             input_time_dim,
             output_time_dim,
-            nside,
-            n_coupled_inputs,
             enable_healpixpad,
             enable_nhwc,
             couplings,
@@ -117,7 +110,7 @@ class ocean_gt_model(HEALPixUNet3Plus):
         # scale and return output
         return (output_array - self.mean) / self.std
     
-class ocean_climo_model(HEALPixUNet3Plus):
+class ocean_climo_model(HEALPixUNet):
     def __init__(
             self,
             encoder: DictConfig,
@@ -128,8 +121,6 @@ class ocean_climo_model(HEALPixUNet3Plus):
             decoder_input_channels: int,
             input_time_dim: int,
             output_time_dim: int,
-            nside: int = 32,
-            n_coupled_inputs: int = 0,
             enable_healpixpad = True,
             enable_nhwc = False,
             couplings: list = [],
@@ -150,9 +141,6 @@ class ocean_climo_model(HEALPixUNet3Plus):
             for both inputs and outputs. If this is zero, no decoder inputs should be provided as inputs to `forward`.
         :param input_time_dim: number of time steps in the input array
         :param output_time_dim: number of time steps in the output array
-        :param nside: number of points on the side of a HEALPix face
-        :param n_coupled_inputs: Number of channels model will receive from another coupled model. Default 0 
-            assumes no coupling and performs similarly to traditional HEALPixUnet 
         :param couplings: sequence of dictionaries that describe coupling mechanisms
         """
         # Attribute declares this as a debuggin model for forecasting methods 
@@ -167,8 +155,6 @@ class ocean_climo_model(HEALPixUNet3Plus):
             decoder_input_channels,
             input_time_dim,
             output_time_dim,
-            nside,
-            n_coupled_inputs,
             enable_healpixpad,
             enable_nhwc,
             couplings,
@@ -193,7 +179,6 @@ class ocean_climo_model(HEALPixUNet3Plus):
         self.integration_time_dim = None
         self.integration_counter = 0 
         self.initialization_counter = 0
-        self.nside = nside
 
     def set_output(self, forecast_dates, forecast_integrations, data_module):
 

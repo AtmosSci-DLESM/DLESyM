@@ -1,5 +1,9 @@
 #!/bin/bash
 
+
+# This example presents a batch script for forecasting using the SLURM
+# scheduler configuration on our machines at the University of Washington.
+
 ################ Batch Params ################
 
 #SBATCH --ntasks=1
@@ -10,7 +14,6 @@
 
 ################ Environment Params ################
 MODULE_DIR="/path/to/zephyr"
-DEVICE_NUMBERS="0"
 
 ################ Forecast Params ################
 
@@ -50,6 +53,5 @@ RUN_CMD="python scripts/coupled_forecast.py \
 # Set environment variables and run the command
 export WORLD_RANK=${SLURM_PROCID}
 export HDF5_USE_FILE_LOCKING=False
-export CUDA_VISIBLE_DEVICES=${DEVICE_NUMBERS}
 export HYDRA_FULL_ERROR=1 
 ${RUN_CMD}

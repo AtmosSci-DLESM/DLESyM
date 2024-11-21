@@ -37,7 +37,7 @@ def main(args):
     fc_ds_hpx = xr.open_dataset(args.file_name)
     #fc_ds_hpx = fc_ds_hpx.isel({"time": slice(0, 2)})
     print(fc_ds_hpx)
-    latitudes, longitudes = 181, 360
+    latitudes, longitudes =args.latitudes, args.longitudes
     nside = fc_ds_hpx.dims["height"]
 
     #exit()
@@ -142,6 +142,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Remap a HEALPix forecast file into LatLon.")
     parser.add_argument("-f", "--file-name", type=str, required=True,
                         help="Name or path to the HEALPix forecast file.")
+    parser.add_argument("--latitudes", type=int, default=181,
+                        help="Number of latitudes in the LatLon grid.")
+    parser.add_argument("--longitudes", type=int, default=360,
+                        help="Number of longitudes in the LatLon grid.")
     parser.add_argument("-v", "--visualize", action="store_true",
                         help="Visualize the projected data.")
     parser.add_argument("--resolution-factor", type=float, default=1.0,

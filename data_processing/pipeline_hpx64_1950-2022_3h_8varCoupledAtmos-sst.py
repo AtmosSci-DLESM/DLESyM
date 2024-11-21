@@ -1,3 +1,15 @@
+# This script offers examples of how to structure a data processing pipeline for
+# DLESyM-style atmosphere training and intialization data. It provides examples
+# of how to included data utilities. You'll notice it includes directory paths 
+# and file names that are specfic to machines at University of Washington. 
+# As such it cannot be run as is on non-UW machines. 
+
+# NOTE: This script will note recreate the training data used for training 
+# the DLESyM model presented in Cresswell-Clay et al. 2024. In particular, 
+# the OLR retirval and preparation routines are not included here, 
+# however, full initialization data for simulations in the paper are included in
+# the repository.
+
 from utils import (
     era5_retrieval,
     data_imputation,
