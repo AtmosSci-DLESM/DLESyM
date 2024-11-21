@@ -228,55 +228,7 @@ def create_time_series_dataset_classic(
     write_zarr(data=result, path=os.path.join(dst_directory, dataset_name + ".zarr"))
     
     return result
-
-class DoubleTimeSeriesDataset(Dataset):
-    def __init__(
-        self,
-        dataset: xr.Dataset,
-        ocean_dataset: xr.Dataset,
-        scaling: DictConfig,
-        input_time_dim: int = 1,
-        output_time_dim: int = 1,
-        time_step: Union[int, str] = '48H',
-        gap: Union[int, str, None] = None,
-        add_insolation: bool = False,
-        ocean_input_time_dim: int = 1,
-        ocean_output_time_dim: int = 1,
-        ocean_time_step: Union[int, str] = '48H',
-        ocean_gap: Union[int, str, None] = None,
-        ocean_add_insolation: bool = False,
-        data_time_step: Union[int, str] = '3H',
-        batch_size: int = 32,
-        drop_last: bool = False,
-        forecast_init_times: Optional[Sequence] = None,
-    ):
-
-        self.ocean_dataloader = TimeSeriesDataset(
-            ocean_dataset,
-            scaling,
-            ocean_input_time_dim,
-            ocean_output_time_dim,
-            data_time_step,
-            ocean_gap,
-            batch_size,
-            drop_last,
-            ocean_add_insolation,
-            forecast_init_times)
-        self.atmos_dataloader = TimeSeriesDataset(
-            atmos_dataset,
-            scaling,
-            atmos_input_time_dim,
-            atmos_output_time_dim,
-            data_time_step,
-            atmos_gap,
-            batch_size,
-            drop_last,
-            atmos_add_insolation,
-            forecast_init_times)
-        print('done!')
-        
-        
-
+     
 class TimeSeriesDataset(Dataset):
     def __init__(
             self,

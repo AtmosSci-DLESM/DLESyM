@@ -12,7 +12,6 @@ output_variables: ${data.output_variables}
 constants: ${data.constants}
 scaling: ${data.scaling}
 splits: ${data.splits}
-presteps: ${model.presteps}
 input_time_dim: ${data.input_time_dim}
 output_time_dim: ${data.output_time_dim}
 data_time_step: ${data.data_time_step}
@@ -30,8 +29,7 @@ couplings:
       batch_size: ${batch_size}
       variables: 
         - 'z1000-48H'
-        - 'ws-48H'
-      presteps: ${model.presteps}
+        - 'ws10-48H'
       input_time_dim: ${data.input_time_dim}
       output_time_dim: ${data.output_time_dim} 
       averaging_window: '48H'
