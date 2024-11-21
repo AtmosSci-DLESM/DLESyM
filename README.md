@@ -2,7 +2,7 @@
 Code repository for training, running and analyzing a Deep Learning Earth System Model (DLESyM). Full use of this repository requires Git and Git LFS (instructions for downloading can be found [here](https://github.com/git-guides/install-git) and [here](https://docs.github.com/en/repositories/working-with-files/managing-large-files/installing-git-large-file-storage), repsectively). 
 
 ## Getting Started
-Before messing around with DLESyM, you'll need to set up the repository and environemnt on your machine.
+Before messing around with DLESyM, you'll need to set up the repository and environemnt on your machine. You'll need to make sure your machine has Git and Git LFS installed (instructions [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and [here](https://git-lfs.github.com/), repectively).
 
 1.  Clone the repository:
     ```sh
