@@ -102,10 +102,17 @@ def coupled_inference(args: argparse.Namespace):
     except AttributeError:
         print(f'model {args.atmos_model_path} is not interpreted as a coupled model, cannot perform coupled forecast. Aborting.')
     
-    optional_kwargs = {k: v for k, v in {
+    optional_kwargs_atmos = {k: v for k, v in {
         'dst_directory': args.data_directory,
         'prefix': args.data_prefix,
-        'suffix': args.data_suffix
+        'suffix': args.data_suffix,
+        'dataset_name': args.atmos_dataset_name,
+    }.items() if v is not None}
+    optional_kwargs_ocean = {k: v for k, v in {
+        'dst_directory': args.data_directory,
+        'prefix': args.data_prefix,
+        'suffix': args.data_suffix,
+        'dataset_name': args.ocean_dataset_name,
     }.items() if v is not None}
     
     # instantiate data modules 
@@ -114,7 +121,7 @@ def coupled_inference(args: argparse.Namespace):
         output_time_dim=atmos_coupled_time_dim,
         forecast_init_times=forecast_dates,
         shuffle=False,
-        **optional_kwargs
+        **optional_kwargs_atmos
     )
     atmos_loader, _ = atmos_data_module.test_dataloader()
     ocean_data_module = instantiate(
@@ -122,7 +129,7 @@ def coupled_inference(args: argparse.Namespace):
         output_time_dim=ocean_coupled_time_dim,
         forecast_init_times=forecast_dates,
         shuffle=False,
-        **optional_kwargs
+        **optional_kwargs_ocean
     )
     ocean_loader, _ = ocean_data_module.test_dataloader()
     
@@ -392,6 +399,10 @@ if __name__ == '__main__':
                         help="Export data in zarr format")
     parser.add_argument('-d', '--data-directory', type=str, default=None,
                         help="Path to test data, if different from files used for model training")
+    parser.add_argument('--atmos-dataset-name', type=str, default=None,
+                        help="Name of init dataset, if different from files used for model training")  
+    parser.add_argument('--ocean-dataset-name', type=str, default=None,
+                        help="Name of init dataset, if different from files used for model training")
     parser.add_argument('--data-prefix', type=str, default=None,
                         help="Prefix for test data files")
     parser.add_argument('--data-suffix', type=str, default=None,

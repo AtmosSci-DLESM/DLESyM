@@ -5,7 +5,7 @@
 # at the University of Washington.
 
 ################ Environment Params ################
-MODULE_DIR="/home/disk/brume/nacc/dlesm/zephyr"
+MODULE_DIR="path/to/DLESyM"
 # set to -1 to use CPU
 DEVICE_NUMBERS="0"
 
@@ -19,6 +19,9 @@ ATMOS_MODEL="${MODULE_DIR}/models/dlwp"
 OCEAN_MODEL="${MODULE_DIR}/models/dlom"
 # Path to directory with initialization data. Initializaion for example forecasts are included in repo
 DATA_DIR="${MODULE_DIR}/data"
+# Name of dataset
+ATMOS_DATASET_NAME="hpx64_9varCoupledAtmos-sst"
+OCEAN_DATASET_NAME="hpx64_1varCoupledOcean-z1000-ws10-olr"
 # These are parameters used to create the first 100 year forecast initialized in jan. To create other inits we have to change these values for availability of olr 
 ATMOS_OUTPUT_FILENAME="atmos_dlesym_1000year"
 OCEAN_OUTPUT_FILENAME="ocean_dlesym_1000year"
@@ -65,6 +68,8 @@ RUN_CMD="python scripts/coupled_forecast_hdf5.py \
     --atmos-output-filename ${ATMOS_OUTPUT_FILENAME} \
     --ocean-output-filename ${OCEAN_OUTPUT_FILENAME} \
     --data-directory ${DATA_DIR} \
+    --atmos-dataset-name ${ATMOS_DATASET_NAME} \
+    --ocean-dataset-name ${OCEAN_DATASET_NAME} \
     --datetime ${DATETIME} \
     --end-date ${END_DATE} \
     --gpu 0"

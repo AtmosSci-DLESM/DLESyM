@@ -22,10 +22,13 @@ OCEAN_MODEL="${MODULE_DIR}/models/dlom"
 ATMOS_OUTPUT_FILENAME_SUFFIXES=("JanInit" "FebInit" "MarInit" "AprInit" "MayInit" "JunInit" "JulInit" "AugInit" "SepInit" "OctInit" "NovInit" "DecInit")
 OCEAN_OUTPUT_FILENAME_SUFFIXES=("JanInit" "FebInit" "MarInit" "AprInit" "MayInit" "JunInit" "JulInit" "AugInit" "SepInit" "OctInit" "NovInit" "DecInit")
 # corresponding initialization dates for each suffix
-INIT_STARTS=("2017-01-01" "2017-02-01" "2017-03-01" "2017-04-01" "2017-05-01" "2017-06-01" "2017-07-01" "2017-08-01" "2017-09-01" "2017-10-01" "2017-11-01" "2017-12-01")
-INIT_ENDS=("2017-01-02" "2017-02-02" "2017-03-02" "2017-04-02" "2017-05-02" "2017-06-02" "2017-07-02" "2017-08-02" "2017-09-02" "2017-10-02" "2017-11-02" "2017-12-02")
+INIT_STARTS=("2017-01-01" "2017-02-01" "2017-03-01" "2017-04-01" "2017-05-01" "2017-06-01" "2016-07-01" "2016-08-01" "2016-09-01" "2016-10-01" "2016-11-01" "2016-12-01")
+INIT_ENDS=("2017-01-02" "2017-02-02" "2017-03-02" "2017-04-02" "2017-05-02" "2017-06-02" "2016-07-02" "2016-08-02" "2016-09-02" "2016-10-02" "2016-11-02" "2016-12-02")
 # Path to directory with initialization data. Initializaion for example forecasts are included in repo
 DATA_DIR="${MODULE_DIR}/data"
+# Name of dataset
+ATMOS_DATASET_NAME="hpx64_9varCoupledAtmos-sst"
+OCEAN_DATASET_NAME="hpx64_1varCoupledOcean-z1000-ws10-olr"
 # 100 years in hours
 LEAD_TIME="876672"
 
@@ -71,6 +74,8 @@ do
         --atmos-output-filename atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-124_double_restart_100year${ATMOS_OUTPUT_FILENAME_SUFFIXES[$i]} \
         --ocean-output-filename ocean_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-124_double_restart_100year${OCEAN_OUTPUT_FILENAME_SUFFIXES[$i]} \
         --data-directory ${DATA_DIR} \
+        --atmos-dataset-name ${ATMOS_DATASET_NAME} \
+        --ocean-dataset-name ${OCEAN_DATASET_NAME} \
         --gpu ${DEVICE_NUMBERS}"
 
     # Set environment variables and run the command

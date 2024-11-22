@@ -100,6 +100,7 @@ def inference(args: argparse.Namespace):
     
     optional_kwargs = {k: v for k, v in {
         'dst_directory': args.data_directory,
+        'dataset_name': args.dataset_name,
         'prefix': args.data_prefix,
         'suffix': args.data_suffix
     }.items() if v is not None}
@@ -240,6 +241,8 @@ if __name__ == '__main__':
                         help="Export data in zarr format")
     parser.add_argument('-d', '--data-directory', type=str, default=None,
                         help="Path to test data, if different from files used for model training")
+    parser.add_argument('--dataset-name', type=str, default=None,
+                        help="Name of init dataset, if different from files used for model training")  
     parser.add_argument('--data-prefix', type=str, default=None,
                         help="Prefix for test data files")
     parser.add_argument('--data-suffix', type=str, default=None,

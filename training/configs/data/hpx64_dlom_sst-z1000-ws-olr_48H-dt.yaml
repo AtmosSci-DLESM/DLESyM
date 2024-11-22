@@ -1,5 +1,5 @@
 defaults:
-  - module: sst-z1000-ws-olr_unet3plus
+  - module: sst-z1000-ws-olr
   - scaling: hpx64_1983-2017
   - splits: train_1983-2017
 
