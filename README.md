@@ -45,7 +45,7 @@ To recreate this simulation, follow these steps:
     - `OUTPUT_FILE` is where logs, stdout, stderr will be piped. Commenting this line out will sent these directly to your terminal session. 
     - The remaining parameters should be fine as default values for now.
 
-3. Time to run the simulation and wait: 
+3. Time to run the simulation: 
 
     ```sh
     ./scripts/example_100yr_forecasts_12init.sh
