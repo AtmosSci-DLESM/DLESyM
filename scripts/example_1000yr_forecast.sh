@@ -5,20 +5,21 @@
 # at the University of Washington.
 
 ################ Environment Params ################
-MODULE_DIR="path/to/DLESyM"
+# Path to DLESyM module
+MODULE_DIR="/home/disk/brume/nacc/DLESyM"
 # set to -1 to use CPU
-DEVICE_NUMBERS="0"
+DEVICE_NUMBERS="-1"
 
 ################ Forecast Params ################
 # Destination directory for forecast files
-OUTPUT_DIR="path/to/output_dir"
+OUTPUT_DIR="./"
 # Output logs sent here
 OUTPUT_FILE="${OUTPUT_DIR}/1000yr_forecast.out"
 # Path to models 
 ATMOS_MODEL="${MODULE_DIR}/models/dlwp"
 OCEAN_MODEL="${MODULE_DIR}/models/dlom"
 # Path to directory with initialization data. Initializaion for example forecasts are included in repo
-DATA_DIR="${MODULE_DIR}/data"
+DATA_DIR="${MODULE_DIR}/example_data"
 # Name of dataset
 ATMOS_DATASET_NAME="hpx64_9varCoupledAtmos-sst"
 OCEAN_DATASET_NAME="hpx64_1varCoupledOcean-z1000-ws10-olr"
@@ -37,7 +38,7 @@ END_DATE="3017-01-03"
 
 # This is where intermediate data is stored, make sure it's big enough. 
 # 1000 year forecast takes ~2.4TB
-CACHE_DIR="./"
+CACHE_DIR="${MODULE_DIR}/example_data"
 
 #############################################################
 ############ Boiler plate to execute forecast ###############
@@ -72,11 +73,10 @@ RUN_CMD="python scripts/coupled_forecast_hdf5.py \
     --ocean-dataset-name ${OCEAN_DATASET_NAME} \
     --datetime ${DATETIME} \
     --end-date ${END_DATE} \
-    --gpu 0"
+    --gpu ${DEVICE_NUMBERS}"
 
 # Set environment variables and run the command
 export HDF5_USE_FILE_LOCKING=False
-export CUDA_VISIBLE_DEVICES=${DEVICE_NUMBERS}
 export HYDRA_FULL_ERROR=1 
 
 # if output file is given, redirect output

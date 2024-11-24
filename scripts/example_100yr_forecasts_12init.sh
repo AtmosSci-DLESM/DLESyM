@@ -5,14 +5,15 @@
 # a CUDA GPU as configured on our machines at the University of Washington.
 
 ################ Environment Params ################
-MODULE_DIR="path/to/DLESyM"
+# Path to DLESyM module
+MODULE_DIR="./"
 # set to -1 to use CPU
-DEVICE_NUMBERS="0"
+DEVICE_NUMBERS="-1"
 
 ################ Forecast Params ################
 
 # Destination directory for forecast files
-OUTPUT_DIR="path/to/output_dir"
+OUTPUT_DIR="./"
 # Output logs sent here
 OUTPUT_FILE="${OUTPUT_DIR}/100yr_forecasts.out"
 # Path to models 
@@ -21,11 +22,12 @@ OCEAN_MODEL="${MODULE_DIR}/models/dlom"
 # Sufffixes for output filnames. We're forecasting for each month, so we have 12 suffixes. 
 ATMOS_OUTPUT_FILENAME_SUFFIXES=("JanInit" "FebInit" "MarInit" "AprInit" "MayInit" "JunInit" "JulInit" "AugInit" "SepInit" "OctInit" "NovInit" "DecInit")
 OCEAN_OUTPUT_FILENAME_SUFFIXES=("JanInit" "FebInit" "MarInit" "AprInit" "MayInit" "JunInit" "JulInit" "AugInit" "SepInit" "OctInit" "NovInit" "DecInit")
-# corresponding initialization dates for each suffix
-INIT_STARTS=("2017-01-01" "2017-02-01" "2017-03-01" "2017-04-01" "2017-05-01" "2017-06-01" "2016-07-01" "2016-08-01" "2016-09-01" "2016-10-01" "2016-11-01" "2016-12-01")
-INIT_ENDS=("2017-01-02" "2017-02-02" "2017-03-02" "2017-04-02" "2017-05-02" "2017-06-02" "2016-07-02" "2016-08-02" "2016-09-02" "2016-10-02" "2016-11-02" "2016-12-02")
+# corresponding initialization dates for each suffix. Analyses from Cresswell-Clay et al. 2024 are presented from 100 year simulation initialized on january 1st 2017, 
+# to initialize 12 other simulations referenced in manuscript, data from the entire test set is required. Please reach out to the authors for more information.
+INIT_STARTS=("2017-01-01") # "2017-02-01" "2017-03-01" "2017-04-01" "2017-05-01" "2017-06-01" "2016-07-01" "2016-08-01" "2016-09-01" "2016-10-01" "2016-11-01" "2016-12-01")
+INIT_ENDS=("2017-01-02") # "2017-02-02" "2017-03-02" "2017-04-02" "2017-05-02" "2017-06-02" "2016-07-02" "2016-08-02" "2016-09-02" "2016-10-02" "2016-11-02" "2016-12-02")
 # Path to directory with initialization data. Initializaion for example forecasts are included in repo
-DATA_DIR="${MODULE_DIR}/data"
+DATA_DIR="${MODULE_DIR}/example_data"
 # Name of dataset
 ATMOS_DATASET_NAME="hpx64_9varCoupledAtmos-sst"
 OCEAN_DATASET_NAME="hpx64_1varCoupledOcean-z1000-ws10-olr"
@@ -39,7 +41,7 @@ STEP_CHUNK=1000
 
 # This is where intermediate data is stored, make sure it's big enough. 
 # Each 100 year forecast takes ~243GB
-CACHE_DIR="./"
+CACHE_DIR="${MODULE_DIR}/example_data"
 
 
 
