@@ -41,7 +41,7 @@ STEP_CHUNK=1000
 
 # This is where intermediate data is stored, make sure it's big enough. 
 # Each 100 year forecast takes ~243GB
-CACHE_DIR="${MODULE_DIR}/example_data"
+CACHE_DIR="${OUTPUT_DIR}/"
 
 
 

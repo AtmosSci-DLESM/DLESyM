@@ -38,7 +38,7 @@ END_DATE="3017-01-03"
 
 # This is where intermediate data is stored, make sure it's big enough. 
 # 1000 year forecast takes ~2.4TB
-CACHE_DIR="${MODULE_DIR}/example_data"
+CACHE_DIR="${OUTPUT_DIR}/"
 
 #############################################################
 ############ Boiler plate to execute forecast ###############

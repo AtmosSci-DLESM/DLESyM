@@ -17,7 +17,7 @@ import numpy as np
 # Internal modules
 from .data_loading import create_time_series_dataset_classic, open_time_series_dataset_classic_prebuilt, \
                           open_time_series_dataset_classic_on_the_fly, \
-                          TimeSeriesDataset, CoupledTimeSeriesDataset, DoubleTimeSeriesDataset
+                          TimeSeriesDataset, CoupledTimeSeriesDataset
 
 logger = logging.getLogger(__name__)
 
