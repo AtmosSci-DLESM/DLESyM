@@ -54,6 +54,14 @@ def triple_interp(params):
         da = xr.open_mfdataset(params['filename'],chunks = params['chunks'])[params['variable']]
     else:
         da = xr.open_dataset(params['filename'],chunks = params['chunks'])[params['variable']]
+
+    # see if selections are provided
+    if 'selections' in params.keys():
+        da = da.sel(params['selections'])
+    # mask mask_value values to nan if 'mask_file' is provided
+    if 'mask_file' in params.keys() and 'mask_values' in params.keys():
+        mask = xr.open_dataset(params['mask_file'])['lsm'].values
+        da = xr.where(mask<params['mask_values'],np.nan,da)
     # first go at interpolation along lines of latitude 
     da_interp = da.interpolate_na(dim='longitude',method='linear',use_coordinate=False)
     # offset and interpolate again, this allows interpolation where nans persist to boundary 
