@@ -8,5 +8,4 @@
 Re-mapping tools for processing data on different coordinate projections.
 """
 
-from .cubesphere import CubeSphereRemap
 from .healpix import HEALPixRemap

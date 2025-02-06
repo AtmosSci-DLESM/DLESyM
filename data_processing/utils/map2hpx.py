@@ -10,7 +10,6 @@ import multiprocessing
 import matplotlib.pyplot as plt
 
 from data_processing.remap.healpix import HEALPixRemap
-from data_processing.remap.cubesphere import to_chunked_dataset
 
 EXAMPLE_PARAMS = {
     'file_name' : '/home/quicksilver2/nacc/Data/pipeline_dev/era5_1950-2022_3h_1deg_sst-ti.nc',
@@ -80,6 +79,17 @@ def main(params, output_file=None):
 
     # Load .nc file in latlon format to extract latlon information and to initialize the remapper module
     ds_ll = xr.open_dataset(args.file_name)
+    ds_ll_temp = ds_ll
+    print(ds_ll)
+    # enforced ascending order, starting at 0 for longitude
+    if 'longitude' in ds_ll.dims:
+        ds_ll = ds_ll.assign_coords(longitude=(ds_ll.longitude % 360)).sortby('longitude')
+    elif 'lon' in ds_ll.dims:
+        ds_ll = ds_ll.assign_coords(lon=(ds_ll.lon % 360)).sortby('lon')
+    # enforce descending order, starting at 90 for latitude
+    if 'latitude' in ds_ll.dims:
+        ds_ll = ds_ll.sortby('latitude', ascending=False)
+
     if 'time' in xr.open_dataset(args.file_name).dims:
         ds_ll.rename({"time": "sample"}).squeeze()
     try:
