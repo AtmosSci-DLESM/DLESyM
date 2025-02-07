@@ -350,14 +350,11 @@ def coupled_inference(args: argparse.Namespace):
         atmos_output_file = os.path.join(args.output_directory, f"forecast_{atmos_model_name}.{'zarr' if args.to_zarr else 'nc'}")
     logger.info(f"writing forecasts to {atmos_output_file} and {ocean_output_file}")
     if args.to_zarr:
-        ocean_write_job = ocean_prediction_ds.to_zarr(ocean_output_file, compute=False)
-        atmos_write_job = atmos_prediction_ds.to_zarr(atmos_output_file, compute=False)
+        ocean_write_job = ocean_prediction_ds.to_zarr(ocean_output_file)
+        atmos_write_job = atmos_prediction_ds.to_zarr(atmos_output_file)
     else:
-        ocean_write_job = ocean_prediction_ds.to_netcdf(ocean_output_file, compute=False)
-        atmos_write_job = atmos_prediction_ds.to_netcdf(atmos_output_file, compute=False)
-    with ProgressBar():
-        ocean_write_job.compute()
-        atmos_write_job.compute()
+        ocean_write_job = ocean_prediction_ds.to_netcdf(ocean_output_file)
+        atmos_write_job = atmos_prediction_ds.to_netcdf(atmos_output_file)
     logger.debug("wrote file in %0.1f s", time.time() - write_time)
 
 
