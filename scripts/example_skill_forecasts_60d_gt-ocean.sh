@@ -23,7 +23,7 @@ OCEAN_OUTPUT_FILE="ocean_forecast_skill_60d"
 # OUTPUT_FILE="${OUTPUT_DIR}/forecast_logs.out"
 # Path to models 
 ATMOS_MODEL="${MODULE_DIR}/models/dlwp"
-OCEAN_MODEL="${MODULE_DIR}/models/dlom"
+OCEAN_MODEL="${MODULE_DIR}/models/ocean_gt_model"
 # Define the range of initializations
 INIT_START="2016-05-01"
 INIT_END="2017-05-01"
