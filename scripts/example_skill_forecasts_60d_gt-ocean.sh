@@ -11,29 +11,29 @@
 # Path to DLESyM module
 MODULE_DIR="./"
 # set to -1 to use CPU
-DEVICE_NUMBERS="5"
+DEVICE_NUMBERS="4"
 
 ################ Forecast Params ################
 
 # Destination directory for forecast files
-OUTPUT_DIR="/home/disk/rhodium/nacc/forecasts/testing_dlesym/"
-ATMOS_OUTPUT_FILE="atmos_forecast_skill_60d_gt-coupled"
-OCEAN_OUTPUT_FILE="ocean_forecast_skill_60d_gt-coupled"
+OUTPUT_DIR="path/to/output/dir"
+ATMOS_OUTPUT_FILE="atmos_forecast_skill_60d"
+OCEAN_OUTPUT_FILE="ocean_forecast_skill_60d"
 # Output logs sent here
 # OUTPUT_FILE="${OUTPUT_DIR}/forecast_logs.out"
 # Path to models 
 ATMOS_MODEL="${MODULE_DIR}/models/dlwp"
-OCEAN_MODEL="${MODULE_DIR}/models/ocean_gt_model"
+OCEAN_MODEL="${MODULE_DIR}/models/dlom"
 # Define the range of initializations
 INIT_START="2016-05-01"
 INIT_END="2017-05-01"
 FREQ="biweekly"
 # Path to directory with initialization data. 
-DATA_DIR="/home/mercury2/nacc/data/HPX64"
+DATA_DIR="path/to/init/data"
 # Name of dataset
-ATMOS_DATASET_NAME="hpx64_1983-2017_3h_9varCoupledAtmos-sst"
-OCEAN_DATASET_NAME="hpx64_1983-2017_3h_1varCoupledOcean-z1000-ws10-olr"
-# 16 days 
+ATMOS_DATASET_NAME="hpx64_atmos_ds_name"
+OCEAN_DATASET_NAME="hpx64_ocean_ds_name"
+# 60 days 
 LEAD_TIME="1440" 
 
 #############################################################
