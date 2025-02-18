@@ -1,9 +1,0 @@
-name: Image series on native geometry
-on_latlon: False
-method: plot_image_series_native
-arguments:
-  model_name: ${model_name}
-  plot_path: ${paths.eval_directory}/plots/image_series_native
-  f_idx: 0
-  colormap_discretization: 8
-skip: False

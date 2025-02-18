@@ -16,7 +16,7 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 # https://stackoverflow.com/questions/57354700/starmap-combined-with-tqdm/57364423#57364423
 from .istarmap import istarmap
-from data_processing.remap import CubeSphereRemap, HEALPixRemap
+from data_processing.remap import HEALPixRemap
 
 def load_da_parallel(
         ds_path: str,

@@ -1,9 +1,0 @@
-name: RMSE per face
-on_latlon: False
-method: plot_rmse_per_face
-arguments:
-  model_name: ${model_name}
-  plot_path: ${paths.eval_directory}/plots/rmse_per_face
-  add_std: True
-  ncol: 2
-skip: False
