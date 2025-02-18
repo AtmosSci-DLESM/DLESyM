@@ -5,68 +5,48 @@ from scipy.interpolate import RectBivariateSpline
 import matplotlib.pyplot as plt
 from matplotlib import rcParams
 import sys
-
-# Dependency available in this repo: https://github.com/PeterRochford/SkillMetrics/tree/master
-sys.path.append('path/to/SkillMetrics')
 import skill_metrics as sm
 
-def interp_cmip(input_var, target):
-    # var_high = np.zeros(target.shape)
-    rbs = RectBivariateSpline(input_var.latitude, input_var.longitude, input_var)
-    var_high = rbs(target.latitude, target.longitude)
-    var_high = xr.DataArray(var_high, coords=[target.latitude, target.longitude], dims=['latitude', 'longitude'])
+
+sys.path.append('./evaluation')
+from taylor_diagrams import TaylorDiagram, weighted_lat, interp_cmip
+# Dependency available in this repo: https://github.com/PeterRochford/SkillMetrics/tree/master
+sys.path.append('path/to/SkillMetrics')
+
+def interp_cmip_hovmoller(input_var, target):
+
+    # Interpolate only along the latitude dimension
+    var_high = input_var.interp(latitude=target.latitude, kwargs={'fill_value': 'extrapolate'})
+
+    # Ensure the resulting DataArray has the correct coordinates and dimensions
+    var_high = xr.DataArray(var_high, coords=[input_var.time, target.latitude], dims=['time', 'latitude'])
+
     return var_high
 
-def weighted_lat(input_var):
-    # weight by latitude
-    weight_lat = input_var.latitude.values
-    weights = np.sqrt(np.cos(np.deg2rad(weight_lat)))
-    ds_weights = xr.DataArray(weights, coords=[input_var.latitude], dims=['latitude'])
-    weighted_var = input_var.weighted(ds_weights.fillna(0))
-    return weighted_var.obj
-
-def normalize_to_ref(data, target):
-
-    # Calculate mean and standard deviation of the data
-    mean_data = np.mean(data)
-    std_data = np.std(data)
-    
-    # Calculate mean and standard deviation of the target
-    mean_target = np.mean(target)
-    std_target = np.std(target)
-    
-    # Scale the data
-    return ((data - mean_data) / std_data) * std_target + mean_target
-    
-def TaylorDiagram(
+def hovmoller_taylor_diagrams(
         simulation_dicts: list,
         ref_file: str,
         ax: plt.Axes,
-        ref_var_name: str,
-        legend: bool = False,
-        ylim: tuple = (0, 1.05),
+        legend: bool = True,
+        ylim: tuple = (0, 1.5),
         ylabel: str = '',
 ):
     
-    # load the reference data and format dimension names 
-    ref = xr.open_dataset(ref_file).squeeze()[ref_var_name]
-    if 'latitude' not in ref.coords:
-        ref = ref.rename({'lat':'latitude','lon':'longitude'}) 
+    # # load the reference data and format dimension names 
+    ref = xr.open_dataset(ref_file).squeeze().rename({'lat':'latitude'})
 
     # reformat coord dimensions in the model simulations 
     for sim in simulation_dicts:
-        sim['data'] = xr.open_dataset(sim['file_path']).squeeze()[sim['var_name']]
-        if 'latitude' not in sim['data'].coords:
-            sim['data'] = sim['data'].rename({'lat':'latitude','lon':'longitude'})
+        sim['data'] = xr.open_dataarray(sim['file_path']).squeeze().rename({'lat':'latitude'})
 
     # weight data by lat, check for interpolating cmip data
     for sim in simulation_dicts:
         if sim['cmip']:
-            sim['data'] = interp_cmip(sim['data'], ref)
+            sim['data'] = interp_cmip_hovmoller(sim['data'], ref['olr'])
         sim['data'] = weighted_lat(sim['data']).values.flatten()
 
     # calculate the taylor statistics
-    taylor_stats = [sm.taylor_statistics(sim['data'], ref.values.flatten()) for sim in simulation_dicts]
+    taylor_stats = [sm.taylor_statistics(sim['data'], ref['olr'].values.flatten()) for sim in simulation_dicts]
 
     # extract the statistics for the simulations and reference data
     sdev = np.array([taylor_stats[0]['sdev'][0]]+[taylor_stat['sdev'][1] for taylor_stat in taylor_stats])
@@ -85,10 +65,11 @@ def TaylorDiagram(
 
     sm.taylor_diagram(
         ax, sdev,crmsd,ccoef, 
-        markerLabel = ['ERA5']+[sim['model_name'] for sim in simulation_dicts],
+        markerLabel = ['ISCCP']+[sim['model_name'] for sim in simulation_dicts],
         markerSize = 11,
         markerLegend = 'on',                
-        tickRMS= [0.25, 0.5, 1.0], axismax = 1.5,
+        tickRMS= [0.25, 0.5, 1.0,], 
+        axismax = 1.5,
         tickRMSangle = 110.0, 
         titleRMS = 'off',
         titleCOR = 'off',
@@ -99,16 +80,17 @@ def TaylorDiagram(
         tickCOR = [0.8, 0.9, 0.95, 0.99, 1.0],
         styleOBS = '--', 
         colOBS = 'k', 
-        markerobs = 'D',
-        titleOBS = 'ERA5',
+        markerobs = 'o',
+        titleOBS = 'ISCCP',
         widthobs = 2.0,
         markers = markers,
     ) 
 
     ax.set_ylabel(ylabel, fontsize=14, fontweight='normal')
     ax.set_ylim(ylim)
-    
+
     if not legend:
+        print('legend is being turned off...')
         ax.get_legend().set_visible(False)
 
     return ax
