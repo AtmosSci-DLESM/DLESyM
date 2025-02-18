@@ -46,8 +46,12 @@ def zonal_climo_impute(params):
 def triple_interp(params):
 
     if os.path.isfile(params["imputed_file"]):
-        print(f'Target file {params["imputed_file"]} already exists. Aborting.')
-        return
+        if 'overwrite' in params.keys() and params['overwrite']:
+            print(f'Overwriting target file {params["imputed_file"]}.')
+            os.remove(params["imputed_file"])
+        else:
+            print(f'Target file {params["imputed_file"]} already exists. Aborting.')
+            return
 
     # Account for multiple file datasets 
     if "*" in params['filename']:

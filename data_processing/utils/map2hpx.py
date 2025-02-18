@@ -10,7 +10,6 @@ import multiprocessing
 import matplotlib.pyplot as plt
 
 from data_processing.remap.healpix import HEALPixRemap
-from data_processing.remap.cubesphere import to_chunked_dataset
 
 EXAMPLE_PARAMS = {
     'file_name' : '/home/quicksilver2/nacc/Data/pipeline_dev/era5_1950-2022_3h_1deg_sst-ti.nc',
