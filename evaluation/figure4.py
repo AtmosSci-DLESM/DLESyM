@@ -368,6 +368,23 @@ def blocking_frequency(
 
 def am_pattern(fig, dlesm_loc, obs_loc, dlesm_pattern_file, obs_pattern_file, levels, cmap, hemisphere='north', colorbar_ticks=None, add_variance=True):
 
+    """
+    Function to plot annular mode patterns using a polar projection
+    Parameters:
+        fig: matplotlib.pyplot.Figure: figure object
+        dlesm_loc: numpy.ndarray: location for dlesm axis as indexed matplotlib gridspec
+        obs_loc: numpy.ndarray: location for obs axis as indexed matplotlib gridspec
+        dlesm_pattern_file: str: path to dlesm pattern file (netcdf)
+        obs_pattern_file: str: path to obs pattern file (netcdf)
+        levels: numpy.ndarray: levels for contourf
+        cmap: str: colormap for contourf
+        hemisphere: str: hemisphere for projection, either 'north' or 'south'
+        colorbar_ticks: numpy.ndarray: ticks for colorbar
+        add_variance: bool: boolean to add explained variance to plot
+    Returns:
+        ax_dlesm: axis object for dlesm pattern
+        ax_obs: axis object for obs pattern
+    """
     # load nam patterns
     dlesm_pattern = xr.open_dataset(dlesm_pattern_file)
     obs_pattern = xr.open_dataset(obs_pattern_file)
