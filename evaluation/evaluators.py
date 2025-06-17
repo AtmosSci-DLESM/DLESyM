@@ -109,6 +109,14 @@ class EvaluatorBase(object):
             "plot_label":r"T$_{850}$",
             "cmap": "coolwarm"
             },
+        "t500": {
+            "unit": r"$K$",
+            "fname_era5": "temperature_500",
+            "vname_era5": "t",
+            "vname_long": "Air temperature 500hPa",
+            "plot_label":r"T$_{500}$",
+            "cmap": "coolwarm"
+            },
         "t2m0": {
             "unit": r"$K$",
             "fname_era5": "2m_temperature",
