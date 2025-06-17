@@ -124,6 +124,9 @@ def create_prebuilt_zarr(
         print('Successfully wrote zarr:')
         print(data)
 
+    # enforce chunking before writing
+    result = result.chunk({'time': batch_size})
+
     write_zarr(data=result, path=os.path.join(dst_directory, dataset_name + ".zarr"))
     
     return True

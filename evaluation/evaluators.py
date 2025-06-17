@@ -145,6 +145,13 @@ class EvaluatorBase(object):
             "vname_long": "Wind strength 10m",
             "cmap": "Oranges"
             },
+        "ws10m": {
+            "unit": r"$m s^{-1}$",
+            "fname_era5": "?",
+            "vname_era5": "ws10",
+            "vname_long": "Wind strength 10m",
+            "cmap": "Oranges"
+            },
         "u10m": {
             "unit": r"$m s^{-1}$",
             "fname_era5": "?",
