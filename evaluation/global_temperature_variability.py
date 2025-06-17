@@ -34,9 +34,9 @@ def main(
 ):
 
     # caching data to avoid recomputing
-    cache_file_forecast = f"{cache_dir}/forecast_annual_{var}.nc"
-    cache_file_forced = f"{cache_dir}/forced-forecast_annual_{var}.nc"
-    cache_file_reference = f"{cache_dir}/era5_annual_{var}.nc"
+    cache_file_forecast = f"{cache_dir}/forecast_monthly_{var}.nc"
+    cache_file_forced = f"{cache_dir}/forced-forecast_monthly_{var}.nc"
+    cache_file_reference = f"{cache_dir}/era5_monthly_{var}.nc"
 
 
     # check caches, overwrite flag
