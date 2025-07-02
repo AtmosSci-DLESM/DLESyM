@@ -6,7 +6,7 @@ Code repository for training, running and analyzing a Deep Learning Earth System
 
 ```
    |-data_processing - utilities for data curation
-   |-environments - conda environemnts files 
+   |-environments - conda environment files 
    |-evaluation
    |-example_data - contains sample initialization
    |-models - contains the model files for DLESyMls 
