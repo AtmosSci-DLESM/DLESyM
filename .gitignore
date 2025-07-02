@@ -3,3 +3,8 @@
 
 # pycache files
 *.pyc
+
+# egg-info
+dlesym.egg-info/
+
+# zeonodo repo downloads 
