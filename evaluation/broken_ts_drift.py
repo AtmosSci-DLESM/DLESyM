@@ -16,108 +16,19 @@ import logging
 from drift import linear_fit
 logging.basicConfig(level=logging.INFO)
 
-
-FIGURE1_PARAMS = dict(
-    broken_ts_params = {
-        # 1000 year forecast file
-        'forecast_file': 'path/to/1000yr/forecast/forecast_filename',
-        # file containing first 5 years of the 1000 year forecast. Must be seperate netcdf file, subdivided before analysis
-        'first_5_forecast_file': 'path/to/first5yrs/of/1000yr/forecast/forecast_filename',
-        # file containing last 5 years of the 1000 year forecast. Must be seperate netcdf file, subdivided before analysis
-        'last_5_forecast_file': 'path/to/last5yrs/of/1000yr/forecast/forecast_filename',
-        # params for evaluator initialization  
-        'eval_variable' : 'z500', # variable name in file
-        'verification_path' : '/path/to/verif/era5_z500.nc', # path to verification data
-        # params for seasonal cycle calculation 
-        'levels' : np.arange(490,591,10), # levels for contour plot
-        'scale_factor':98.1, # transform geopotential to deka meters
-        'time': slice(pd.Timedelta(0,'D'),pd.Timedelta(36512,'D')), # time slice for seasonal cycle calculation
-        'resampled_dates_first5': pd.date_range('2017-02-01','2022-02-01',freq='6H'), # resampled dates for first 5 years
-        'resampled_dates_last5': pd.date_range('2112-02-01','2117-02-01',freq='6H'), # resampled dates for last 5 years, useful if you've reassigned time dimension to datetime obj
-        'init_index' : 1, # corresponds to july initialization 
-        # parameters for plotting contours
-        'add_verif_ref':True,
-        'rolling_params_color': {'dim':{'step':int(12)},
-                                        'center':True}, 
-        'rolling_params_contour': {'dim':{'step':int(60)},
-                                        'center':True},
-        'ref_line':560,
-        'cmap':'Spectral_r',
-        'colorbar_label':'Z$_{500}$ (dam)',
-        'forecast_init': pd.Timestamp('2017-01-01'),
-        'xticks_left':pd.date_range('2017-01-01','2022-01-01',freq='YS'),
-        'xtick_labels_left':[],#pd.date_range('2017-01-01','2022-01-01',freq='YS').year,
-        'xticks_right':pd.date_range('2112-01-01','2117-01-01',freq='YS'),
-        'xtick_labels_right':np.arange(3012,3018,dtype=int),
-        'xlabel':None,
-    },
-    first5_verif_params = {
-        # forecast files 
-        'forecast_file': 'path/to/1000yr/forecast/forecast_filename',
-        'first_5_forecast_file': 'path/to/first5yrs/of/1000yr/forecast/forecast_filename',
-        # params for evaluator initialization  
-        'eval_variable' : 'z500',
-        'verification_path' : '/path/to/verif/era5_z500.nc', # path to verification data
-        # params for seasonal cycle calculation 
-        'levels' : np.arange(490,591,10),
-        'scale_factor':98.1, # transform geopotential to deka meters
-        'time': slice(pd.Timedelta(0,'D'),pd.Timedelta(36512,'D')),
-        'init_index' : 1, # corresponds to july initialization 
-        'add_verif_ref':True,
-        'rolling_params_color': {'dim':{'step':int(12)},
-                                        'center':True},
-        'rolling_params_contour': {'dim':{'step':int(60)},
-                                        'center':True},
-        'ref_line':560,
-        'cmap':'Spectral_r',
-        'colorbar_label':'Z$_{500}$ (dkm)',
-        'forecast_init': pd.Timestamp('2017-01-01'),
-        'xticks':pd.date_range('2017-01-01','2022-01-01',freq='YS'),
-        'xtick_labels':pd.date_range('2017-01-01','2022-01-01',freq='YS').year,
-    },
-    t2m_drift_params = dict(
-        file='path/to/1000yr/forecast/forecast_filename.nc',
-        var='t2m0',
-        cache_dir='place/to/cache/drift_cache',
-        indexing=dict(year=slice(2017, 3016)),
-        smoothing_func=None,
-        linear_fit_params=dict(
-            years=slice(2017, 3017),
-        ),
-        ylim=(287.5, 288.1),
-        yticks=np.arange(287.5, 288.15, 0.2),
-        xticks=np.arange(2017, 3018, 200),
-        xtick_labels=[],
-        xlabel=None,
-        ylabel='T$_{2m}$ (K)',
-    ),
-    sst_drift_params = dict(
-        file='path/to/1000yr/forecast/forecast_filename.nc',
-        var='sst',
-        cache_dir='place/to/cache/drift_cache',
-        indexing=dict(year=slice(2017, 3016)),
-        smoothing_func=None,
-        linear_fit_params=dict(
-            years=slice(2017, 3016),
-        ),
-        ylim=(291.5, 291.9),
-        yticks=np.arange(291.5, 292, 0.1),
-        xticks=np.arange(2017, 3018, 200),
-        xtick_labels=np.arange(2017, 3018, 200),
-        xlabel='Year',
-        ylabel='SST (K)',
-        mask='./example_data/hpx64_1varCoupledOcean-z1000-ws10-olr.zarr',
-    ),
-    savefig_params = {
-        # 'fname': './figure1.pdf',
-        'fname': './figure1.png',
-        'dpi': 300,
-        'bbox_inches': 'tight',
-    },
-)
-
 # helper function which takes datetime objects and selects associated forecast data, caches selected slices
 def get_year(params):
+    """
+    Selects forecast data for a given date range and saves it to a netCDF file.
+    Parameters:
+        params (dict): A dictionary containing the following
+            - 'forecast_file': Path to the input forecast file.
+            - 'forecast_init': The initial date of the forecast.
+            - 'resample_daterange': A list of datetime objects representing the desired date range.
+            - 'output_file': Path to save the output netCDF file.
+    Returns:
+        None
+    """
     def get_dir(file):
         return os.path.dirname(file)
     os.makedirs(get_dir(params['output_file']),exist_ok=True)
@@ -138,6 +49,12 @@ def get_year(params):
 
 # creates a linear fit of the data and returns the fit and the slope in percent per century
 def linear_fit(ts, years):
+    """
+    Creates a linear fit of the data for the specified years.
+    Parameters:
+        ts (xarray.DataArray): The time series data with a 'year' coordinate.
+        years (list): A list of years to fit the data to.
+    """
 
     # Ensure the time series has a 'time' coordinate
     if 'year' not in ts.coords:
@@ -161,6 +78,39 @@ def linear_fit(ts, years):
 
 #region Broken TS
 def broken_ts(fig, ax_first5, ax_last5, params):
+    """
+    Create a broken z500 seasonal cycle plot for the first and last 5 years of a 1000 year simulation.
+    Parameters:
+        fig (matplotlib.figure.Figure): The figure to plot on.
+        ax_first5 (matplotlib.axes.Axes): The axes for the first 5 years.
+        ax_last5 (matplotlib.axes.Axes): The axes for the last 5 years.
+        params (dict): A dictionary containing the following
+            - 'first_5_forecast_file': Path to the first 5 years forecast file.
+            - 'last_5_forecast_file': Path to the last 5 years forecast file.
+            - 'forecast_file': Path to the input forecast file.
+            - 'forecast_init': The initial date of the forecast.
+            - 'eval_variable': The variable to evaluate (e.g., 'z500').
+            - 'verification_path': Path to the verification data.
+            - 'rolling_params_color': Parameters for rolling mean for color map.
+            - 'rolling_params_contour': Parameters for rolling mean for contour lines.
+            - 'scale_factor': Factor to scale the data for plotting.
+            - 'cmap': Colormap to use for the plot.
+            - 'levels': Levels for the contour plot.
+            - 'ref_line': Reference line value for the contour plot. 
+            - 'add_verif_ref': Boolean indicating whether to add verification reference line.
+            - 'colorbar_label': Label for the colorbar.
+            - 'xticks_left': X-ticks for the left plot.
+            - 'xtick_labels_left': Labels for the left plot x-ticks.
+            - 'xticks_right': X-ticks for the right plot.
+            - 'xtick_labels_right': Labels for the right plot x-ticks.
+            - 'mask': Path to the mask file for global averages (optional, for SST).
+    Returns:
+        fig (matplotlib.figure.Figure): The figure with the seasonal cycle plot.
+        ax_first5 (matplotlib.axes.Axes): The axes for the first 5 years.
+        ax_last5 (matplotlib.axes.Axes): The axes for the last 5 years.
+
+
+    """
 
     if not os.path.exists(f"{params['first_5_forecast_file']}.nc"):
         if 'resampled_dates_first5' not in params.keys():
@@ -188,6 +138,7 @@ def broken_ts(fig, ax_first5, ax_last5, params):
         }
         get_year(PARAMS_last_5)
 
+    # helper function to plot the seasonal cycle
     def plot_cycle(fig,
                    ax,
                    da, 
@@ -328,8 +279,8 @@ def broken_ts(fig, ax_first5, ax_last5, params):
 
         # return 
         return fig,ax
-
     # initialize evaluator around atmos forecast file and remap to lat lon 
+    logging.info('making seasonal cycle first 5...')
     fcst_first5 = ev.EvaluatorHPX(
                forecast_path = f'{params["first_5_forecast_file"]}'+'.nc',
                verification_path = params['verification_path'],
@@ -343,13 +294,21 @@ def broken_ts(fig, ax_first5, ax_last5, params):
     ) 
     # load verification data if indicated
     verif_da = None
-    if params['add_verif_ref'] and not os.path.exists(f'{params["first_5_forecast_file"]}_{params["eval_variable"]}_ll_ProcessedVerif.nc'):
+    # resolve file names for caches 
+    first5_processed_fcst_cache = f'{os.path.dirname(params["first_5_forecast_file"])}/analysis_cache/seasonal_cycle/{os.path.basename(params["first_5_forecast_file"])}_{params["eval_variable"]}_ll_ProcessedFcst.nc'
+    first5_processed_fcst_ref_cache = f'{os.path.dirname(params["first_5_forecast_file"])}/analysis_cache/seasonal_cycle/{os.path.basename(params["first_5_forecast_file"])}_{params["eval_variable"]}_ll_ProcessedFcstRef.nc'
+    first5_processed_verif_cache = f'{os.path.dirname(params["first_5_forecast_file"])}/analysis_cache/seasonal_cycle/{os.path.basename(params["first_5_forecast_file"])}_{params["eval_variable"]}_ll_ProcessedVerif.nc'
+    last5_processed_fcst_cache = f'{os.path.dirname(params["last_5_forecast_file"])}/analysis_cache/seasonal_cycle/{os.path.basename(params["last_5_forecast_file"])}_{params["eval_variable"]}_ll_ProcessedFcst.nc'
+    last5_processed_fcst_ref_cache = f'{os.path.dirname(params["last_5_forecast_file"])}/analysis_cache/seasonal_cycle/{os.path.basename(params["last_5_forecast_file"])}_{params["eval_variable"]}_ll_ProcessedFcstRef.nc'
+    last5_processed_verif_cache = f'{os.path.dirname(params["last_5_forecast_file"])}/analysis_cache/seasonal_cycle/{os.path.basename(params["last_5_forecast_file"])}_{params["eval_variable"]}_ll_ProcessedVerif.nc'
+    if params['add_verif_ref'] and not os.path.exists(first5_processed_verif_cache):
         fcst_first5.generate_verification(
             verification_path = params['verification_path'],
             defined_verif_only = False,
         )
         verif_da = fcst_first5.verification_da
     logging.info('making seasonal cycle first 5...')
+
     fig,ax_first5 = plot_cycle(fig,
         ax_first5,
         da=fcst_first5.forecast_da,
@@ -365,9 +324,9 @@ def broken_ts(fig, ax_first5, ax_last5, params):
         xticks = [float((xt-params['forecast_init']).total_seconds()) for xt in params['xticks_left']],
         xtick_labels = params['xtick_labels_left'],
         xlabel = None,
-        processed_fcst = f'{params["first_5_forecast_file"]}_{params["eval_variable"]}_ll_ProcessedFcst.nc',
-        processed_fcst_ref = f'{params["first_5_forecast_file"]}_{params["eval_variable"]}_ll_ProcessedFcstRef.nc',
-        processed_verif = f'{params["first_5_forecast_file"]}_{params["eval_variable"]}_ll_ProcessedVerif.nc', 
+        processed_fcst = first5_processed_fcst_cache,
+        processed_fcst_ref = first5_processed_fcst_ref_cache,
+        processed_verif = first5_processed_verif_cache,
     )
     fcst_last5 = ev.EvaluatorHPX(
         forecast_path = f'{params["last_5_forecast_file"]}'+'.nc',
@@ -395,9 +354,9 @@ def broken_ts(fig, ax_first5, ax_last5, params):
         xticks = [float((xt-params['forecast_init']).total_seconds()) for xt in params['xticks_right']],
         xtick_labels = params['xtick_labels_right'],
         xlabel = None,
-        processed_fcst = f'{params["last_5_forecast_file"]}_{params["eval_variable"]}_ll_ProcessedFcst.nc',
-        processed_fcst_ref = f'{params["last_5_forecast_file"]}_{params["eval_variable"]}_ll_ProcessedFcstRef.nc',
-        processed_verif = f'{params["last_5_forecast_file"]}_{params["eval_variable"]}_ll_ProcessedVerif.nc',
+        processed_fcst = last5_processed_fcst_cache,
+        processed_fcst_ref = last5_processed_fcst_ref_cache,
+        processed_verif = last5_processed_verif_cache,
         right_plot=True, 
     )
 
@@ -440,6 +399,28 @@ def broken_ts(fig, ax_first5, ax_last5, params):
 
 #region Verif TS
 def verif_ts(fig, ax_verif, params):
+    """
+    Verify the seasonal cycle of a variable against verification data.
+    Parameters:
+        fig (matplotlib.figure.Figure): The figure to plot on.
+        ax_verif (matplotlib.axes.Axes): The axes for the verification data.
+        params (dict): A dictionary containing the following
+            - 'verification_path': Path to the verification data.
+            - 'eval_variable': The variable to evaluate (e.g., 'z500').
+            - 'rolling_params_color': Parameters for rolling mean for color map.
+            - 'rolling_params_contour': Parameters for rolling mean for contour lines.
+            - 'scale_factor': Factor to scale the data for plotting.
+            - 'cmap': Colormap to use for the plot.
+            - 'levels': Levels for the contour plot.
+            - 'ref_line': Reference line value for the contour plot. 
+            - 'colorbar_label': Label for the colorbar.
+            - 'xticks': X-ticks for the plot.
+            - 'xtick_labels': Labels for the x-ticks.
+            - 'mask': Path to the mask file for global averages (optional, for SST).
+    Returns:
+        fig (matplotlib.figure.Figure): The figure with the seasonal cycle plot.
+        ax_verif (matplotlib.axes.Axes): The axes for the verification data.
+    """
 
     if not os.path.exists(f"{params['first_5_forecast_file']}.nc"):
         PARAMS_first_5= {
@@ -567,7 +548,11 @@ def verif_ts(fig, ax_verif, params):
     ) 
     # load verification data if indicated
     verif_da = None
-    if params['add_verif_ref'] and not (os.path.exists(f'{params["first_5_forecast_file"]}_{params["eval_variable"]}_ll_ProcessedVerif.nc') and os.path.exists(f'{params["first_5_forecast_file"]}_{params["eval_variable"]}_ll_ProcessedERA5.nc')):
+    # resolve file names for caches
+    processed_verif_cache = f'{os.path.dirname(params["first_5_forecast_file"])}/analysis_cache/seasonal_cycle/{os.path.basename(params["first_5_forecast_file"])}_{params["eval_variable"]}_ll_ProcessedVerif.nc'
+    processed_ERA5_cache = f'{os.path.dirname(params["first_5_forecast_file"])}/analysis_cache/seasonal_cycle/{os.path.basename(params["first_5_forecast_file"])}_{params["eval_variable"]}_ll_ProcessedERA5.nc'
+    processed_ERA5_ref_cache = f'{os.path.dirname(params["first_5_forecast_file"])}/analysis_cache/seasonal_cycle/{os.path.basename(params["first_5_forecast_file"])}_{params["eval_variable"]}_ll_ProcessedERA5Ref.nc'
+    if params['add_verif_ref'] and not (os.path.exists(processed_verif_cache) and os.path.exists(processed_ERA5_cache)):
         fcst_first5.generate_verification(
             verification_path = params['verification_path'],
             defined_verif_only = False,
@@ -589,8 +574,8 @@ def verif_ts(fig, ax_verif, params):
         xticks = [float((xt-params['forecast_init']).total_seconds()) for xt in params['xticks']],
         xtick_labels = params['xtick_labels'],
         xlabel = 'Year',
-        processed_fcst = f'{params["first_5_forecast_file"]}_{params["eval_variable"]}_ll_ProcessedERA5.nc',
-        processed_fcst_ref = f'{params["first_5_forecast_file"]}_{params["eval_variable"]}_ll_ProcessedERA5Ref.nc',
+        processed_fcst = processed_ERA5_cache,
+        processed_fcst_ref = processed_ERA5_ref_cache,
         processed_verif = None, 
         title='ERA5',
         seconds=fcst_first5.forecast_da.step.values / 1e9,
@@ -619,6 +604,28 @@ def drift_ts(
         ylabel = None,
         mask = None,
 ):
+    """
+    Generate a drift time series plot for a specific variable.
+    Parameters:
+        file (str): Path to the input file containing the variable data.
+        var (str): The variable to plot (e.g., 'sst').
+        fig (matplotlib.figure.Figure): The figure to plot on.
+        ax (matplotlib.axes.Axes): The axes to plot on.
+        cache_dir (str): Directory to store cached annual averages.
+        indexing (dict): Dictionary to index the data (optional).
+        smoothing_func (callable): Function to apply smoothing to the data (optional).
+        linear_fit_params (dict): Parameters for linear fit
+        ylim (tuple): Y-axis limits for the plot.
+        yticks (list): Y-ticks for the plot.
+        xticks (list): X-ticks for the plot.
+        xtick_labels (list): Labels for the x-ticks.
+        xlabel (str): Label for the x-axis.
+        ylabel (str): Label for the y-axis.
+        mask (str): Path to the land-sea mask file (optional, for SST). 
+    Returns:
+        fig (matplotlib.figure.Figure): The figure with the drift time series plot.
+        ax (matplotlib.axes.Axes): The axes with the drift time series plot.
+    """
     
     # check for cache 
     os.makedirs(cache_dir, exist_ok=True)
@@ -690,9 +697,21 @@ def drift_ts(
 #endregion
 
 #region Plotting
-def plot_figure1(
+def main(
     params,
 ):
+    """
+    Main function to create the figure and axes for the broken time series and drift plots.
+    Parameters:
+        params (dict): A dictionary containing the following
+            - 'broken_ts_params': Parameters for the broken time series plot.
+            - 'first5_verif_params': Parameters for the first 5 verification time series plot.
+            - 't2m_drift_params': Parameters for the T2M drift time series plot.
+            - 'sst_drift_params': Parameters for the SST drift time series plot.
+            - 'savefig_params': Parameters for saving the figure.
+    Returns:
+        None
+    """
     
     def stretch_left(ax, stretch=0.03):
         pos = ax.get_position()
@@ -753,8 +772,105 @@ def plot_figure1(
     # save 
     logging.info(f'Saving figure to {params["savefig_params"]["fname"]}')
     # fig.tight_layout()
-    fig.savefig(**params['savefig_params'])
+    output_filename = params['savefig_params'].pop('fname')
+    fig.savefig(output_filename +'.png',**params['savefig_params'])
+    fig.savefig(output_filename +'.pdf',**params['savefig_params'])
+
 #endregion
 
+broken_ts_drift_params = dict(
+    broken_ts_params = {
+        # forecast files 
+        'forecast_file': None,  # this is the full 1000 year forecast, not necessary if you have the first 5 and last 5 files. 
+        'first_5_forecast_file': 'dlesym_zenodo/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_1000year_first5_datetime',
+        'last_5_forecast_file': 'dlesym_zenodo/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_1000year_last5_datetime',
+        # params for evaluator initialization
+        'eval_variable': 'z500',
+        'verification_path': 'dlesym_zenodo/era5_2017-2022_3h_1deg_z500.nc',
+        # params for seasonal cycle calculation
+        'levels': np.arange(490, 591, 10),
+        'scale_factor': 98.1,  # transform geopotential to deka meters
+        'time': slice(pd.Timedelta(0, 'D'), pd.Timedelta(36512, 'D')),
+        'resampled_dates_first5': pd.date_range('2017-02-01', '2022-02-01', freq='6H'),
+        'resampled_dates_last5': pd.date_range('2112-02-01','2117-02-01',freq='6H'),
+        'init_index' : 1, # corresponds to july initialization 
+        'add_verif_ref':True,
+        'rolling_params_color': {'dim':{'step':int(12)},
+                                        'center':True},
+        'rolling_params_contour': {'dim':{'step':int(60)},
+                                        'center':True},
+        'ref_line':560,
+        'cmap':'Spectral_r',
+        'colorbar_label':'Z$_{500}$ (dam)',
+        'forecast_init': pd.Timestamp('2017-01-01'),
+        'xticks_left':pd.date_range('2017-01-01','2022-01-01',freq='YS'),
+        'xtick_labels_left':[],#pd.date_range('2017-01-01','2022-01-01',freq='YS').year,
+        'xticks_right':pd.date_range('2112-01-01','2117-01-01',freq='YS'),
+        'xtick_labels_right':np.arange(3012,3018,dtype=int),
+        'xlabel':None,
+    },
+    first5_verif_params = {
+        # forecast files 
+        'forecast_file': None, # this is the full 1000 year forecast, not necessary if you have the first 5 and last 5 files.
+        'first_5_forecast_file': 'dlesym_zenodo/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_1000year_first5_datetime',
+        # params for evaluator initialization  
+        'eval_variable': 'z500',
+        'verification_path': 'dlesym_zenodo/era5_2017-2022_3h_1deg_z500.nc',
+        # params for seasonal cycle calculation
+        'levels' : np.arange(490,591,10),
+        'scale_factor':98.1, # transform geopotential to deka meters
+        'time': slice(pd.Timedelta(0,'D'),pd.Timedelta(36512,'D')),
+        'init_index' : 1, # corresponds to july initialization 
+        'add_verif_ref':True,
+        'rolling_params_color': {'dim':{'step':int(12)},
+                                        'center':True},
+        'rolling_params_contour': {'dim':{'step':int(60)},
+                                        'center':True},
+        'ref_line':560,
+        'cmap':'Spectral_r',
+        'colorbar_label':'Z$_{500}$ (dkm)',
+        'forecast_init': pd.Timestamp('2017-01-01'),
+        'xticks':pd.date_range('2017-01-01','2022-01-01',freq='YS'),
+        'xtick_labels':pd.date_range('2017-01-01','2022-01-01',freq='YS').year,
+    },
+    t2m_drift_params = dict(
+        file=None, # this is the full 1000 year forecast, not necessary you have annual average cache.
+        var='t2m0',
+        cache_dir='dlesym_zenodo/analysis_cache/global_average_1000yr',
+        indexing=dict(year=slice(2017, 3016)),
+        smoothing_func=None,
+        linear_fit_params=dict(
+            years=slice(2017, 3017),
+        ),
+        ylim=(287.5, 288.1),
+        yticks=np.arange(287.5, 288.15, 0.2),
+        xticks=np.arange(2017, 3018, 200),
+        xtick_labels=[],
+        xlabel=None,
+        ylabel='T$_{2m}$ (K)',
+    ),
+    sst_drift_params = dict(
+        file=None,
+        var='sst',
+        cache_dir='dlesym_zenodo/analysis_cache/global_average_1000yr',
+        indexing=dict(year=slice(2017, 3016)),
+        smoothing_func=None,
+        linear_fit_params=dict(
+            years=slice(2017, 3016),
+        ),
+        ylim=(291.5, 291.9),
+        yticks=np.arange(291.5, 292, 0.1),
+        xticks=np.arange(2017, 3018, 200),
+        xtick_labels=np.arange(2017, 3018, 200),
+        xlabel='Year',
+        ylabel='SST (K)',
+        mask=None, # mask is only required for calculating annual average. Instead precalculated values are provided. 
+    ),
+    savefig_params = {
+        'fname': 'broken_ts_drift',
+        'dpi': 400,
+        'bbox_inches': 'tight',
+    },
+)
 if __name__ == '__main__':
-    plot_figure1(FIGURE1_PARAMS)
+    main(broken_ts_drift_params)
