@@ -1,36 +1,20 @@
 # DLESyM
-Code repository for training, running and analyzing a Deep Learning Earth System Model (DLESyM) as presented in [Cresswell-Clay et al. 2024](https://arxiv.org/abs/2409.16247). Full use of this repository requires Git and Git LFS (instructions for downloading can be found [here](https://github.com/git-guides/install-git) and [here](https://docs.github.com/en/repositories/working-with-files/managing-large-files/installing-git-large-file-storage), repsectively). 
+Code repository for training, running and analyzing a Deep Learning Earth System Model (DLESyM) as presented in [Cresswell-Clay et al. 2024](https://arxiv.org/abs/2409.16247). This repository is accompanied by a Zenodo data record (linked [here](https://zenodo.org/)) which allows free access to model configuration and checkpoints, initialization and training data, simulation output, and cached analysis output. 
 
-## Organization
+Together, this repo and the associated Zenodo store should be sufficient to entirely reproduce results presented in Cresswell-Clay et al. 2024. If you would like to start running DLESyM as quickly as possible without necessarily reproducing all of the results from the study, you will only need to complete the next two sections: "Setting up your environment" and "Inference with DLESyM". 
+
+For any feedback on this repo, or suggestions for your use case, please feel free to reach out to me directly at nacc@uw.edu.
 
 
-```
-   |-data_processing - utilities for data curation
-   |-environments - conda environemnts files 
-   |-evaluation
-   |-example_data - contains sample initialization
-   |-models - contains the model files for DLESyMls 
-   |-scripts - inference, training utilities, example batch scripts
-   |-testing 
-   |-training
-   |---configs - configurations used for model initialization
-   |---dlwp - classes and utilities used for model interence,
-```
-
-## Getting Started
-Before messing around with DLESyM, you'll need to set up the repository and environemnt on your machine. You'll need to make sure your machine has Git and Git LFS installed (instructions [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and [here](https://git-lfs.github.com/), repectively).
+## Setting up your environment
+Before messing around with DLESyM, you'll need to set up the repository and environemnt on your machine. First, make sure your machine has Git (instructions [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)). Git is used for source-code version control. 
 
 1.  Clone the repository:
     ```sh
     git clone https://github.com/AtmosSci-DLESM/DLESyM.git
     ```
 
-2. Ensure LFS files are included
-    ```sh
-    git lfs pull
-    ```
-
-3. Create the virtual environment. Conda is recommended for environemnt management (it's what we used). Code in this repo was developed using `conda 4.13.0`; install instructions found [here](https://docs.anaconda.com/miniconda/). Once conda is installed, create the environment: 
+2. Create the virtual environment. Conda is recommended for environemnt management (it's what we used). Code in this repo was developed using `conda 4.13.0`; install instructions found [here](https://docs.anaconda.com/miniconda/). Once conda is installed, you can create an environment from the requirements file included here. Note you may have to update the `prefix` field to point to your own anaconda installation. The command for creating your environment is: 
     ```sh
     conda env create -f /path/to/DLESyM/environments/dlesym-0.1.yaml
     ```
@@ -38,10 +22,14 @@ Before messing around with DLESyM, you'll need to set up the repository and envi
     ```sh
     conda activate dlesym-0.1
     ```
+    editable install of DLESyM source:
+    ```sh
+    pip install -e .
+    ```
+    now your conda environment is ready. Just make sure to activate before running experiments or evaluation below. 
 
-Now you're all set! 
+**Whenever running inference, trianing or evaluations, you need this environment to be activated**
 
-NOTE: For modification of DLESyM source, I suggest creating a fork. When forking, make sure you clone the fork and not the original repo. Otherwise, the above steps are the same. 
 
 ## Inference with DLESyM
 
@@ -67,3 +55,8 @@ To recreate this simulation, follow these steps:
     ./scripts/example_100yr_forecasts_12init.sh
     ```
 
+## Experiment Replication 
+
+## Analysis Replication 
+
+This repo is designed for exact replication of the results presented in [Cresswell-Clay et al. 2024](https://arxiv.org/abs/2409.16247). Code for analysis routines, as well as instructions for their use are provided in the `DLESyM/evaluation/ `. 
