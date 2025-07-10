@@ -5,9 +5,9 @@ For ease of replication, I have included some processed output from CMIP experim
 
 | File | Description | Significance | Zenodo Retrievals | Notes |
 |----------|-------------|----------|----------|----------|
-|  `broken_ts_drify.py`    |   Plot zonally averaged Z500 seasonal cycle for 1000-year forecast and globally averaged timeseries.     |   Panels c-f of Figure 2 in manuscript      |   `DLESyM/zenodo/first5_1000yr_retrieval.sh`, `DLESyM/zenodo/last5_1000yr_retrieval.sh`, `DLESyM/zenodo/era5_z500_2017-2022_retrieval.sh`    |   Full 1000-year forecast is roughly 2 TB large and does not fit into Zenodo data repository. Instead the first 5 and last 5 years of the forecast are published. Last 5 forecast aliases `step` dimension to 2112-2117 due to limits of datetime[ns] encoding.    |
+|  `broken_ts_drify.py`    |   Plot zonally averaged Z500 seasonal cycle for 1000-year forecast and globally averaged timeseries.     |   Panels c-f of Figure 2 in manuscript      |   `DLESyM/zenodo/first5_1000yr_retrieval.sh`, `DLESyM/zenodo/last5_1000yr_retrieval.sh`, `DLESyM/zenodo/era5_z500_2017-2022_retrieval.sh`, `DLESyM/zenodo/analysis_cache_retirval.sh`    |   Full 1000-year forecast is roughly 2 TB large and does not fit into Zenodo data repository. Instead the first 5 and last 5 years of the forecast are published. Last 5 forecast aliases `step` dimension to 2112-2117 due to limits of datetime[ns] encoding.    |
 |   `spectral_analysis.py`     |   Plot averaged spectra accross 45N at various leadtimes and over the last year of a 1000-year simulation.     |  Panel A of figure 3. Shows  stabalized spectral distortion throughout simulations.     |   `DLESyM/zenodo/last5_1000yr_retrieval.sh` , `DLESyM/zenodo/skill_forecast_retrieval.sh`, `hpx64_lat-lon_ref_retrival.sh`     |   See above note about 1000-year simulation.     |
-|      |         |   C3     |   D3     |   E3     |
+|   `rmse_acc.py`   |   Calculate RMSE and ACC of DLESyM forecasts and plot as a function of leadtime. Compare to GraphCast, IFS, and climatological benchmarks      |   Panels B and C and figure 3.     |     `DLESyM/zenodo/skill_forecast_retrieval.sh`, `DLESyM/zenodo/analysis_cache_retirval.sh`   |   GraphCast skill taken from WeatherBench     |
 
 ### Evaluation tips 
 
