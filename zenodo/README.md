@@ -4,10 +4,14 @@ Model checkpoints, forecast files, training data, and cached analyses are hosted
 
 ## File descriptions
 
-`first5_1000yr_retrieval.sh` - downloads the first 5 years of a 1000 year simulation with DLESyM.
+`first5_1000yr_retrieval.sh`: downloads the first 5 years of a 1000-year simulation with DLESyM.
 
-`last5_1000yr_retrieval.sh` - downloads the last 5 years of a 1000 year simulation with DLESyM. Note that because of limits of datetime[ns] encoding in the `step` dimension, times have been aliased to 2112-2117. 
+`last5_1000yr_retrieval.sh`: downloads the last 5 years of a 1000-year simulation with DLESyM. Note that because of limits of datetime[ns] encoding in the `step` dimension, times have been aliased to 2112-2117. 
 
-`analysis_caches.sh` - downloads zipped analysis caches. Required for quick recreation of plots and curves presented in paper. Exclude for full replication of results. 
+`era5_z500_2017-2022_retrieval.sh`: era5 data interpolated into a 1-degree lat-lon mesh. Used as a reference fore seasonal cycles. 
 
-`era5_z500_2017-2022_retrieval.sh` - era5 data interpolated into a 1-degree lat-lon mesh. Used as a reference fore seasonal cycles. 
+`hpx64_lat-lon_ref_retrieval.sh`: download the reference lat-lon coordinates for each hpx64 point. 
+
+`skill_forecast_retrieval.sh`: download 16-day forecasts for 105 initialization between years 2016 and 2017. 
+
+`analysis_caches.sh`: downloads zipped analysis caches. Required for quick recreation of plots and curves presented in paper. Exclude for full replication of results. 
