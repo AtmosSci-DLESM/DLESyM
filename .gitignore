@@ -1,8 +1,9 @@
 *.out
 *scratch*
 
-# pycache files
+# Ignore Python cache files
 *.pyc
+__pycache__/
 
 # egg-info
 dlesym.egg-info/
