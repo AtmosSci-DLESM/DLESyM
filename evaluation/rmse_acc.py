@@ -362,6 +362,9 @@ def plot_baseline_metrics(
         axs[1].plot([s / np.timedelta64(1, 'D') for s in accs[i].step.values], # plot in days 
                     accs[i],
                     **forecast_params[i]['plot_kwargs'])
+        
+        print("plotting skill for ", forecast_params[i]['plot_kwargs']['label'])
+        print(f'acc: {accs[i].values}')
         # add indicator 
         if 'indicator' in forecast_params[i]:
             print(f"Adding indicator for {forecast_params[i]['indicator']} to plot.")
@@ -405,11 +408,11 @@ if __name__ == '__main__':
     plot_baseline_metrics(
         forecast_params=[
             {
-                'file':'dlesym_zenodo/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_SkillForecast.nc',
-                'verification_file':'dlesym_zenodo/hpx64_1983-2017_3h_9varCoupledAtmos-sst.zarr',
-                'climatology_file':'dlesym_zenodo/analysis_cache/climatologies/hpx64_1979-2021_3h_9Atmos-ttr_Coupled-sst-swvl1_z500-clima.nc',
-                'rmse_cache':'dlesym_zenodo/analysis_cache/skill_caches/rmse_cache_z500_dlesym.nc',
-                'acc_cache':'dlesym_zenodo/analysis_cache/skill_caches/acc_cache_z500_dlesym.nc',
+                'file':'data/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_SkillForecast.nc',
+                'verification_file':'data/hpx64_1983-2017_3h_9varCoupledAtmos-sst.zarr',
+                'climatology_file':'data/analysis_cache/climatologies/hpx64_1979-2021_3h_9Atmos-ttr_Coupled-sst-swvl1_z500-clima.nc',
+                'rmse_cache':'data/analysis_cache/skill_caches/rmse_cache_z500_dlesym.nc',
+                'acc_cache':'data/analysis_cache/skill_caches/acc_cache_z500_dlesym.nc',
                 'plot_kwargs':{'label':'DL$ESy$M','color':'red','linewidth':2, 'linestyle':'-'},  
                 'indicator': 8, # index of indicator
             },
@@ -417,16 +420,16 @@ if __name__ == '__main__':
                 'file':None, # we're using a precalculated, cached RMSE, only parameters needed are caches
                 'verification_file':None,
                 'climatology_file':None,
-                'rmse_cache':'dlesym_zenodo/analysis_cache/skill_caches/rmse_z500_Climatology.nc',
-                'acc_cache':'dlesym_zenodo/analysis_cache/skill_caches/acc_cache_z500_dlesym.nc',
+                'rmse_cache':'data/analysis_cache/skill_caches/rmse_z500_Climatology.nc',
+                'acc_cache':'data/analysis_cache/skill_caches/acc_z500_Climatology.nc',
                 'plot_kwargs':{'label':'Climatology','color':'grey','linewidth':2, 'linestyle':':'},  
             },
             {
                 'file':None,
                 'verification_file':None,
                 'climatology_file':None,
-                'rmse_cache':'dlesym_zenodo/analysis_cache/skill_caches/rmse_z500_GraphCast.nc',
-                'acc_cache':'dlesym_zenodo/analysis_cache/skill_caches/acc_z500_GraphCast.nc',
+                'rmse_cache':'data/analysis_cache/skill_caches/rmse_z500_GraphCast.nc',
+                'acc_cache':'data/analysis_cache/skill_caches/acc_z500_GraphCast.nc',
                 'plot_kwargs':{'label':'GraphCast','color':'purple','linewidth':2, 'linestyle':'dashdot'},  
                 'indicator': 8, # index of indicator
 
@@ -435,14 +438,15 @@ if __name__ == '__main__':
                 'file':None,
                 'verification_file':None,
                 'climatology_file':None,
-                'rmse_cache':'dlesym_zenodo/analysis_cache/skill_caches/rmse_z500_ECMWF_IFS_S2S.nc',
-                'acc_cache':'dlesym_zenodo/analysis_cache/skill_caches/acc_z500_ECMWF_IFS_S2S.nc',
+                'rmse_cache':'data/analysis_cache/skill_caches/rmse_z500_ECMWF_IFS_S2S.nc',
+                'acc_cache':'data/analysis_cache/skill_caches/acc_z500_ECMWF_IFS_S2S.nc',
                 'plot_kwargs':{'label':'IFS-S2S','color':'hotpink','linewidth':2, 'linestyle':'dashdot'},
                 'indicator': 2, # index of indicator
             }
         ],
         variable='z500',
-        plot_file='z500_skill_comparison',
+        # plot_file='z500_skill_comparison',
+        plot_file="/home/disk/brume/nacc/DLESyM/evaluation/z500_skill_comparison",
         xlim={'left':0, 'right':10}, # set xlim to 10 days
         ymax=100,
 

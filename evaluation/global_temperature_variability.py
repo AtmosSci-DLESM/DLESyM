@@ -160,30 +160,26 @@ def main(
     )
     print(f"Correlation between forced forecast and reference: {corr_ref_forced:.2f} (p-value: {pval:.2e})")
 
-
-
-
-
 if __name__ == "__main__":
     
     # t2m
     main(
-        forecast_file='dlesym_zenodo/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_100yearJanInit.nc',
-        forced_forecast_file='dlesym_zenodo/forced_atmos_dlesym_1983-2017.nc',
-        reference_file='dlesym_zenodo/hpx64_1983-2017_3h_9varCoupledAtmos-sst.zarr',
+        forecast_file='data/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_100yearJanInit.nc',
+        forced_forecast_file='data/forced_atmos_dlesym_1983-2017.nc',
+        reference_file='data/hpx64_1983-2017_3h_9varCoupledAtmos-sst.zarr',
         output_file='global_temperature_variability',
-        cache_dir='dlesym_zenodo/analysis_cache/forced_vs_coupled_climo_var',
+        cache_dir='data/analysis_cache/forced_vs_coupled_climo_var',
         overwrite_cache=False,
         var='t2m0',
         var_name = r"T$_{2m}$",
     )
     # t850 
     main(
-        forecast_file='dlesym_zenodo/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_100yearJanInit.nc',
-        forced_forecast_file='dlesym_zenodo/forced_atmos_dlesym_1983-2017.nc',
-        reference_file='dlesym_zenodo/hpx64_1983-2017_3h_9varCoupledAtmos-sst.zarr',
+        forecast_file='data/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_100yearJanInit.nc',
+        forced_forecast_file='data/forced_atmos_dlesym_1983-2017.nc',
+        reference_file='data/hpx64_1983-2017_3h_9varCoupledAtmos-sst.zarr',
         output_file='global_t850_variability',
-        cache_dir='dlesym_zenodo/analysis_cache/forced_vs_coupled_climo_var',
+        cache_dir='data/analysis_cache/forced_vs_coupled_climo_var',
         overwrite_cache=False,
         var='t850',
         var_name = r"T$_{850}$",

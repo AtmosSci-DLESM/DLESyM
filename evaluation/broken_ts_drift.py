@@ -782,11 +782,11 @@ broken_ts_drift_params = dict(
     broken_ts_params = {
         # forecast files 
         'forecast_file': None,  # this is the full 1000 year forecast, not necessary if you have the first 5 and last 5 files. 
-        'first_5_forecast_file': 'dlesym_zenodo/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_1000year_first5_datetime',
-        'last_5_forecast_file': 'dlesym_zenodo/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_1000year_last5_datetime',
+        'first_5_forecast_file': 'data/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_1000year_first5_datetime',
+        'last_5_forecast_file': 'data/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_1000year_last5_datetime',
         # params for evaluator initialization
         'eval_variable': 'z500',
-        'verification_path': 'dlesym_zenodo/era5_2017-2022_3h_1deg_z500.nc',
+        'verification_path': 'data/era5_2017-2022_3h_1deg_z500.nc',
         # params for seasonal cycle calculation
         'levels': np.arange(490, 591, 10),
         'scale_factor': 98.1,  # transform geopotential to deka meters
@@ -812,10 +812,10 @@ broken_ts_drift_params = dict(
     first5_verif_params = {
         # forecast files 
         'forecast_file': None, # this is the full 1000 year forecast, not necessary if you have the first 5 and last 5 files.
-        'first_5_forecast_file': 'dlesym_zenodo/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_1000year_first5_datetime',
+        'first_5_forecast_file': 'data/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_1000year_first5_datetime',
         # params for evaluator initialization  
         'eval_variable': 'z500',
-        'verification_path': 'dlesym_zenodo/era5_2017-2022_3h_1deg_z500.nc',
+        'verification_path': 'data/era5_2017-2022_3h_1deg_z500.nc',
         # params for seasonal cycle calculation
         'levels' : np.arange(490,591,10),
         'scale_factor':98.1, # transform geopotential to deka meters
@@ -836,7 +836,7 @@ broken_ts_drift_params = dict(
     t2m_drift_params = dict(
         file=None, # this is the full 1000 year forecast, not necessary you have annual average cache.
         var='t2m0',
-        cache_dir='dlesym_zenodo/analysis_cache/global_average_1000yr',
+        cache_dir='data/analysis_cache/global_average_1000yr',
         indexing=dict(year=slice(2017, 3016)),
         smoothing_func=None,
         linear_fit_params=dict(
@@ -852,7 +852,7 @@ broken_ts_drift_params = dict(
     sst_drift_params = dict(
         file=None,
         var='sst',
-        cache_dir='dlesym_zenodo/analysis_cache/global_average_1000yr',
+        cache_dir='data/analysis_cache/global_average_1000yr',
         indexing=dict(year=slice(2017, 3016)),
         smoothing_func=None,
         linear_fit_params=dict(

@@ -5,9 +5,9 @@ from tqdm import tqdm
 import pandas as pd
 
 PARAMS_45N_1000th_year = {
-    'skill_forecast':'dlesym_zenodo/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_SkillForecast.nc',
-    'forecast_1000':'dlesym_zenodo/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_1000year_last5_datetime.nc',
-    'ref_file':'dlesym_zenodo/hpx64_ref_lat_lon.nc',
+    'skill_forecast':'data/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_SkillForecast.nc',
+    'forecast_1000':'data/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_1000year_last5_datetime.nc',
+    'ref_file':'data/hpx64_ref_lat_lon.nc',
     'variable':'z500',
     'unit_conversion':9.81,
     'unit_label':'m$^2$ km',
@@ -33,9 +33,9 @@ PARAMS_45N_1000th_year = {
 
 
 PARAMS_45N_1000th_year_ws = {
-    'skill_forecast':'dlesym_zenodo/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_SkillForecast.nc',
-    'forecast_1000':'dlesym_zenodo/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_1000year_last5_datetime.nc',
-    'ref_file':'dlesym_zenodo/hpx64_ref_lat_lon.nc',
+    'skill_forecast':'data/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_SkillForecast.nc',
+    'forecast_1000':'data/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_1000year_last5_datetime.nc',
+    'ref_file':'data/hpx64_ref_lat_lon.nc',
     'variable':'ws10',
     'unit_conversion':1,
     'unit_label':'m$^2$ s$^{-2}$ km',
@@ -61,9 +61,9 @@ PARAMS_45N_1000th_year_ws = {
 }
 
 PARAMS_45N_1000th_year_t850 = {
-    'skill_forecast':'dlesym_zenodo/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_SkillForecast.nc',
-    'forecast_1000':'dlesym_zenodo/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_1000year_last5_datetime.nc',
-    'ref_file':'dlesym_zenodo/hpx64_ref_lat_lon.nc',
+    'skill_forecast':'data/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_SkillForecast.nc',
+    'forecast_1000':'data/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_1000year_last5_datetime.nc',
+    'ref_file':'data/hpx64_ref_lat_lon.nc',
     'variable':'t850',
     'unit_conversion':1,
     'unit_label':'K$^2$ km',
@@ -88,9 +88,9 @@ PARAMS_45N_1000th_year_t850 = {
     ],
 }
 PARAMS_45N_1000th_year_olr = {
-    'skill_forecast':'dlesym_zenodo/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_SkillForecast.nc',
-    'forecast_1000':'dlesym_zenodo/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_1000year_last5_datetime.nc',
-    'ref_file':'dlesym_zenodo/hpx64_ref_lat_lon.nc',
+    'skill_forecast':'data/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_SkillForecast.nc',
+    'forecast_1000':'data/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_1000year_last5_datetime.nc',
+    'ref_file':'data/hpx64_ref_lat_lon.nc',
     'variable':'olr',
     'unit_conversion':1,
     'unit_label':'W$^2$ m$^{-4}$ km',

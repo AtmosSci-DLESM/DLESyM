@@ -367,4 +367,4 @@ dependencies:
     - xlrd==2.0.1
     - xlsxwriter==3.2.0
     - xskillscore==0.0.26
-prefix: /home/disk/brume/nacc/anaconda3/envs/dlesym-0.1
+prefix: ~/anaconda3/envs/dlesym-0.1
