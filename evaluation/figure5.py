@@ -15,7 +15,7 @@ sys.path.append('./')
 import cartopy.feature as cfeature
 import evaluation.evaluators as ev
 from matplotlib.gridspec import GridSpec
-from figure1 import get_year
+from evaluation.broken_ts_drift import get_year
 from cartopy.util import add_cyclic_point
 import matplotlib.path as mpath
 import matplotlib.dates as mdates
