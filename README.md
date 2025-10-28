@@ -10,7 +10,6 @@ Together, this repository and the associated data store are sufficient to reprod
 
 For any feedback on this repo, or suggestions for your use case, please feel free to reach out to me directly.
 
-
 ## Setting up your environment
 
 Before using DLESyM, you'll need to set up the repository and environemnt on your machine. Your machine must have Git and GitLFS installed (instructions [here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) and [here](https://git-lfs.github.com/), repectively).
@@ -65,8 +64,14 @@ To recreate this simulation, follow these steps:
     ./scripts/example_100yr_forecasts_12init.sh
     ```
 
-## Experiment Replication 
+## Data Store 
+
+All training data, initialization data, model output, and verification data that were used in this study have been made publicly available [here](https://dlesym.atmos.washington.edu/DLESyM_AGU-Advances/). The page also provides description of all hosted files. HTTP-based retrieval methods like curl or wget are recommended for data aquisition. 
+
+If interested in running evaluations, the table found in `DLESyM/evaluation/` identifies data files necessary for key analyses from our paper. 
+
+NOTE: Large trainsets are saved in the ML-optimized zarr format (look for the `.zarr` suffix). For convienient download, I have collected these into tarballs. Extraction is necessary before use. 
 
 ## Analysis Replication 
 
-This repo is designed for exact replication of the results presented in [Cresswell-Clay et al. 2024](https://arxiv.org/abs/2409.16247). Code for analysis routines, as well as instructions for their use are provided in the `DLESyM/evaluation/ `. 
+This repo is designed for replication of the results presented in [Cresswell-Clay et al. 2024](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2025AV001706). Code for analysis routines, as well as instructions for their use are provided in the `DLESyM/evaluation/ `. 

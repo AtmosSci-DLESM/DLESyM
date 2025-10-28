@@ -1,5 +1,5 @@
 # Evaluating DLESyM
-Analysis routines presented in our study are included here. This catalogue is organized by analysis script/notebook. For each, I provide a short description, identify significance to the study, and list the output files what were analyzed in the paper. These output files are available at our UW-hosted data store (linked [here](https://dlesym.atmos.washington.edu/DLESyM_AGU-Advances/)). Most analysis routines make use of caches to for quick replication of results. For full transparency, some of these intermediate cahces have been made available in the data store ([this subdirectory](https://dlesym.atmos.washington.edu/DLESyM_AGU-Advances/analysis_cache/)). 
+Analysis routines presented in our study are included here. In the table below, key analyses from the paper have been catalogued. This catalogue is organized by analysis script/notebook. For each, I provide a short description, identify significance to the study, and list the data files what were used for analysis in the paper. These output files are available at our UW-hosted data store (linked [here](https://dlesym.atmos.washington.edu/DLESyM_AGU-Advances/)). Most analysis routines make use of caches to for quick replication of results. For full transparency, some of these intermediate cahces have been made available in the data store ([this subdirectory](https://dlesym.atmos.washington.edu/DLESyM_AGU-Advances/analysis_cache/)). 
 
 For ease of replication, I have made public some processed output from CMIP experiments as well as processed ERA5 reanalysis data. Full citation and acknowledgmenet of data sources is provided in our paper. 
 
@@ -13,5 +13,5 @@ For ease of replication, I have made public some processed output from CMIP expe
 ### Notes
 
 - References to forecast files and analysis caches will be relative and assume data the data is stored in the directory `./data/`.
-- Other scripts/routines in this directory are included but not documented in the above table (e.g. `figureX.py` files were used to generate the figures in the corresponding arXiv preprint). These files remain for additional examples but as they were not directly used in the published work, have not been tested or carefully documented. 
+- Other scripts/routines in this directory are included but not documented in the above table (e.g. `figureX.py` files were used to generate the figures in the corresponding arXiv preprint). These files remain for additional examples but as of yet are not carefully documented. If you think you would like to work with these routines, let me know and I can provide documentation. 
 
