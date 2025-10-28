@@ -1,3 +1,8 @@
+<p align="center">
+  <img src="storm.gif" alt="Storm animation" width="850">
+</p>
+
+
 # DLESyM
 Code repository for training, running and analyzing a Deep Learning Earth System Model (DLESyM) as presented our paper ["A Deep Learning Earth System Model for Efficient Simulation of the Observed Climate"](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2025AV001706) (arXiv manuscript [here](https://arxiv.org/abs/2409.16247)). This repository is accompanied by a data store (linked [here](https://dlesym.atmos.washington.edu/DLESyM_AGU-Advances/)) hosted at the University of Washington that provides free access to training data, simulation output, and cached analysis output. Model checkpoints are included in this repository, but require GitLFS. 
 
