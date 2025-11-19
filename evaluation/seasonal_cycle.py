@@ -14,7 +14,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-PARAMS_Z500 = {
+PARAMS_Z500_control = {
     # forecast file 
     'forecast_file': '/home/disk/rhodium/WEB/DLESyM_AGU-Advances/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_100yearJanInit.nc',
     # params for evaluator initialization  
@@ -22,7 +22,7 @@ PARAMS_Z500 = {
     # params for seasonal cycle calculation 
     'levels' : np.arange(490,591,10),
     'scale_factor':98.1, # transform geopotential to deka meters
-    'time': slice(pd.Timedelta(0,'D'),pd.Timedelta(365,'D')),
+    'time': slice(pd.Timedelta(365*90,'D'),pd.Timedelta(365*100,'D')),
     'init_index' : 1, # corresponds to july initialization 
     # 'add_verif_ref':True,
     'rolling_params': {'dim':{'step':int(12)},
@@ -32,11 +32,12 @@ PARAMS_Z500 = {
     'colorbar_label':'Z$_{500}$ (dkm)',
     'title':'Simulation Seasonal Cycle',
     'savefig_params': {
-        'fname' : './forecast_seasonal_cycle_z500.png',
+        'fname' : './forecast_seasonal_cycle_z500_control.png',
         'dpi' : 300,
     },
     'verif_title':'6-year ERA5 Seasonal Cycle',
 }
+
 
 def main(params):
 
@@ -161,5 +162,6 @@ def main(params):
 
 if __name__=="__main__":
  
-    main(PARAMS_Z500)
+    main(PARAMS_Z500_control)
+    main(PARAMS_Z500_1in1out_24AR)
 
