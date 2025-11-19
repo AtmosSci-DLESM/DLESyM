@@ -28,7 +28,7 @@ import pandas as pd
 import logging
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
-from cmip6_utils import cesm2, mpi_esm1, gfdl_cm4, had_gem, ipsl
+from evaluation.cmip_utils import cesm2, mpi_esm1, gfdl_cm4, had_gem, ipsl
 
 # endregion 
 
