@@ -1,9 +1,8 @@
 import numpy as np
-from evaluation.blocking import get_custom_cmap
-from evaluation.blocking import blocking_frequency
+from evaluation.blocking import get_custom_cmap, blocking_frequency
 
 PARAMS_NH_40yr = {
-    'forecast_file' : '/home/disk/rhodium/nacc/forecasts/hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_100yearJanInit',
+    'forecast_file' : '/home/disk/rhodium/WEB/DLESyM_AGU-Advances/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_100yearJanInit',
     'forecast_time_range': slice('2070-01-01', '2110-12-31'),
     'verification_file' : '/home/disk/rhodium/dlwp/data/era5/1deg/era5_1950-2022_3h_1deg_z500.nc',
     'verification_time_range': slice('1970-01-01', '2010-12-31'),
@@ -17,7 +16,7 @@ PARAMS_NH_40yr = {
     'std_cmap': get_custom_cmap('Greens'),
     'std_levels': np.arange(0, 0.101, .02),
     'std_ticks': np.arange(0, 0.101, .02),
-    'output_dir' : '/home/disk/brume/nacc/WeeklyNotebooks/2024.05.13/FigureScripts/blocking_cache',
+    'output_dir' : './scratch/blocking_last40/',
     'plot_file_suffix': 'nh_40yr',
     'map_suffix': 'nh_map_40yr',
 }
