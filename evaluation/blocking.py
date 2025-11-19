@@ -65,28 +65,8 @@ def get_custom_cmap(cmap_base='YlOrRd', middle=False, white_levels=20, start_col
         cmap_combined = mcolors.LinearSegmentedColormap.from_list('colormap', colors)
         return cmap_combined
 
-PARAMS_NH = {
-    'forecast_file' : '/home/disk/rhodium/nacc/forecasts/hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_100yearJanInit',
-    'forecast_time_range': slice('2087-01-01', '2116-12-31'),
-    'verification_file' : '/home/disk/rhodium/dlwp/data/era5/1deg/1979-2021_era5_1deg_3h_geopotential_500.nc',
-    'verification_time_range': slice('1987-01-01', '2016-12-31'),
-    'months':[1,2,3,4,5,6,7,8,9,10,11,12],
-    'hemisphere': 'north',
-    # 'freq_levels': np.arange(1, 15.1, 1),
-    'freq_levels': np.arange(0.0, 0.101, 0.01),
-    # 'freq_ticks': np.arange(1, 15.1, 2),
-    'freq_ticks': np.arange(0.0, 0.101, 0.01),
-    'freq_cmap': get_custom_cmap('plasma_r'),
-    'std_cmap': get_custom_cmap('Greens'),
-    'std_levels': np.arange(0, 0.101, .02),
-    'std_ticks': np.arange(0, 0.101, .02),
-    'output_dir' : '/home/disk/brume/nacc/WeeklyNotebooks/2024.05.13/FigureScripts/blocking_cache',
-    'plot_file_suffix': 'nh',
-    'map_suffix': 'nh_map',
-}
-
 PARAMS_NH_40yr = {
-    'forecast_file' : '/home/disk/rhodium/nacc/forecasts/hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_100yearJanInit',
+    'forecast_file' : '/home/disk/rhodium/WEB/DLESyM_AGU-Advances/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_100yearJanInit',
     'forecast_time_range': slice('2070-01-01', '2110-12-31'),
     'verification_file' : '/home/disk/rhodium/dlwp/data/era5/1deg/era5_1950-2022_3h_1deg_z500.nc',
     'verification_time_range': slice('1970-01-01', '2010-12-31'),
@@ -100,32 +80,11 @@ PARAMS_NH_40yr = {
     'std_cmap': get_custom_cmap('Greens'),
     'std_levels': np.arange(0, 0.101, .02),
     'std_ticks': np.arange(0, 0.101, .02),
-    'output_dir' : '/home/disk/brume/nacc/WeeklyNotebooks/2024.05.13/FigureScripts/blocking_cache',
+    'output_dir' : './scratch/blocking_cache_UpdatedAGP_v2',
     'plot_file_suffix': 'nh_40yr',
     'map_suffix': 'nh_map_40yr',
 }
 
-PARAMS_NH_CESM = {
-    'simulation_dir' : '/home/disk/mercury5/nacc/cmip6/CESM2',
-    'selection_function' : cesm2,
-    'forecast_time_range': slice('2087-01-01', '2116-12-31'),
-    'verification_file' : '/home/disk/rhodium/dlwp/data/era5/1deg/1979-2021_era5_1deg_3h_geopotential_500.nc',
-    'verification_time_range': slice('1987-01-01', '2016-12-31'),
-    'months':[1,2,3,4,5,6,7,8,9,10,11,12],
-    'hemisphere': 'north',
-    'model_label':'CESM2',
-    # 'freq_levels': np.arange(1, 15.1, 1),
-    'freq_levels': np.arange(0.0, 0.101, 0.01),
-    # 'freq_ticks': np.arange(1, 15.1, 2),
-    'freq_ticks': np.arange(0.0, 0.101, 0.01),
-    'freq_cmap': get_custom_cmap('plasma_r'),
-    'std_cmap': get_custom_cmap('Greens'),
-    'std_levels': np.arange(0, 0.101, .02),
-    'std_ticks': np.arange(0, 0.101, .02),
-    'output_dir' : '/home/disk/brume/nacc/WeeklyNotebooks/2024.05.13/FigureScripts/blocking_cache',
-    'plot_file_suffix': 'cesm_nh',
-    'map_suffix': 'cesm_nh_map',
-}
 PARAMS_NH_CESM_40yr = {
     'simulation_dir' : '/home/disk/mercury5/nacc/cmip6/CESM2',
     'selection_function' : cesm2,
@@ -143,57 +102,11 @@ PARAMS_NH_CESM_40yr = {
     'std_cmap': get_custom_cmap('Greens'),
     'std_levels': np.arange(0, 0.101, .02),
     'std_ticks': np.arange(0, 0.101, .02),
-    'output_dir' : '/home/disk/brume/nacc/WeeklyNotebooks/2024.05.13/FigureScripts/blocking_cache',
+    'output_dir' : './scratch/blocking_cache_UpdatedAGP_v2',
     'plot_file_suffix': 'cesm_nh_40yr',
     'map_suffix': 'cesm_nh_map_40yr',
 }
 
-PARAMS_NH_MPI = {
-    'simulation_dir' : '/home/disk/mercury5/nacc/cmip6/MPI-ESM1-2-LR/day',
-    'selection_function' : mpi_esm1,
-    'forecast_time_range': slice('2087-01-01', '2116-12-31'),
-    'verification_file' : '/home/disk/rhodium/dlwp/data/era5/1deg/1979-2021_era5_1deg_3h_geopotential_500.nc',
-    'verification_time_range': slice('1987-01-01', '2016-12-31'),
-    'months':[1,2,3,4,5,6,7,8,9,10,11,12],
-    'hemisphere': 'north',
-    'max_lat': 73.659, # closest lat to 75 on mesh
-    'model_label':'MPI-ESM1-LR',
-    'model_label_size': 12,
-    # 'freq_levels': np.arange(1, 15.1, 1),
-    'freq_levels': np.arange(0.0, 0.101, 0.01),
-    # 'freq_ticks': np.arange(1, 15.1, 2),
-    'freq_ticks': np.arange(0.0, 0.101, 0.01),
-    'freq_cmap': get_custom_cmap('plasma_r'),
-    'std_cmap': get_custom_cmap('Greens'),
-    'std_levels': np.arange(0, 0.101, .02),
-    'std_ticks': np.arange(0, 0.101, .02),
-    'output_dir' : '/home/disk/brume/nacc/WeeklyNotebooks/2024.05.13/FigureScripts/blocking_cache',
-    'plot_file_suffix': 'mpi-esp1-2-lr_nh',
-    'map_suffix': 'mpi-esp1-2-lr_nh_map',
-}
-
-PARAMS_NH_MPI_HR = {
-    'simulation_dir' : '/home/disk/mercury5/nacc/cmip6/MPI-ESM1-2-HR',
-    'selection_function' : mpi_esm1,
-    'forecast_time_range': slice('2087-01-01', '2116-12-31'),
-    'verification_file' : '/home/disk/rhodium/dlwp/data/era5/1deg/1979-2021_era5_1deg_3h_geopotential_500.nc',
-    'verification_time_range': slice('1987-01-01', '2016-12-31'),
-    'months':[1,2,3,4,5,6,7,8,9,10,11,12],
-    'hemisphere': 'north',
-    'max_lat': 73.659, # closest lat to 75 on mesh
-    'model_label':'MPI',
-    # 'freq_levels': np.arange(1, 15.1, 1),
-    'freq_levels': np.arange(0.0, 0.101, 0.01),
-    # 'freq_ticks': np.arange(1, 15.1, 2),
-    'freq_ticks': np.arange(0.0, 0.101, 0.01),
-    'freq_cmap': get_custom_cmap('plasma_r'),
-    'std_cmap': get_custom_cmap('Greens'),
-    'std_levels': np.arange(0, 0.101, .02),
-    'std_ticks': np.arange(0, 0.101, .02),
-    'output_dir' : '/home/disk/brume/nacc/WeeklyNotebooks/2024.05.13/FigureScripts/blocking_cache',
-    'plot_file_suffix': 'mpi-esp1-2-hr_nh',
-    'map_suffix': 'mpi-esp1-2-hr_nh_map',
-}
 
 PARAMS_NH_MPI_HR_40yr = {
     'simulation_dir' : '/home/disk/mercury5/nacc/cmip6/MPI-ESM1-2-HR',
@@ -213,32 +126,9 @@ PARAMS_NH_MPI_HR_40yr = {
     'std_cmap': get_custom_cmap('Greens'),
     'std_levels': np.arange(0, 0.101, .02),
     'std_ticks': np.arange(0, 0.101, .02),
-    'output_dir' : '/home/disk/brume/nacc/WeeklyNotebooks/2024.05.13/FigureScripts/blocking_cache',
+    'output_dir' : './scratch/blocking_cache_UpdatedAGP_v2',
     'plot_file_suffix': 'mpi-esp1-2-hr_nh_40yr',
     'map_suffix': 'mpi-esp1-2-hr_nh_map_40yr',
-}
-
-PARAMS_NH_gfdl = {
-    'simulation_dir' : '/home/disk/mercury5/nacc/cmip6/GFDL-CM4',
-    'selection_function' : gfdl_cm4,
-    'forecast_time_range': slice('2087-01-01', '2116-12-31'),
-    'verification_file' : '/home/disk/rhodium/dlwp/data/era5/1deg/1979-2021_era5_1deg_3h_geopotential_500.nc',
-    'verification_time_range': slice('1987-01-01', '2016-12-31'),
-    'months':[1,2,3,4,5,6,7,8,9,10,11,12],
-    'hemisphere': 'north',
-    'model_label':'GFDL-CM4',
-    'model_label_size': 12,
-    # 'freq_levels': np.arange(1, 15.1, 1),
-    'freq_levels': np.arange(0.0, 0.101, 0.01),
-    # 'freq_ticks': np.arange(1, 15.1, 2),
-    'freq_ticks': np.arange(0.0, 0.101, 0.01),
-    'freq_cmap': get_custom_cmap('plasma_r'),
-    'std_cmap': get_custom_cmap('Greens'),
-    'std_levels': np.arange(0, 0.101, .02),
-    'std_ticks': np.arange(0, 0.101, .02),
-    'output_dir' : '/home/disk/brume/nacc/WeeklyNotebooks/2024.05.13/FigureScripts/blocking_cache',
-    'plot_file_suffix': 'gfdl_nh',
-    'map_suffix': 'gfdl_nh_map',
 }
 
 PARAMS_NH_gfdl_40yr = {
@@ -258,33 +148,9 @@ PARAMS_NH_gfdl_40yr = {
     'std_cmap': get_custom_cmap('Greens'),
     'std_levels': np.arange(0, 0.101, .02),
     'std_ticks': np.arange(0, 0.101, .02),
-    'output_dir' : '/home/disk/brume/nacc/WeeklyNotebooks/2024.05.13/FigureScripts/blocking_cache',
+    'output_dir' : './scratch/blocking_cache_UpdatedAGP_v2',
     'plot_file_suffix': 'gfdl_nh_40yr',
     'map_suffix': 'gfdl_nh_map_40yr',
-}
-
-PARAMS_NH_HadGEM = {
-    'simulation_dir' : '/home/disk/mercury5/nacc/cmip6/HadGEM3-GC31-LL',
-    'selection_function' : had_gem,
-    'forecast_time_range': slice('2087-01-01', '2116-12-31'),
-    'verification_file' : '/home/disk/rhodium/dlwp/data/era5/1deg/1979-2021_era5_1deg_3h_geopotential_500.nc',
-    'verification_time_range': slice('1987-01-01', '2016-12-31'),
-    'months':[1,2,3,4,5,6,7,8,9,10,11,12],
-    'hemisphere': 'north',
-    'max_lat': 74, # closest lat to 75 on mesh
-    'model_label':'HadGEM3',
-    'model_label_size': 13,
-    # 'freq_levels': np.arange(1, 15.1, 1),
-    'freq_levels': np.arange(0.0, 0.101, 0.01),
-    # 'freq_ticks': np.arange(1, 15.1, 2),
-    'freq_ticks': np.arange(0.0, 0.101, 0.01),
-    'freq_cmap': get_custom_cmap('plasma_r'),
-    'std_cmap': get_custom_cmap('Greens'),
-    'std_levels': np.arange(0, 0.101, .02),
-    'std_ticks': np.arange(0, 0.101, .02),
-    'output_dir' : '/home/disk/brume/nacc/WeeklyNotebooks/2024.05.13/FigureScripts/blocking_cache',
-    'plot_file_suffix': 'hadgem_nh',
-    'map_suffix': 'hadgem_nh_map',
 }
 
 PARAMS_NH_HadGEM_40yr = {
@@ -306,226 +172,10 @@ PARAMS_NH_HadGEM_40yr = {
     'std_cmap': get_custom_cmap('Greens'),
     'std_levels': np.arange(0, 0.101, .02),
     'std_ticks': np.arange(0, 0.101, .02),
-    'output_dir' : '/home/disk/brume/nacc/WeeklyNotebooks/2024.05.13/FigureScripts/blocking_cache',
+    'output_dir' : './scratch/blocking_cache_UpdatedAGP_v2',
     'plot_file_suffix': 'hadgem_nh_40yr',
     'map_suffix': 'hadgem_nh_map_40yr',
 }
-
-PARAMS_NH_IPSL = {
-    'simulation_dir' : '/home/disk/mercury5/nacc/cmip6/IPSL-CM6A-LR',
-    'selection_function' : ipsl,
-    'forecast_time_range': slice('2087-01-01', '2116-12-31'),
-    'verification_file' : '/home/disk/rhodium/dlwp/data/era5/1deg/1979-2021_era5_1deg_3h_geopotential_500.nc',
-    'verification_time_range': slice('1987-01-01', '2016-12-31'),
-    'months':[1,2,3,4,5,6,7,8,9,10,11,12],
-    'hemisphere': 'north',
-    'model_label':'IPSL-CM6A-LR',
-    'model_label_size': 10,
-    # 'freq_levels': np.arange(1, 15.1, 1),
-    'freq_levels': np.arange(0.0, 0.101, 0.01),
-    # 'freq_ticks': np.arange(1, 15.1, 2),
-    'freq_ticks': np.arange(0.0, 0.101, 0.01),
-    'freq_cmap': get_custom_cmap('plasma_r'),
-    'std_cmap': get_custom_cmap('Greens'),
-    'std_levels': np.arange(0, 0.101, .02),
-    'std_ticks': np.arange(0, 0.101, .02),
-    'output_dir' : '/home/disk/brume/nacc/WeeklyNotebooks/2024.05.13/FigureScripts/blocking_cache',
-    'plot_file_suffix': 'ipsl_nh',
-    'map_suffix': 'ipsl_nh_map',
-}
-
-
-PARAMS_NH_DJF = {
-    'forecast_file' : '/home/disk/rhodium/nacc/forecasts/hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_100yearJanInit',
-    'forecast_time_range': slice('2087-01-01', '2116-12-31'),
-    'verification_file' : '/home/disk/rhodium/dlwp/data/era5/1deg/1979-2021_era5_1deg_3h_geopotential_500.nc',
-    'verification_time_range': slice('1987-01-01', '2016-12-31'),
-    'months':[12,1,2],
-    'hemisphere': 'north',
-    # 'freq_levels': np.arange(1, 15.1, 1),
-    'freq_levels': np.arange(0.0, 0.101, 0.01),
-    # 'freq_ticks': np.arange(1, 15.1, 2),
-    'freq_ticks': np.arange(0.0, 0.101, 0.01),
-    'freq_cmap': get_custom_cmap('plasma_r'),
-    'std_cmap': get_custom_cmap('Greens'),
-    'std_levels': np.arange(0, 0.101, .02),
-    'std_ticks': np.arange(0, 0.101, .02),
-    'output_dir' : '/home/disk/brume/nacc/WeeklyNotebooks/2024.05.13/FigureScripts/blocking_cache',
-    'plot_file_suffix': 'nh_djf',
-    # ATLANTIC SECTOR
-    # 'spatial_correlation_params': {
-    #     'region': {'lat':slice(50,75),'lon':slice(-90,90)},
-    #     'extra_suffix': '_atl'
-    # },
-    # 'average_params' : {
-    #     'region': {'lat':slice(50,75),'lon':slice(-90,90)},
-    #     'extra_suffix': '_atl'
-    # },
-    # 'rmse_params' : {
-    #     'region': {'lat':slice(50,75),'lon':slice(-90,90)},
-    #     'extra_suffix': '_atl'
-    # },
-    # PACIFIC SECTOR
-    # 'spatial_correlation_params': {
-    #     'region': {'lat':slice(50,75),'lon':slice(90,270)},
-    #     'extra_suffix': '_pac',
-    #     'yticks': np.arange(.6,1.01,0.05)
-    # },
-    # 'average_params' : {
-    #     'region': {'lat':slice(50,75),'lon':slice(90,270)},
-    #     'extra_suffix': '_pac',
-    #     'yticks': np.arange(0,0.036,0.005)
-    # },
-    # 'rmse_params' : {
-    #     'region': {'lat':slice(50,75),'lon':slice(90,270)},
-    #     'extra_suffix': '_pac',
-    #     'yticks': np.arange(0.0,0.026,0.005)
-    # },
-}
-
-PARAMS_NH_MAM = {
-    'forecast_file' : '/home/disk/rhodium/nacc/forecasts/hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_100yearJanInit',
-    'forecast_time_range': slice('2087-01-01', '2116-12-31'),
-    'verification_file' : '/home/disk/rhodium/dlwp/data/era5/1deg/1979-2021_era5_1deg_3h_geopotential_500.nc',
-    'verification_time_range': slice('1987-01-01', '2016-12-31'),
-    'months':[3,4,5],
-    'hemisphere': 'north',
-    'freq_levels': np.arange(0.0, 0.101, 0.01),
-    'freq_ticks': np.arange(0.0, 0.101, 0.01),
-    'freq_cmap': get_custom_cmap('plasma_r'),
-    'std_cmap': get_custom_cmap('Greens'),
-    'std_levels': np.arange(0, 0.101, .02),
-    'std_ticks': np.arange(0, 0.101, .02),
-    'output_dir' : '/home/disk/brume/nacc/WeeklyNotebooks/2024.05.13/FigureScripts/blocking_cache',
-    'plot_file_suffix': 'nh_mam',
-    # ATLANTIC SECTOR
-    # 'spatial_correlation_params': {
-    #     'region': {'lat':slice(50,75),'lon':slice(-90,90)},
-    #     'extra_suffix': '_atl'
-    # },
-    # 'average_params' : {
-    #     'region': {'lat':slice(50,75),'lon':slice(-90,90)},
-    #     'extra_suffix': '_atl'
-    # },
-    # 'rmse_params' : {
-    #     'region': {'lat':slice(50,75),'lon':slice(-90,90)},
-    #     'extra_suffix': '_atl'
-    # },
-    # PACIFIC SECTOR
-    # 'spatial_correlation_params': {
-    #     'region': {'lat':slice(50,75),'lon':slice(90,270)},
-    #     'extra_suffix': '_pac',
-    #     'yticks': np.arange(.6,1.01,0.05)
-    # },
-    # 'average_params' : {
-    #     'region': {'lat':slice(50,75),'lon':slice(90,270)},
-    #     'extra_suffix': '_pac',
-    #     'yticks': np.arange(0,0.036,0.005)
-    # },
-    # 'rmse_params' : {
-    #     'region': {'lat':slice(50,75),'lon':slice(90,270)},
-    #     'extra_suffix': '_pac',
-    #     'yticks': np.arange(0.0,0.026,0.005)
-    # },
-}
-
-PARAMS_NH_JJA = {
-    'forecast_file' : '/home/disk/rhodium/nacc/forecasts/hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_100yearJanInit',
-    'forecast_time_range': slice('2087-01-01', '2116-12-31'),
-    'verification_file' : '/home/disk/rhodium/dlwp/data/era5/1deg/1979-2021_era5_1deg_3h_geopotential_500.nc',
-    'verification_time_range': slice('1987-01-01', '2016-12-31'),
-    'months':[6,7,8],
-    'hemisphere': 'north',
-    # 'freq_levels': np.arange(1, 15.1, 1),
-    'freq_levels': np.arange(0.0, 0.101, 0.01),
-    # 'freq_ticks': np.arange(1, 15.1, 2),
-    'freq_ticks': np.arange(0.0, 0.101, 0.01),
-    'freq_cmap': get_custom_cmap('plasma_r'),
-    'std_cmap': get_custom_cmap('Greens'),
-    'std_levels': np.arange(0, 0.101, .02),
-    'std_ticks': np.arange(0, 0.101, .02),
-    'plot_file_suffix': 'nh_jja', 
-    'output_dir' : '/home/disk/brume/nacc/WeeklyNotebooks/2024.05.13/FigureScripts/blocking_cache',
-    # ATLANTIC SECTOR
-    # 'spatial_correlation_params': {
-    #     'region': {'lat':slice(50,75),'lon':slice(-90,90)},
-    #     'extra_suffix': '_atl'
-    # },
-    # 'average_params' : {
-    #     'region': {'lat':slice(50,75),'lon':slice(-90,90)},
-    #     'extra_suffix': '_atl'
-    # },
-    # 'rmse_params' : {
-    #     'region': {'lat':slice(50,75),'lon':slice(-90,90)},
-    #     'extra_suffix': '_atl'
-    # },
-    # PACIFIC SECTOR
-    # 'spatial_correlation_params': {
-    #     'region': {'lat':slice(50,75),'lon':slice(90,270)},
-    #     'extra_suffix': '_pac',
-    #     'yticks': np.arange(.6,1.01,0.05)
-    # },
-    # 'average_params' : {
-    #     'region': {'lat':slice(50,75),'lon':slice(90,270)},
-    #     'extra_suffix': '_pac',
-    #     'yticks': np.arange(0,0.036,0.005)
-    # },
-    # 'rmse_params' : {
-    #     'region': {'lat':slice(50,75),'lon':slice(90,270)},
-    #     'extra_suffix': '_pac',
-    #     'yticks': np.arange(0.0,0.026,0.005)
-    # },
-}
-
-PARAMS_NH_SON = {
-    'forecast_file' : '/home/disk/rhodium/nacc/forecasts/hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_100yearJanInit',
-    'forecast_time_range': slice('2087-01-01', '2116-12-31'),
-    'verification_file' : '/home/disk/rhodium/dlwp/data/era5/1deg/1979-2021_era5_1deg_3h_geopotential_500.nc',
-    'verification_time_range': slice('1987-01-01', '2016-12-31'),
-    'months':[9,10,11],
-    'hemisphere': 'north',
-    # 'freq_levels': np.arange(1, 15.1, 1),
-    'freq_levels': np.arange(0.0, 0.101, 0.01),
-    # 'freq_ticks': np.arange(1, 15.1, 2),
-    'freq_ticks': np.arange(0.0, 0.101, 0.01),
-    'freq_cmap': get_custom_cmap('plasma_r'),
-    'std_cmap': get_custom_cmap('Greens'),
-    'std_levels': np.arange(0, 0.101, .02),
-    'std_ticks': np.arange(0, 0.101, .02),
-    'output_dir' : '/home/disk/brume/nacc/WeeklyNotebooks/2024.05.13/FigureScripts/blocking_cache',
-    'plot_file_suffix': 'nh_son',
-    # ATLANTIC SECTOR
-    # 'spatial_correlation_params': {
-    #     'region': {'lat':slice(50,75),'lon':slice(-90,90)},
-    #     'extra_suffix': '_atl'
-    # },
-    # 'average_params' : {
-    #     'region': {'lat':slice(50,75),'lon':slice(-90,90)},
-    #     'extra_suffix': '_atl'
-    # },
-    # 'rmse_params' : {
-    #     'region': {'lat':slice(50,75),'lon':slice(-90,90)},
-    #     'extra_suffix': '_atl'
-    # },
-    # PACIFIC SECTOR
-    # 'spatial_correlation_params': {
-    #     'region': {'lat':slice(50,75),'lon':slice(90,270)},
-    #     'extra_suffix': '_pac',
-    #     'yticks': np.arange(.6,1.01,0.05)
-    # },
-    # 'average_params' : {
-    #     'region': {'lat':slice(50,75),'lon':slice(90,270)},
-    #     'extra_suffix': '_pac',
-    #     'yticks': np.arange(0,0.036,0.005)
-    # },
-    # 'rmse_params' : {
-    #     'region': {'lat':slice(50,75),'lon':slice(90,270)},
-    #     'extra_suffix': '_pac',
-    #     'yticks': np.arange(0.0,0.026,0.005)
-    # },
-}
-
-#endregion
 
 #region ### SOURCE ###
 
@@ -588,13 +238,20 @@ def AGP_Blocking_Index(
    z500_north = z500.sel(lat=slice(lower_lat + del_lat, upper_lat + del_lat))
    z500_north["lat"] = z500_o["lat"]
    winds_pgf = z500_north - z500_o
-   winds_pgf = (winds_pgf / del_lat) < -10
+   winds_pgf = (winds_pgf / del_lat) < -10 * 9.81 # metric is defined in meters / lat, we convert here to geopotential / lat for compatibility with DLESyM native units
 
    # Find where both conditions are met
    blocking = grad_reversal & winds_pgf
 
    # 3. Must be True for at least 5 days
    blocking = (blocking.rolling(time=5).sum() == 5)
+
+   # rolling will not count first 4 days of blocking event. 
+   # to fix this we  back fill blocking so that points with 
+   # True are assigned True for the previous 4 points in time
+   blocking = blocking.where(blocking==True, np.nan)
+   blocking = blocking.bfill(dim="time", limit=4)
+   blocking = blocking.fillna(0)
 
    # If southern hemisphere, revert back to original latitudes
    if hemisphere == "south":
@@ -1258,28 +915,9 @@ def blocking_nam_sam(
 
 if __name__=="__main__":
 
-    # blocking_nam_sam(
-    #     verif_blocking = '/home/disk/brume/nacc/WeeklyNotebooks/2024.06.10/FigureScripts/blocking_cache/blocking_freq_nh_map-verif.nc',
-    #     dlesm_blocking = '/home/disk/brume/nacc/WeeklyNotebooks/2024.05.06/FigureScripts/blocking_cache/blocking_freq_nh_map_40yr.nc',
-    #     blocking_levels = np.arange(0.0, 0.101, 0.01),
-    #     blocking_colormap = get_custom_cmap('plasma_r'),
-    #     plot_file = '/home/disk/brume/nacc/WeeklyNotebooks/2024.08.05/FigureScripts/blocking_nam_sam.pdf',
-    # )
-
-    # blocking_frequency_cmip(**PARAMS_NH_CESM)
-    blocking_frequency_cmip(**PARAMS_NH_CESM_40yr)
-    # blocking_frequency_cmip(**PARAMS_NH_MPI)
-    # blocking_frequency_cmip(**PARAMS_NH_MPI_HR)
-    blocking_frequency_cmip(**PARAMS_NH_MPI_HR_40yr)
-    # blocking_frequency_cmip(**PARAMS_NH_gfdl)
-    blocking_frequency_cmip(**PARAMS_NH_gfdl_40yr)
-    # blocking_frequency_cmip(**PARAMS_NH_HadGEM)
-    blocking_frequency_cmip(**PARAMS_NH_HadGEM_40yr)
-    # blocking_frequency_cmip(**PARAMS_NH_IPSL)
-
-    # blocking_frequency(**PARAMS_NH)
     blocking_frequency(**PARAMS_NH_40yr)
-    # blocking_frequency(**PARAMS_NH_DJF)
-    # blocking_frequency(**PARAMS_NH_MAM)
-    # blocking_frequency(**PARAMS_NH_JJA)
-    # blocking_frequency(**PARAMS_NH_SON)
+    blocking_frequency_cmip(**PARAMS_NH_CESM_40yr)
+    blocking_frequency_cmip(**PARAMS_NH_MPI_HR_40yr)
+    blocking_frequency_cmip(**PARAMS_NH_gfdl_40yr)
+    blocking_frequency_cmip(**PARAMS_NH_HadGEM_40yr)
+
