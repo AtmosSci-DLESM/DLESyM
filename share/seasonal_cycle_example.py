@@ -1,4 +1,5 @@
 import numpy as np
+import pandas as pd
 from evaluation.seasonal_cycle import main as seasonal_cycle_main
 
 PARAMS_Z500_1in1out_24AR = {

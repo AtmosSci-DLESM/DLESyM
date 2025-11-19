@@ -163,5 +163,4 @@ def main(params):
 if __name__=="__main__":
  
     main(PARAMS_Z500_control)
-    main(PARAMS_Z500_1in1out_24AR)
 
