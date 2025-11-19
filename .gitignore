@@ -8,4 +8,5 @@ __pycache__/
 # egg-info
 dlesym.egg-info/
 
-# zeonodo repo downloads 
+# ignore scratch folder files
+scratch/
