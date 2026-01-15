@@ -69,9 +69,22 @@ def cal_tau_clim(pacific_tau):
     tau_clim: the climatological tau300-700 data over the West Pacific region
     """
     # calculate the climatological tau300-700 data over the West Pacific region
-    tau_clim = pacific_tau.mean(dim='latitude').mean(dim='longitude')\
-                        .groupby('time.dayofyear').mean(dim='time')
-    return tau_clim
+    # tau_clim = pacific_tau.mean(dim='latitude').mean(dim='longitude')\
+    #                     .groupby('time.dayofyear').mean(dim='time')
+    pacific_tau_m = pacific_tau.mean(dim='latitude').mean(dim='longitude')
+    ds = pd.DataFrame(pacific_tau_m)
+    ds['tau'] = pd.Series(pacific_tau_m)
+    ds['time'] = pd.to_datetime(pacific_tau_m.time)
+    # Extract the month and day from the 'time' column
+    ds['month'] = ds['time'].dt.month
+    ds['day'] = ds['time'].dt.day
+    ds['hour'] = ds['time'].dt.hour
+    # fake year, just for convenience when grouping the data
+    ds['year'] = 2000
+    ds['date'] = pd.to_datetime(ds[['year','month', 'day', 'hour']])
+    # tau.assign_coords(time=ds['date'])
+    tau_clim = ds.groupby('date').mean()
+    return tau_clim['tau']
 
 
 def find_TC_tracks(args, higher_res = 0.05):
@@ -120,7 +133,7 @@ def find_TC_tracks(args, higher_res = 0.05):
             outmap_tau = args.pacific_tau[itime, ...].to_numpy()
             ilocs = np.unravel_index(outmap.argmin(), outmap.shape) 
             # if the min(z1000) is less than the threshold, and the tau300-700 is larger than the climatological value, otherwise skip
-            if np.min(outmap) < threshold_z1000 and outmap_tau[ilocs]>args.tau_clim[itime%(366*args.day_interval)].values:
+            if np.min(outmap) < threshold_z1000 and outmap_tau[ilocs]>args.tau_clim[itime%(366*args.day_interval)]:
                 # interpolate the z1000 to higher resolution
                 rbs = RectBivariateSpline(args.pacific_z1000.latitude[::-1], args.pacific_z1000.longitude, outmap[::-1,:])
                 outmap_high = rbs(new_lat, new_lon)
@@ -309,17 +322,21 @@ def plot_tracks(track_lat_z1000, track_lon_z1000, region_box, output_file=None):
         fig.savefig(output_file, bbox_inches='tight', dpi=150)
     return []
 
-
-if __name__ == '__main__':
-
+def main(
+    input_dir,
+    z1000_file,
+    tau_file,
+    output_dir,
+):
+    
     args = SimpleNamespace()
     # path of the input/output files
     # hpx data: z1000 and tau300-700 (6h or daily data)
-    input_path = '/home/disk/rhodium/dlwp/data/hpx/1deg/'
-    output_path = './' # change to your output path
-    input_path = '/home/disk/rhodium/nacc/forecasts/hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart/'
-    hpx_z1000 = 'atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_100yearJanInit_z1000_ll.nc'; varname_z1000 = 'z1000'
-    hpx_tau = 'atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_100yearJanInit_tau300-700_ll.nc'; varname_tau = 'tau300-700'
+    # input_path = '/home/disk/rhodium/dlwp/data/hpx/1deg/'
+    output_path = output_dir # change to your output path
+    input_path = input_dir
+    hpx_z1000 = z1000_file; varname_z1000 = 'z1000'
+    hpx_tau = tau_file; varname_tau = 'tau300-700'
     # select the time period
     start_year = 2085; end_year = 2114
     args.start_time = np.datetime64('%d-01-01'%start_year)
@@ -331,10 +348,9 @@ if __name__ == '__main__':
     # land-sea mask. better to choose less than 0.25 degrees. 1: land, 0: sea
     args.lsm = xr.open_dataset('/home/disk/rhodium/dlwp/data/era5/0.25deg/1979-2021_era5_0.25deg_3h_land_sea_mask.nc')['lsm']
 
-
     # load hpx data
     args.pacific_z1000, args.day_interval = load_hpx(input_path+hpx_z1000, varname_z1000, args)
-    args.pacific_tau, _ = load_hpx(input_path+hpx_tau, varname_tau, args)
+    args.pacific_tau, _ = load_hpx(hpx_tau, varname_tau, args)
 
     # calculate the climatological tau300-700 data over the West Pacific region
     args.tau_clim = cal_tau_clim(args.pacific_tau)
@@ -358,3 +374,13 @@ if __name__ == '__main__':
     # plot the tracks of tropical cyclones
     output_tracks = 'TC_tracks_hpx_%4d_%4d.png'%(start_year, end_year)
     plot_tracks(track_lat_z1000, track_lon_z1000, args.region_box, output_file=output_path+output_tracks)
+
+if __name__ == '__main__':
+
+    main(
+        input_dir = '/home/disk/rhodium/nacc/forecasts/hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart/',
+        z1000_file = 'atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_100yearJanInit_z1000_ll.nc',
+        tau_file = '/home/disk/rhodium/bowenliu/remap/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_100yearJanInit_tau300-700_ll.nc',
+        output_dir = '/scratch',
+
+    )
