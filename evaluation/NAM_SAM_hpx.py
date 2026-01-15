@@ -153,10 +153,15 @@ def plot_regression_map(reg_hgt, expvar_ratio, region_box, output_file=None):
     return []
 
 
-if __name__ == "__main__":
+def main(
+        input_dir,
+        mode = "NAM",
+        output_dir='.',
+):
+
     args = SimpleNamespace()
 
-    Annular_mode = 'NAM' # 'NAM' or 'SAM' 
+    Annular_mode = mode
 
     if Annular_mode == 'NAM':
         variable = 'z1000'
@@ -165,10 +170,10 @@ if __name__ == "__main__":
         variable = 'z500'
         lon_min = 0; lon_max = 360; lat_min = -90; lat_max = -20
 
-    args.input_path = '/home/disk/rhodium/nacc/forecasts/hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart/'
+    args.input_path = input_dir
     args.hpx_hgt = f'atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_100yearJanInit_{variable}_ll.nc'; args.var_name = variable
     output_EOF = f'{Annular_mode}_{variable}_HPX.nc'
-    output_regression_map = f'{Annular_mode}_{variable}_HPX_regression_map.png'
+    output_regression_map = f'{output_dir}/{Annular_mode}_{variable}_HPX_regression_map.png'
     # select time period
     start_year = 2070; end_year = 2110
     args.start_time = np.datetime64('%d-01-01T00'%start_year)
@@ -187,3 +192,10 @@ if __name__ == "__main__":
     # plot regression map
     plot_regression_map(reg_hgt, expvar_ratio, args.region_box, output_regression_map)
 
+if __name__ == "__main__":
+
+    main(
+        input_dir = '/home/disk/rhodium/nacc/forecasts/hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart/',
+        mode = 'NAM',
+        output_dir = './scratch'
+    )
