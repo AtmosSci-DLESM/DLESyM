@@ -1,4 +1,5 @@
 import numpy as np
+import os
 import matplotlib.pyplot as plt
 import cartopy.crs as ccrs
 import xarray as xr
@@ -148,6 +149,7 @@ def plot_regression_map(reg_hgt, expvar_ratio, region_box, output_file=None):
     ax.text(0.95, 0.95, '%.1f%%' %(expvar_ratio*100), fontsize=11, 
                     ha='right', transform=ax.transAxes)
     if output_file is not None:
+        print(f'saving figure to {output_file}')
         plt.savefig(output_file, dpi=200, bbox_inches='tight')
     plt.show()
     return []
@@ -155,8 +157,9 @@ def plot_regression_map(reg_hgt, expvar_ratio, region_box, output_file=None):
 
 def main(
         input_dir,
+        output_cache,
+        output_plot_file,
         mode = "NAM",
-        output_dir='.',
 ):
 
     args = SimpleNamespace()
@@ -172,8 +175,11 @@ def main(
 
     args.input_path = input_dir
     args.hpx_hgt = f'atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_100yearJanInit_{variable}_ll.nc'; args.var_name = variable
-    output_EOF = f'{Annular_mode}_{variable}_HPX.nc'
-    output_regression_map = f'{output_dir}/{Annular_mode}_{variable}_HPX_regression_map.png'
+
+    # make directories for outputs 
+    os.makedirs(os.path.dirname(output_cache), exist_ok=True)
+    os.makedirs(os.path.dirname(output_plot_file), exist_ok=True)
+
     # select time period
     start_year = 2070; end_year = 2110
     args.start_time = np.datetime64('%d-01-01T00'%start_year)
@@ -187,10 +193,10 @@ def main(
     reg_hgt, scores, expvar_ratio = Annular_mode_EOF(weighted_polar_hgt, polar_hgt_anom, ds_weights)
     # save EOF results
     EOF_out = xr.Dataset({'reg_hgt': reg_hgt, 'scores': scores, 'expvar_ratio': expvar_ratio})
-    EOF_out.to_netcdf(output_EOF)
-    print("EOF results saved to: ", output_EOF)
+    EOF_out.to_netcdf(output_cache)
+    print("EOF results saved to: ", output_cache)
     # plot regression map
-    plot_regression_map(reg_hgt, expvar_ratio, args.region_box, output_regression_map)
+    plot_regression_map(reg_hgt, expvar_ratio, args.region_box, output_plot_file)
 
 if __name__ == "__main__":
 
