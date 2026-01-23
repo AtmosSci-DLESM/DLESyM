@@ -326,14 +326,13 @@ def main(
     input_dir,
     z1000_file,
     tau_file,
-    output_dir,
+    output_prefix,
 ):
     
     args = SimpleNamespace()
     # path of the input/output files
     # hpx data: z1000 and tau300-700 (6h or daily data)
     # input_path = '/home/disk/rhodium/dlwp/data/hpx/1deg/'
-    output_path = output_dir # change to your output path
     input_path = input_dir
     hpx_z1000 = z1000_file; varname_z1000 = 'z1000'
     hpx_tau = tau_file; varname_tau = 'tau300-700'
@@ -363,17 +362,17 @@ def main(
     TC_freq = cal_TC_freq(args.pacific_z1000, track_time_z1000)
 
     # save the tracks & frequency
-    output_tracks_file = 'TC_hpx_6h_%4d_%4d.npz'%(start_year, end_year)
-    np.savez(output_path+output_tracks_file, track_lat_z1000=track_lat_z1000, track_lon_z1000=track_lon_z1000,\
+    output_tracks_file = '_%4d_%4d.npz'%(start_year, end_year)
+    np.savez(output_prefix+output_tracks_file, track_lat_z1000=track_lat_z1000, track_lon_z1000=track_lon_z1000,\
                                                 track_time_z1000=track_time_z1000, TC_freq=TC_freq)
 
     # plot the frequency of tropical cyclones
-    output_freq = 'TC_freq_hpx.png'
-    plot_TC_freq(TC_freq, nyear, args.day_interval, output_file=output_path+output_freq)
+    output_freq = '_freq_hpx.png'
+    plot_TC_freq(TC_freq, nyear, args.day_interval, output_file=output_prefix+output_freq)
 
     # plot the tracks of tropical cyclones
-    output_tracks = 'TC_tracks_hpx_%4d_%4d.png'%(start_year, end_year)
-    plot_tracks(track_lat_z1000, track_lon_z1000, args.region_box, output_file=output_path+output_tracks)
+    output_tracks = 'tracks_%4d_%4d.png'%(start_year, end_year)
+    plot_tracks(track_lat_z1000, track_lon_z1000, args.region_box, output_file=output_prefix+output_tracks)
 
 if __name__ == '__main__':
 
@@ -381,5 +380,5 @@ if __name__ == '__main__':
         input_dir = '/home/disk/rhodium/nacc/forecasts/hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart/',
         z1000_file = 'atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_100yearJanInit_z1000_ll.nc',
         tau_file = '/home/disk/rhodium/bowenliu/remap/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_100yearJanInit_tau300-700_ll.nc',
-        output_dir = './scratch/',
+        output_prefix = './scratch/example',
     )
