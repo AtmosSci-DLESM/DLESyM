@@ -18,8 +18,7 @@ def load_hpx_hgt_data(args):
     select winter months (Nov-Apr) for northern hemisphere.
     select all months for southern hemisphere.
     Parameters:
-    args.input_path: path to the input data
-    args.hpx_hgt: name of the hpx data file
+    args.input_file: path to the input data
     args.var_name: variable name in the dataset
     args.start_time: start time for the data selection
     args.end_time: end time for the data selection
@@ -29,7 +28,7 @@ def load_hpx_hgt_data(args):
     polar_hgt_anom: geopotential anomalies
     ds_weights: weights for latitudes
     """
-    ds_var = xr.open_dataset(args.input_path+args.hpx_hgt)[args.var_name]
+    ds_var = xr.open_dataset(args.input_file)[args.var_name]
     ds_var = change_hpx_coords(ds_var)
 
     [lon_min, lon_max, lat_min, lat_max] = args.region_box
@@ -156,7 +155,7 @@ def plot_regression_map(reg_hgt, expvar_ratio, region_box, output_file=None):
 
 
 def main(
-        input_dir,
+        input_file,
         output_cache,
         output_plot_file,
         mode = "NAM",
@@ -168,13 +167,17 @@ def main(
 
     if Annular_mode == 'NAM':
         variable = 'z1000'
+        assert input_file.endswith('z1000_ll.nc'), f"Input file must end with 'z1000_ll.nc', but got {input_file}"
         lon_min = 0; lon_max = 360; lat_min = 20; lat_max = 90
     elif Annular_mode == 'SAM':
         variable = 'z500'
+        assert input_file.endswith('z500_ll.nc'), f"Input file must end with 'z500_ll.nc', but got {input_file}"
         lon_min = 0; lon_max = 360; lat_min = -90; lat_max = -20
 
-    args.input_path = input_dir
-    args.hpx_hgt = f'atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_100yearJanInit_{variable}_ll.nc'; args.var_name = variable
+    args.input_file = input_file
+    args.var_name = variable
+    
+    
 
     # make directories for outputs 
     os.makedirs(os.path.dirname(output_cache), exist_ok=True)
@@ -198,10 +201,4 @@ def main(
     # plot regression map
     plot_regression_map(reg_hgt, expvar_ratio, args.region_box, output_plot_file)
 
-if __name__ == "__main__":
 
-    main(
-        input_dir = '/home/disk/rhodium/nacc/forecasts/hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart/',
-        mode = 'NAM',
-        output_dir = './scratch'
-    )
