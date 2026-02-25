@@ -7,3 +7,6 @@ __pycache__/
 
 # egg-info
 dlesym.egg-info/
+
+# forcing data from Ai2
+aimip/forcing_data/*
