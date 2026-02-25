@@ -16,19 +16,17 @@ DLESyM is a coupled atmosphere–ocean deep learning model for efficient simulat
 
 | File | Description |
 |------|-------------|
-| `retrieve_forecing.sh` | Script to download required forcing and initialization data |
-| `run_aimip_forecast.sh` | Main script to run the AIMIP-prescribed experiment(s) |
-| `config/` | Experiment configuration overrides for the intercomparison protocol |
-| *(model checkpoints)* | Symlinks or paths to `../models/dlwp` and `../models/dlom` |
+| `retrieve_forecing.sh` | Script to download required standard forcing data from Zenodo|
 
 ---
 
-## Protocol
+## Process
 
 1. **Retrieve Forcing Data**: get standard forcing data using: 
 
       `python retrieve_zenodo.py`
 
-2. process data
+2. **Prepare Forcing data**: prepare forcing data for ingestion into DLESyM atmosphere component: 
+      `python preprocess_forcing.py`
 
 3. run experiments
