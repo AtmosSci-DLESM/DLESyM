@@ -92,6 +92,34 @@ def resample_monthly_zarr_to_daily(
         write_job.compute()
     logger.info("Finished writing daily-resampled forcing dataset.")
 
+def increase_sst_uniform(
+    input_zarr: str,
+    output_zarr: str,
+    delta_K: float,
+    overwrite: bool = False,
+) -> None:
+    """
+    Increase the SST field uniformly by ``delta_K``.
+    """
+    if os.path.exists(output_zarr) and not overwrite:
+        logger.info(f"Output {output_zarr} already exists and overwrite=False. Skipping.")
+        return
+    logger.info(f"Increasing SST field uniformly by {delta_K} K")
+    ds = xr.open_zarr(input_zarr)
+    
+    # Increment sst channel in both input and targets (xr.where preserves dask laziness for chunked writes)
+    inputs = ds["inputs"]
+    targets = ds["targets"]
+    inputs = inputs + xr.where(inputs.channel_in == "sst", delta_K, 0)
+    targets = targets + xr.where(targets.channel_out == "sst", delta_K, 0)
+    ds = ds.assign(inputs=inputs)
+    ds = ds.assign(targets=targets)
+
+    logger.info(f"Writing increased SST field to {output_zarr}")
+    with ProgressBar():
+        ds.to_zarr(output_zarr)
+        logger.info(f"Finished writing increased SST field to {output_zarr}")
+    return
 # basic reformatting
 reformat_params = {
     "filename": '/home/disk/mercury2/nacc/AIMIP2026/DLESyM/aimip/forcing_data/ERA5-0.25deg-monthly-mean-forcing-1978-2024.nc',
@@ -155,6 +183,19 @@ resample_params = {
     "time_chunk": 128,
 }
 
+# params for increasing SST field uniformly
+increase_sst_uniform_params_2k = {
+    "input_zarr": "/home/disk/mercury2/nacc/AIMIP2026/DLESyM/aimip/forcing_data/AIMIP_1978-2024_daily_HPX64.zarr",
+    "output_zarr": "/home/disk/mercury2/nacc/AIMIP2026/DLESyM/aimip/forcing_data/AIMIP_1978-2024_daily_HPX64_2k.zarr",
+    "delta_K": 2.0,
+}
+# params for increasing SST by 4k
+increase_sst_uniform_params_4k = {
+    "input_zarr": "/home/disk/mercury2/nacc/AIMIP2026/DLESyM/aimip/forcing_data/AIMIP_1978-2024_daily_HPX64.zarr",
+    "output_zarr": "/home/disk/mercury2/nacc/AIMIP2026/DLESyM/aimip/forcing_data/AIMIP_1978-2024_daily_HPX64_4k.zarr",
+    "delta_K": 4.0,
+}
+
 if __name__ == "__main__":
     logger.info("Starting AIMIP forcing data preprocessing...")
     logger.info("Reformatting AIMIP forcing data...")
@@ -168,3 +209,7 @@ if __name__ == "__main__":
     write_zarr.create_prebuilt_zarr(**zarr_params)
     logger.info("Resampling zarr dataset to daily resolution...")
     resample_monthly_zarr_to_daily(**resample_params)
+
+    # create incremented experiment forcing files
+    increase_sst_uniform(**increase_sst_uniform_params_2k)
+    increase_sst_uniform(**increase_sst_uniform_params_4k)
