@@ -10,13 +10,40 @@ DLESyM is a coupled atmosphere–ocean deep learning model for efficient simulat
 - **DLWP** (atmosphere): HEALPix-based U-Net for atmospheric state prediction
 - **DLOM-gt** (ocean): A "ground-truth" model that coupled to DLWP but provides output prescribed by a forcing dataset. In this case, a processed version of the [standard SST forcing dataset published by Ai2](https://zenodo.org/records/17065758). 
 
+**Forcing Data:**
+
+Forcing data was retrived from Ai2-curated [Zenodo store](https://zenodo.org/records/17065758). For compatibility with our coupling scheme onthly data was resampled to daily using linear interpolation. 
+
+**Submission Overview:**
+
+Output from the following experiments are provided: `aimip`, `aimip-p2k`, and `aimip-p4k`. Five realizations were provided for each experiment resulting in 15 total simulations. 
+
+Realizations were created using lagged initialization. Due to a limited data range in DLESyM's satellite derived outgoing longwave radiation data, simulations were started in 1984.
+| Realization | Initialization |
+|------|-------------|
+| `r1` | 10/01/1983 |
+| `r2` | 10/02/1983 |
+| `r3` | 10/03/1983 |
+| `r4` | 10/04/1983 |
+| `r5` | 10/05/1983 |
+
+Initial submission will include key variables surface temperature (`tas`), temperature at 850hPa (`ta`), and geopotential height (`zg`). 
+
+
 ---
 
 ## Directory Contents
 
 | File | Description |
 |------|-------------|
-| `retrieve_forecing.sh` | Script to download required standard forcing data from Zenodo|
+| `retrieve_zenodo.sh` | Script to download required standard forcing data from Zenodo|
+| `preprocess_forcing.py` | process standardized forcing into a format compatible with DLESyM coupling scheme|
+|`forcedforecast_1983-2025_5member.sh`| batch script for running AIMIP basic simulations|
+|`forcedforecast_1983-2025_p2k.sh`| batch script for running AIMIP p2k simulations|
+|`forcedforecast_1983-2025_p4k.sh`| batch script for running AIMIP p4k simulations|
+|`cmortize_dlesym.py`| Routine for reformatting DLESyM output into CMIP-style output | 
+|`aimip_validator.py`| class for checking output format |
+|`test_submission.py`| test suite which invokes `cf-checker` and other basic validations of submission format| 
 
 ---
 
@@ -29,4 +56,16 @@ DLESyM is a coupled atmosphere–ocean deep learning model for efficient simulat
 2. **Prepare Forcing data**: prepare forcing data for ingestion into DLESyM atmosphere component: 
       `python preprocess_forcing.py`
 
-3. run experiments
+3. **Run Experiments**: run requested experiments from AIMIP phase-1 call: 
+      `bash forced_forecast_1983-2025_5member.sh`
+      `bash forced_forecast_1983-2025_p2k.sh`      
+      `bash forced_forecast_1983-2025_p4k.sh`
+
+4. **"Cmortize" Output: enforce CMIP-style output: 
+      `python cmortize_dlesym.py`
+
+...and check that output satisfies expected structure
+      `python test_submission.py`
+
+Once tests are passed, we're ready to submit!
+
