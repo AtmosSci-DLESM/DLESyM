@@ -8,6 +8,54 @@ from dask.diagnostics import ProgressBar
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+def _set_metadata_coordinates(ds, variable, units, long_name, surface=False):
+    # This function assumes 'ds' is the xarray.Dataset being prepared for save
+    
+    # 1. GLOBAL ATTRIBUTES (must be on the Dataset)
+    ds.attrs['Conventions'] = 'CF-1.8'
+    ds.attrs['source_id'] = 'DLESyM'
+    ds.attrs['institution_id'] = 'University of Washington'
+    ds.attrs['time_units'] = 'days since 1850-01-01 00:00:00'
+    ds.attrs['time_calendar'] = 'gregorian'
+
+    # 1.5.set attributes for data variables
+    ds[variable].attrs['standard_name'] = long_name
+    ds[variable].attrs['long_name'] = long_name
+    ds[variable].attrs['units'] = units
+    ds[variable].attrs['time_units'] = 'days since 1850-01-01 00:00:00'
+    ds[variable].attrs['time_calendar'] = 'gregorian'
+
+    # Ensure Conventions isn't accidentally duplicated on the variable
+    if 'Conventions' in ds[list(ds.data_vars)[0]].attrs:
+        del ds[list(ds.data_vars)[0]].attrs['Conventions']
+
+    # 2. COORDINATE ATTRIBUTES
+    # Use .assign_attrs to be safe
+    ds.time.attrs.update({
+        'standard_name': 'time',
+        'long_name': 'time',
+        'units': 'days since 1850-01-01 00:00:00',
+        'calendar': 'gregorian',
+        'axis': 'T'
+    })
+
+    if not surface:
+        ds.plev.attrs.update({
+            'standard_name': 'air_pressure',
+            'long_name': 'pressure',
+            'units': 'Pa',
+            'positive': 'down',
+            'axis': 'Z'
+        })
+
+    # 3. NATIVE GRID
+    # The checker wants 'units' even for indices; '1' is the CF way to say 'dimensionless'
+    ds.face.attrs.update({'long_name': 'tile index', 'units': '1'})
+    ds.height.attrs.update({'long_name': 'grid row index', 'units': '1'})
+    ds.width.attrs.update({'long_name': 'grid column index', 'units': '1'})
+    
+    return ds
+
 def _valid_times_to_cf_numeric(valid_times):
     """Convert valid-time array to CF-compliant numeric values (Optimized)."""
     
@@ -28,7 +76,7 @@ def _valid_times_to_cf_numeric(valid_times):
 
     return numeric_times
 
-def save_daily_average(ds, output_dir, experiment, r, variable, surface=False):
+def save_daily_average(ds, output_dir, experiment, r, variable, units, long_name, surface=False):
     # recursively make directory structure for output
     path = os.path.join(output_dir, 'university_of_washington', 'DLESyM', experiment, f'r{r}i1p1f1', 'day', variable, 'gn', 'v20250825')
     os.makedirs(path, exist_ok=True)
@@ -52,8 +100,8 @@ def save_daily_average(ds, output_dir, experiment, r, variable, surface=False):
             'width': {'dtype': 'int32'},
         }
 
-    TIME_UNITS = ds.attrs['time_units']
-    TIME_CALENDAR = ds.attrs['time_calendar']
+    TIME_UNITS = 'days since 1850-01-01 00:00:00'
+    TIME_CALENDAR = 'gregorian'
     # Resample to daily mean with labels at middle of day (12:00)
     times_cf = cftime.num2date(ds.time.values, units=TIME_UNITS, calendar=TIME_CALENDAR)
     ds = ds.assign_coords(time=times_cf)
@@ -69,22 +117,24 @@ def save_daily_average(ds, output_dir, experiment, r, variable, surface=False):
     end_dt = cftime.num2date(float(ds.time.values[-1]), units=TIME_UNITS, calendar=TIME_CALENDAR)
     start_time = f"{start_dt.year:04d}{start_dt.month:02d}{start_dt.day:02d}"
     end_time = f"{end_dt.year:04d}{end_dt.month:02d}{end_dt.day:02d}"
+    # RE-APPLY attributes because assign_coords/resample often drops them
+    ds = _set_metadata_coordinates(ds, variable=variable, units=units, long_name=long_name, surface=surface)
     # filename: {variable}_{frequency}_{model_name}_{experiment}_{ensemble_member}_{grid}_{start_time}-{end_time}.nc
     file_name = f'{variable}_day_DLESyM_{experiment}_r{r}i1p1f1_gn_{start_time}-{end_time}.nc'
     logger.info(f"Saving daily average to {os.path.join(path, file_name)}")
     with ProgressBar():
         ds.to_netcdf(os.path.join(path, file_name), encoding=encoding)
     logger.info(f"Saved daily average to {os.path.join(path, file_name)}")
-
-def save_monthly_average(ds, output_dir, experiment, r, variable, surface=False):
+    
+def save_monthly_average(ds, output_dir, experiment, r, variable, units, long_name, surface=False):
 
     # recursively make directory structure for output
     path = os.path.join(output_dir, 'university_of_washington', 'DLESyM', experiment, f'r{r}i1p1f1', 'Amon', variable, 'gn', 'v20250825')
     os.makedirs(path, exist_ok=True)
 
     # Resample to monthly mean with labels at middle of month (16th)
-    TIME_UNITS = ds.attrs['time_units']
-    TIME_CALENDAR = ds.attrs['time_calendar']
+    TIME_UNITS = 'days since 1850-01-01 00:00:00'
+    TIME_CALENDAR = 'gregorian'
     times_cf = cftime.num2date(ds.time.values, units=TIME_UNITS, calendar=TIME_CALENDAR)
     ds = ds.assign_coords(time=times_cf)
     ds = ds.resample(time='1MS').mean()
@@ -117,6 +167,12 @@ def save_monthly_average(ds, output_dir, experiment, r, variable, surface=False)
             'height': {'dtype': 'int32'},
             'width': {'dtype': 'int32'},
         }
+    # RE-APPLY attributes because assign_coords/resample often drops them
+    ds = _set_metadata_coordinates(ds, variable=variable, units=units, long_name=long_name, surface=surface)
+    
+    # Set standard_name for the main variable
+    std_names = {'zg': 'geopotential_height', 'ta': 'air_temperature', 'tas': 'surface_temperature'}
+    ds[variable].attrs['standard_name'] = std_names.get(variable, variable)
 
     # filename: {variable}_{frequency}_{model_name}_{experiment}_{ensemble_member}_{grid}_{start_time}-{end_time}.nc
     file_name = f'{variable}_Amon_DLESyM_{experiment}_r{r}i1p1f1_gn_{start_time}-{end_time}.nc'
@@ -163,17 +219,12 @@ def cmortize_geopotential_height(forecast_file, output_dir, r, experiment):
     zg_da.coords['face'] = zg_da.coords['face'].astype(np.int32)
     zg_da.coords['height'] = zg_da.coords['height'].astype(np.int32)
     zg_da.coords['width'] = zg_da.coords['width'].astype(np.int32)
-    zg_da.attrs = {
-        'long_name': 'geopotential_height',
-        'units': 'm',
-        'time_units': 'days since 1850-01-01 00:00:00',
-        'time_calendar': 'gregorian',
-    }   
-    # units for pressure levels
-    zg_da.coords['plev'].attrs['units'] = 'Pa'
 
-    save_monthly_average(zg_da, output_dir, experiment, r, 'zg')
-    save_daily_average(zg_da, output_dir, experiment, r, 'zg')
+    # make dataset
+    zg_ds = zg_da.to_dataset(name='zg')
+    # save jobs
+    save_monthly_average(zg_ds, output_dir, experiment, r, 'zg', units='m', long_name='geopotential_height')
+    save_daily_average(zg_ds, output_dir, experiment, r, 'zg', units='m', long_name='geopotential_height')
 
 def cmortize_temperature(forecast_file, output_dir, r, experiment):
     """
@@ -207,17 +258,12 @@ def cmortize_temperature(forecast_file, output_dir, r, experiment):
     ta_da.coords['face'] = ta_da.coords['face'].astype(np.int32)
     ta_da.coords['height'] = ta_da.coords['height'].astype(np.int32)
     ta_da.coords['width'] = ta_da.coords['width'].astype(np.int32)
-    ta_da.attrs = {
-        'long_name': 'air_temperature',
-        'units': 'K',
-        'time_units': 'days since 1850-01-01 00:00:00',
-        'time_calendar': 'gregorian',
-    }
-    # units for pressure levels
-    ta_da.coords['plev'].attrs['units'] = 'Pa'
 
-    save_monthly_average(ta_da, output_dir, experiment, r, 'ta')
-    save_daily_average(ta_da, output_dir, experiment, r, 'ta')
+    # make dataset
+    ta_ds = ta_da.to_dataset(name='ta')
+    # save jobs
+    save_monthly_average(ta_ds, output_dir, experiment, r, 'ta', units='K', long_name='air_temperature')
+    save_daily_average(ta_ds, output_dir, experiment, r, 'ta', units='K', long_name='air_temperature')
 
 def cmortize_surface_temperature(forecast_file, output_dir, r, experiment):
     """
@@ -248,14 +294,12 @@ def cmortize_surface_temperature(forecast_file, output_dir, r, experiment):
     tas_da.coords['face'] = tas_da.coords['face'].astype(np.int32)
     tas_da.coords['height'] = tas_da.coords['height'].astype(np.int32)
     tas_da.coords['width'] = tas_da.coords['width'].astype(np.int32)
-    tas_da.attrs = {
-        'long_name': 'surface_temperature',
-        'units': 'K',
-        'time_units': 'days since 1850-01-01 00:00:00',
-        'time_calendar': 'gregorian',
-    }
-    save_monthly_average(tas_da, output_dir, experiment, r, 'tas', surface=True)
-    save_daily_average(tas_da, output_dir, experiment, r, 'tas', surface=True)
+
+    # make dataset
+    tas_ds = tas_da.to_dataset(name='tas')
+    # save jobs
+    save_monthly_average(tas_ds, output_dir, experiment, r, 'tas', units='K', long_name='surface_temperature', surface=True)
+    save_daily_average(tas_ds, output_dir, experiment, r, 'tas', units='K', long_name='surface_temperature', surface=True)
 
 def cmortize_dlesym(forecast_file, output_dir, r, experiment):
     """
