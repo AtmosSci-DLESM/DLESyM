@@ -1,10 +1,8 @@
 # DLESyM — AIMIP
 
-This directory contains the files and configuration necessary to run **DLESyM** (Deep Learning Earth System Model) as a submission to the [AIMIP 2026] model intercomparison project.
+This directory contains the files and configuration necessary to run **DLESyM** (Deep Learning Earth System Model) as a submission to the [AIMIP 2026](https://github.com/ai2cm/AIMIP) model intercomparison project.
 
-## Model Overview
-
-DLESyM is a coupled atmosphere–ocean deep learning model for efficient simulation of the observed climate. This submission uses the architecture and checkpoints described in [Cresswell-Clay et al. 2025](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2025AV001706).
+DLESyM is a coupled atmosphere–ocean deep learning model for efficient simulation of the observed climate. This submission used the architecture and checkpoints described in [Cresswell-Clay et al. 2025](https://agupubs.onlinelibrary.wiley.com/doi/10.1029/2025AV001706).
 
 **Model components:**
 - **DLWP** (atmosphere): HEALPix-based U-Net for atmospheric state prediction
@@ -16,9 +14,10 @@ Forcing data was retrived from Ai2-curated [Zenodo store](https://zenodo.org/rec
 
 **Submission Overview:**
 
-Output from the following experiments are provided: `aimip`, `aimip-p2k`, and `aimip-p4k`. Five realizations were provided for each experiment resulting in 15 total simulations. 
+Output from the following experiments are provided: `aimip`, `aimip-p2k`, and `aimip-p4k`. Initial submission will include key variables surface temperature (`tas`), temperature (`ta`) at 850hPa, and geopotential height (`zg`) at 1000, 500, and 250hPa. Monthly averages for the full historical period, and daily averages for the first 15 months are included. 
 
-Realizations were created using lagged initialization. Due to a limited data range in DLESyM's satellite derived outgoing longwave radiation data, simulations were started in 1984.
+Five realizations were provided for each experiment resulting in 15 total simulations. Realizations were created using lagged initialization. Due to a limited data range in DLESyM's satellite derived outgoing longwave radiation data, simulations were started in 1983.
+
 | Realization | Initialization |
 |------|-------------|
 | `r1` | 10/01/1983 |
@@ -26,10 +25,6 @@ Realizations were created using lagged initialization. Due to a limited data ran
 | `r3` | 10/03/1983 |
 | `r4` | 10/04/1983 |
 | `r5` | 10/05/1983 |
-
-Initial submission will include key variables surface temperature (`tas`), temperature at 850hPa (`ta`), and geopotential height (`zg`). 
-
-
 ---
 
 ## Directory Contents
@@ -65,7 +60,7 @@ Initial submission will include key variables surface temperature (`tas`), tempe
       `python cmortize_dlesym.py`
 
 ...and check that output satisfies expected structure
-      `python test_submission.py`
+      `pytest test_submission.py -v`
 
 Once tests are passed, we're ready to submit!
 
