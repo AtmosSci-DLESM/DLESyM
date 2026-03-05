@@ -7,3 +7,9 @@
 # ignore /home/disk/quicksilver2/zespinos/DLESyM/evaluation/enso_figure10/data
 evaluation/enso_figure10/data/
 
+# Ignore Python cache files
+*.pyc
+__pycache__/
+
+# egg-info
+dlesym.egg-info/

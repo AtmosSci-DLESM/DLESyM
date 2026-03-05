@@ -29,7 +29,11 @@ def main(
         output_file: str,
         cache_dir: str,
         overwrite_cache: bool = False,
+        ylim=(-0.45, 0.45),
+        yticks=np.arange(-0.4, 0.5, 0.2),
+        scale_factor: float = 1.0,
         var='t2m0',
+        unit: str = 'K',
         var_name=r"T$_{2m}$"
 ):
 
@@ -110,37 +114,37 @@ def main(
 
     # KDE plot on the left
     ax_kde = fig.add_subplot(gs[0])
-    sns.kdeplot(era5_vals, ax=ax_kde, color='black', vertical=True)
-    sns.kdeplot(dlesym_vals, ax=ax_kde, color='red', vertical=True)
-    sns.kdeplot(dlesym_forced_vals, ax=ax_kde, color='red',linestyle='dashed', vertical=True)
+    sns.kdeplot(y=era5_vals * scale_factor, ax=ax_kde, color='black')
+    sns.kdeplot(y=dlesym_vals * scale_factor, ax=ax_kde, color='red')
+    sns.kdeplot(y=dlesym_forced_vals * scale_factor, ax=ax_kde, color='red',linestyle='dashed')
 
     ax_kde.set_xlabel('Density')
     ax_kde.set_ylabel('')  # Let main plot handle y-label
     ax_kde.set_xticks([])
     # ax_kde.tick_params(left=False,right=True)
-    ax_kde.set_yticks(np.arange(-.4, .5, .2))
+    ax_kde.set_yticks(yticks)
     ax_kde.yaxis.set_ticks_position('left')
     ax_kde.yaxis.set_label_position('left')
-    ax_kde.set_ylabel(var_name + ' Anomaly (K)', fontsize=14)
+    ax_kde.set_ylabel(var_name + f' Anomaly ({unit})', fontsize=14)
     ax_kde.invert_xaxis()  # Put it on the left
 
     # Time series plot on the right
     ax_ts = fig.add_subplot(gs[1], sharey=ax_kde)
     ax_ts.set_xticks(pd.date_range('1984-01-01', '2116-12-31', freq='20Y'))
     ax_ts.set_xlim(pd.Timestamp('1984-01-01'), pd.Timestamp('2116-12-31'))
-    ax_ts.set_ylim(-.45, .45)
+    ax_ts.set_ylim(ylim)
     ax_ts.yaxis.set_ticks_position('right')
     ax_ts.yaxis.set_label_position('right')
-    ax_ts.set_ylabel(var_name + ' Anomaly (K)', fontsize=14)
+    ax_ts.set_ylabel(var_name + f' Anomaly ({unit})', fontsize=14)
     ax_ts.set_xlabel('Year', fontsize=14)
     ax_ts.axhline(0, color='grey', linewidth=1.5)
     ax_ts.set_xticks(pd.date_range('1985-01-01', '2116-12-31', freq='20Y'))
     ax_ts.set_xticklabels(pd.date_range('1985-01-01', '2116-12-31', freq='20Y').strftime('%Y'))
 
     # Plot the time series
-    ax_ts.plot(reference_t['time'], _detrend_no_annual(reference_t), label='ERA5', color='black', linewidth=1)
-    ax_ts.plot(forecast_t['time'], _detrend_no_annual(forecast_t), label='DL$ESy$M', color='red', linewidth=1)
-    ax_ts.plot(forced_forecast_t['time'], _detrend_no_annual(forced_forecast_t), label='DL$ESy$M forced-SST', color='red', linestyle='dashed', linewidth=1)
+    ax_ts.plot(reference_t['time'], _detrend_no_annual(reference_t) * scale_factor, label='ERA5', color='black', linewidth=1)
+    ax_ts.plot(forecast_t['time'], _detrend_no_annual(forecast_t) * scale_factor, label='DL$ESy$M', color='red', linewidth=1)
+    ax_ts.plot(forced_forecast_t['time'], _detrend_no_annual(forced_forecast_t) * scale_factor, label='DL$ESy$M forced-SST', color='red', linestyle='dashed', linewidth=1)
 
     # Legend and save
     fig.legend(loc=(.54, .12), fontsize=12, ncol=3)
@@ -156,29 +160,26 @@ def main(
     )
     print(f"Correlation between forced forecast and reference: {corr_ref_forced:.2f} (p-value: {pval:.2e})")
 
-
-
-
-
 if __name__ == "__main__":
     
     # t2m
-    var_name = r"T$_{2m}$"
     main(
-        forecast_file='/home/disk/rhodium/nacc/forecasts/hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_100yearJanInit.nc',
-        forced_forecast_file='/home/disk/rhodium/nacc/forecasts/testing_dlesym/forced_atmos_dlesym_1983-2017.nc',
-        reference_file='/home/disk/rhodium/dlwp/data/HPX64/hpx64_1983-2017_3h_9varCoupledAtmos-sst.zarr',
+        forecast_file='data/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_100yearJanInit.nc',
+        forced_forecast_file='data/forced_atmos_dlesym_1983-2017.nc',
+        reference_file='data/hpx64_1983-2017_3h_9varCoupledAtmos-sst.zarr',
         output_file='global_temperature_variability',
-        cache_dir='/home/disk/brume/nacc/DLESyM/evaluation/cache',
+        cache_dir='data/analysis_cache/forced_vs_coupled_climo_var',
         overwrite_cache=False,
+        var='t2m0',
+        var_name = r"T$_{2m}$",
     )
     # t850 
     main(
-        forecast_file='/home/disk/rhodium/nacc/forecasts/hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_100yearJanInit.nc',
-        forced_forecast_file='/home/disk/rhodium/nacc/forecasts/testing_dlesym/forced_atmos_dlesym_1983-2017.nc',
-        reference_file='/home/disk/rhodium/dlwp/data/HPX64/hpx64_1983-2017_3h_9varCoupledAtmos-sst.zarr',
+        forecast_file='data/atmos_hpx64_coupled-dlwp-olr_seed0+hpx64_coupled-dlom-olr_unet_dil-112_double_restart_100yearJanInit.nc',
+        forced_forecast_file='data/forced_atmos_dlesym_1983-2017.nc',
+        reference_file='data/hpx64_1983-2017_3h_9varCoupledAtmos-sst.zarr',
         output_file='global_t850_variability',
-        cache_dir='/home/disk/brume/nacc/DLESyM/evaluation/cache',
+        cache_dir='data/analysis_cache/forced_vs_coupled_climo_var',
         overwrite_cache=False,
         var='t850',
         var_name = r"T$_{850}$",
