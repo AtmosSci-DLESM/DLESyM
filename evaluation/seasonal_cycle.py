@@ -144,6 +144,9 @@ def main(params):
     )
 
     print('making seasonal cycle...')
+    # create output directory if it doesn't exist
+    if not os.path.exists(os.path.dirname(params['savefig_params']['fname'])):
+        os.makedirs(os.path.dirname(params['savefig_params']['fname']), exist_ok=True)
     plot_cycle(da=fcst_ll,
                rolling_params=params['rolling_params'],
                scale_factor=params['scale_factor'],

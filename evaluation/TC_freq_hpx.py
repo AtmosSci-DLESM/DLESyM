@@ -1,5 +1,6 @@
 import numpy as np
 import datetime
+from tqdm import tqdm
 import xarray as xr
 import pandas as pd
 import sys
@@ -29,8 +30,9 @@ def load_hpx(input_file, varname, args):
     day_interval: steps per day (int). if step=6h, day_interval=4.
     """
     ds_z1000 = xr.open_dataset(input_file) # 6h or daily data
+    print(ds_z1000)
     ds_z1000 = change_hpx_coords(ds_z1000)
-
+    print(ds_z1000)
     time = ds_z1000.time
     day_interval = (np.timedelta64(1,'D') / (time[1] - time[0]).astype('timedelta64[h]')).astype(int).values # 6h interval, 4 steps per day
     ds_z1000 = ds_z1000.sel(time = slice(args.start_time, args.end_time))[varname].squeeze() # last 30 years
@@ -120,7 +122,8 @@ def find_TC_tracks(args, higher_res = 0.05):
     track_lat_z1000={}
     track_time_z1000={}  # time index of the min(z1000)
 
-    for ith in range(len(z1000_th)): # loop over the rank
+    print('starting to find tracks')
+    for ith in tqdm(range(len(z1000_th))): # loop over the rank
         threshold_z1000 = z1000_th[ith]
         # the location and time index of the min(z1000) for each rank
         track_lon = {}  
@@ -128,7 +131,7 @@ def find_TC_tracks(args, higher_res = 0.05):
         track_time = {}
         count = 1
         previous_track_indices = []
-        for itime in range(int(start_time_index), int(end_time_index) + 1):
+        for itime in tqdm(range(int(start_time_index), int(end_time_index) + 1)):
             outmap = args.pacific_z1000[itime, ...].to_numpy()
             outmap_tau = args.pacific_tau[itime, ...].to_numpy()
             ilocs = np.unravel_index(outmap.argmin(), outmap.shape) 
@@ -349,7 +352,7 @@ def main(
 
     # load hpx data
     args.pacific_z1000, args.day_interval = load_hpx(input_path+hpx_z1000, varname_z1000, args)
-    args.pacific_tau, _ = load_hpx(hpx_tau, varname_tau, args)
+    args.pacific_tau, _ = load_hpx(input_path+hpx_tau, varname_tau, args)
 
     # calculate the climatological tau300-700 data over the West Pacific region
     args.tau_clim = cal_tau_clim(args.pacific_tau)
