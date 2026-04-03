@@ -11,17 +11,22 @@ DEVICE_NUMBERS="2"
 ################ Forecast Params ################
 
 # Destination directory for forecast files
-OUTPUT_DIR="/home/disk/mercury2/nacc/forecasts/aimip"
+# OUTPUT_DIR="/home/disk/mercury2/nacc/forecasts/aimip"
+OUTPUT_DIR="/home/disk/mercury3/nacc/forecasts/aimip"
 # Output logs sent here
 OUTPUT_FILE="${OUTPUT_DIR}/forced_forecasts_1978-2025_2k.out"
 # Path to models 
 ATMOS_MODEL="${MODULE_DIR}/models/dlwp"
 OCEAN_MODEL="${MODULE_DIR}/models/ocean-forcing-model_2k"
 # Sufffixes for output filnames. We're forecasting for each month, so we have 12 suffixes. 
-ATMOS_OUTPUT_FILENAME_SUFFIXES=("01" "02" "03" "04" "05")
-OCEAN_OUTPUT_FILENAME_SUFFIXES=("01" "02" "03" "04" "05")
-INIT_STARTS=("1978-10-03" "1978-10-04" "1978-10-05" "1978-10-06" "1978-10-07")
-INIT_ENDS=("1978-10-03" "1978-10-04" "1978-10-05" "1978-10-06" "1978-10-07")
+# ATMOS_OUTPUT_FILENAME_SUFFIXES=("01" "02" "03" "04" "05")
+# OCEAN_OUTPUT_FILENAME_SUFFIXES=("01" "02" "03" "04" "05")
+ATMOS_OUTPUT_FILENAME_SUFFIXES=("05")
+OCEAN_OUTPUT_FILENAME_SUFFIXES=("05")
+# INIT_STARTS=("1978-10-03" "1978-10-04" "1978-10-05" "1978-10-06" "1978-10-07")
+# INIT_ENDS=("1978-10-03" "1978-10-04" "1978-10-05" "1978-10-06" "1978-10-07")
+INIT_STARTS=("1978-10-07")
+INIT_ENDS=("1978-10-07")
 # Path to directory with atmos initialization data.
 ATMOS_DATA_DIR="/home/disk/mercury2/nacc/AIMIP2026/init_data"
 ATMOS_DATASET_NAME="aimip_1978-init"
@@ -29,9 +34,9 @@ ATMOS_DATASET_NAME="aimip_1978-init"
 # forced ocean model. Output is always taken from forcing dataset
 OCEAN_DATA_DIR="/home/disk/mercury2/nacc/AIMIP2026/init_data"
 OCEAN_DATASET_NAME="aimip_1978-init_ocean"
-# 1983-2025 in hours, using same lead time for each of the 5 inits.
-# all end between 12-19-2024 and 12-29-2024
-LEAD_TIME="414144"
+# 1978-2025 in hours, using same lead time for each of the 5 inits.
+# all end between 12-19-2024 and 12-28-2024
+LEAD_TIME="405312"
 
 # Parameters for resolving intialization dates
 FREQ="D"
@@ -94,3 +99,4 @@ do
         ${RUN_CMD}
     fi
 done
+

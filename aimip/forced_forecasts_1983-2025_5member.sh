@@ -6,7 +6,7 @@
 # Path to DLESyM module
 MODULE_DIR="/home/disk/mercury2/nacc/AIMIP2026/DLESyM"
 # set to -1 to use CPU
-DEVICE_NUMBERS="4"
+DEVICE_NUMBERS="0"
 
 ################ Forecast Params ################
 
@@ -20,7 +20,7 @@ OCEAN_MODEL="${MODULE_DIR}/models/ocean-forcing-model"
 # Sufffixes for output filnames. We're forecasting for each month, so we have 12 suffixes. 
 ATMOS_OUTPUT_FILENAME_SUFFIXES=("01" "02" "03" "04" "05")
 OCEAN_OUTPUT_FILENAME_SUFFIXES=("01" "02" "03" "04" "05")
-INIT_STARTS=("1983-10-01" "1983-10-02" "1983-10-03" "1983-10-04" "1983-10-05")
+INIT_STARTS=("1983-10-01" "1983-10-02" "1983-10-03" "1983-10-04" "1983-10-05")  
 INIT_ENDS=("1983-10-01" "1983-10-02" "1983-10-03" "1983-10-04" "1983-10-05")
 # Path to directory with atmos initialization data.
 ATMOS_DATA_DIR="/home/disk/rhodium/WEB/DLESyM_AGU-Advances"

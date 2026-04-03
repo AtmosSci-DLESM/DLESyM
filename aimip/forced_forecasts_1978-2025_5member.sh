@@ -30,8 +30,8 @@ ATMOS_DATASET_NAME="aimip_1978-init"
 OCEAN_DATA_DIR="/home/disk/mercury2/nacc/AIMIP2026/init_data"
 OCEAN_DATASET_NAME="aimip_1978-init_ocean"
 # 1983-2025 in hours, using same lead time for each of the 5 inits.
-# all end between 12-19-2024 and 12-29-2024
-LEAD_TIME="414144"
+# all end between 12-19-2024 and 12-28-2024
+LEAD_TIME="405312"
 
 # Parameters for resolving intialization dates
 FREQ="D"
