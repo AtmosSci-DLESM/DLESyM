@@ -141,14 +141,17 @@ def coupled_inference_hdf5(args: argparse.Namespace):
     except AttributeError:
         print(f'model {args.atmos_model_path} is not interpreted as a coupled model, cannot perform coupled forecast. Aborting.')
     
+    # Use component-specific data directories when provided; otherwise use shared data_directory
+    atmos_dst_directory = getattr(args, 'atmos_data_directory', None) or args.data_directory
+    ocean_dst_directory = getattr(args, 'ocean_data_directory', None) or args.data_directory
     optional_kwargs_atmos = {k: v for k, v in {
-        'dst_directory': args.data_directory,
+        'dst_directory': atmos_dst_directory,
         'prefix': args.data_prefix,
         'suffix': args.data_suffix,
         'dataset_name': args.atmos_dataset_name,
     }.items() if v is not None}
     optional_kwargs_ocean = {k: v for k, v in {
-        'dst_directory': args.data_directory,
+        'dst_directory': ocean_dst_directory,
         'prefix': args.data_prefix,
         'suffix': args.data_suffix,
         'dataset_name': args.ocean_dataset_name,
@@ -244,6 +247,31 @@ def coupled_inference_hdf5(args: argparse.Namespace):
     ocean_model.eval()
     print(f'Ocean Model Summary:')
     summary(ocean_model)
+
+    # Resolve output file paths early so we can check for existing outputs
+    if getattr(args, 'ocean_output_filename', None) is not None:
+        ocean_output_file = os.path.join(args.output_directory, f"{args.ocean_output_filename}.nc")
+    else:
+        ocean_output_file = os.path.join(args.output_directory, f"forecast_{ocean_model_name}.nc")
+    if getattr(args, 'atmos_output_filename', None) is not None:
+        atmos_output_file = os.path.join(args.output_directory, f"{args.atmos_output_filename}.nc")
+    else:
+        atmos_output_file = os.path.join(args.output_directory, f"forecast_{atmos_model_name}.nc")
+
+    # If outputs already exist and overwrite was not requested, exit without running the forecast
+    if not getattr(args, 'overwrite', False):
+        existing_files = [p for p in (atmos_output_file, ocean_output_file) if os.path.exists(p)]
+        if existing_files:
+            logger.info(
+                "Output file(s) already exist and --overwrite was not set. "
+                "Existing files: %s. Exiting without performing forecast.",
+                ", ".join(existing_files),
+            )
+            return
+    else:
+        logger.info(f"Overwriting existing output files {atmos_output_file} and {ocean_output_file}")
+        os.remove(atmos_output_file) if os.path.exists(atmos_output_file) else None
+        os.remove(ocean_output_file) if os.path.exists(ocean_output_file) else None
 
     # get references to the atmos and ocean couplers and iteratable loaders 
     atmos_coupler = atmos_data_module.test_dataset.couplings[0]
@@ -453,13 +481,6 @@ def coupled_inference_hdf5(args: argparse.Namespace):
         ocean_prediction_ds = encode_variables_as_int(ocean_prediction_ds, compress=1)
         atmos_prediction_ds = encode_variables_as_int(atmos_prediction_ds, compress=1)
 
-    if getattr(args,'ocean_output_filename',None) is not None:
-        ocean_output_file = os.path.join(args.output_directory, f"{args.ocean_output_filename}.nc")
-    if getattr(args,'atmos_output_filename',None) is not None:
-        atmos_output_file = os.path.join(args.output_directory, f"{args.atmos_output_filename}.nc")
-    else:
-        ocean_output_file = os.path.join(args.output_directory, f"forecast_{ocean_model_name}.nc")
-        atmos_output_file = os.path.join(args.output_directory, f"forecast_{atmos_model_name}.nc")
     logger.info(f"writing forecasts to {atmos_output_file} and {ocean_output_file}")
     ocean_write_job = ocean_prediction_ds.to_netcdf(ocean_output_file, compute=False)
     atmos_write_job = atmos_prediction_ds.to_netcdf(atmos_output_file, compute=False)
@@ -515,8 +536,14 @@ if __name__ == '__main__':
                         help="Filename used to save ocean output forecast")
     parser.add_argument('--encode-int', action='store_true',
                         help="Encode data variables as int16 type (may not be compatible with tempest-remap)")
+    parser.add_argument('--overwrite', action='store_true',
+                        help="Overwrite existing output files if they already exist")
     parser.add_argument('-d', '--data-directory', type=str, default=None,
-                        help="Path to test data, if different from files used for model training")
+                        help="Path to test data (used for both atmos and ocean when component-specific dirs not set)")
+    parser.add_argument('--atmos-data-directory', type=str, default=None,
+                        help="Path to atmosphere test data; overrides --data-directory for atmos only")
+    parser.add_argument('--ocean-data-directory', type=str, default=None,
+                        help="Path to ocean test data; overrides --data-directory for ocean only")
     parser.add_argument('--atmos-dataset-name', type=str, default=None,
                         help="Name of init dataset, if different from files used for model training")  
     parser.add_argument('--ocean-dataset-name', type=str, default=None,

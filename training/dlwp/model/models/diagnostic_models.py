@@ -56,17 +56,17 @@ class ocean_gt_model(HEALPixUNet):
         self.debugging_model = True
 
         super().__init__(
-            encoder,
-            decoder,
-            input_channels,
-            output_channels,
-            n_constants,
-            decoder_input_channels,
-            input_time_dim,
-            output_time_dim,
-            enable_healpixpad,
-            enable_nhwc,
-            couplings,
+            encoder=encoder,
+            decoder=decoder,
+            input_channels=input_channels,
+            output_channels=output_channels,
+            n_constants=n_constants,
+            decoder_input_channels=decoder_input_channels,
+            input_time_dim=input_time_dim,
+            output_time_dim=output_time_dim,
+            enable_nhwc=enable_nhwc,
+            enable_healpixpad=enable_healpixpad,
+            couplings=couplings,
         )
 
         # params used for constructing ground truth dataset 
@@ -95,9 +95,9 @@ class ocean_gt_model(HEALPixUNet):
 
         dt = self.delta_t # abbreviation 
 
-        # output array buffer. hard coded for hpx32. This will do for now. issues in the future will 
+        # output array buffer. This will do for now. issues in the future will 
         # fail loudly
-        output_array = th.empty([1, 12, self.output_time_dim, self.output_channels, 32, 32])
+        output_array = th.empty([1, 12, self.output_time_dim, self.output_channels, 64, 64])
 
         for i in range(0,self.output_time_dim):
         
