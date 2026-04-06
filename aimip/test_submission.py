@@ -42,8 +42,3 @@ class TestAIMIPSubmission:
         validator = AIMIPValidator(filepath)
         success, msg = validator.check_pressure_units()
         assert success, msg
-    
-    def test_cf_compliance(self, filepath):
-        validator = AIMIPValidator(filepath)
-        status, msg = validator.run_cf_checker()
-        assert status, msg

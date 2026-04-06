@@ -53,35 +53,3 @@ class AIMIPValidator:
             if self.ds['plev'].attrs.get('units') != 'Pa':
                 return False, "Units attribute not set to 'Pa'."
         return True, "Correct"
-
-    def run_cf_checker(self):
-
-            cmd = [sys.executable, "-m", "cfchecker.cfchecks", "-v", "1.8", self.filepath]
-            
-            try:
-                result = subprocess.run(cmd, capture_output=True, text=True, check=False)
-                full_log = (result.stdout or "") + (result.stderr or "")
-
-                # 1. Look for actual error lines (e.g., "ERROR: (3.1): ...")
-                # This regex matches "ERROR" or "FATAL" at the start of a line, 
-                # but ignores the summary "ERRORS detected: 0"
-                error_pattern = re.compile(r'^(ERROR|FATAL):', re.MULTILINE)
-                error_matches = error_pattern.findall(full_log)
-
-                if error_matches:
-                    # Extract the specific lines that failed for the report
-                    error_lines = [line for line in full_log.split('\n') 
-                                if line.startswith('ERROR:') or line.startswith('FATAL:')]
-                    return False, "\n".join(error_lines)
-
-                # 2. Confirm the check actually reached the end
-                if "ERRORS detected:" in full_log:
-                    # We found the summary and no specific ERROR: lines were matched
-                    return True, "Passed"
-
-                # 3. Handle cases where the checker crashed silently
-                return False, f"CF-Checker aborted. No summary found. Output:\n{full_log[:300]}"
-                
-            except Exception as e:
-                return False, f"Subprocess Error: {str(e)}"
-            

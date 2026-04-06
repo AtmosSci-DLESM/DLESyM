@@ -40,3 +40,5 @@ for file in $files; do
         echo "✅ PASSED"
     fi
 done
+
+echo "ERRORS detected: $(cat $FAILED_FILES | wc -l)"
