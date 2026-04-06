@@ -18,8 +18,8 @@ import s3fs
 def main():
     fs = s3fs.S3FileSystem(
         client_kwargs={"endpoint_url": "https://s3.eu-dkrz-1.dkrz.cloud"},
-        key=os.environ.get("DKRZ_S3_KEY", "PvUwMS8lvawlRecf5Bnp"),
-        secret=os.environ.get("DKRZ_S3_SECRET", "NXrq2PGaBy2pig2Lhgmr85Bdk3tZtkYTsmsunrDh"),
+        key=os.environ.get("DKRZ_S3_KEY", "key"),
+        secret=os.environ.get("DKRZ_S3_SECRET", "secret"),
     )
 
     bucket = "ai-mip"

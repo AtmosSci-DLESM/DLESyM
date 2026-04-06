@@ -1,6 +1,7 @@
 #!/bin/bash
 
-TARGET_DIR=${1:-"/home/disk/mercury3/nacc/aimip_subission/"}
+# TARGET_DIR=${1:-"/home/disk/mercury3/nacc/aimip_subission/"}
+TARGET_DIR=${1:-"/home/disk/mercury3/nacc/aimip_subission_1978/"}
 LOG_FILE="cf_validation_report.log"
 FAILED_FILES="failed_files.txt"
 

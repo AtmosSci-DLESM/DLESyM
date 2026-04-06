@@ -6,7 +6,7 @@ import os
 # Configurable via env var for remote verification (e.g. verify_remote_submission.py)
 SUBMISSION_ROOT = os.environ.get(
     "AIMIP_SUBMISSION_DIR",
-    "/home/disk/mercury3/nacc/aimip_subission"
+    "/home/disk/mercury3/nacc/aimip_subission_1978"
 )
 
 # Discover all netcdf files in your submission directory
