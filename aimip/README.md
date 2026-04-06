@@ -16,18 +16,18 @@ Forcing data was retrived from Ai2-curated [Zenodo store](https://zenodo.org/rec
 
 Output from the following experiments are provided: `aimip`, `aimip-p2k`, and `aimip-p4k`. Initial submission will include key variables surface temperature (`tas`), temperature (`ta`) at 850hPa, and geopotential height (`zg`) at 1000, 500, and 250hPa. Monthly averages for the full historical period, and daily averages for the first 15 months are included. 
 
-Five realizations were provided for each experiment resulting in 15 total simulations. Realizations were created using lagged initialization. Due to a limited data range in DLESyM's satellite-derived outgoing longwave radiation (OLR) data, we use ERA5's `top_net_thermal_radiation` (TTR) field to initialize the simulations in 1978, as requested in the [AIMIP specifications] (https://github.com/ai2cm/AIMIP). The TTR field was fitted to OLR using an affine tranformation. 
-
-
+Five realizations were provided for each experiment resulting in 15 total simulations. Realizations were created using lagged initialization. Due to a limited data range in DLESyM's satellite-derived outgoing longwave radiation (OLR) data, we use ERA5's `top_net_thermal_radiation` (TTR) field to initialize the simulations in 1978, as requested in the [AIMIP specifications] (https://github.com/ai2cm/AIMIP). The TTR field was fitted to OLR using an affine tranformation. Initializations were started on October 3, 1978 (extending to October 7th 1978) to allow for complete DLESyM initialization with available forcing data. 
 
 | Realization | Initialization |
 |------|-------------|
-| `r1` | 10/01/1978 |
-| `r2` | 10/02/1978 |
-| `r3` | 10/03/1978 |
-| `r4` | 10/04/1978 |
-| `r5` | 10/05/1978 |
+| `r1` | 10/03/1978 |
+| `r2` | 10/04/1978 |
+| `r3` | 10/05/1978 |
+| `r4` | 10/06/1978 |
+| `r5` | 10/07/1978 |
 ---
+
+NOTE:
 
 ## Directory Contents
 
