@@ -6,7 +6,7 @@ import os
 # Configurable via env var for remote verification (e.g. verify_remote_submission.py)
 SUBMISSION_ROOT = os.environ.get(
     "AIMIP_SUBMISSION_DIR",
-    "/home/disk/mercury3/nacc/aimip_subission"
+    "/home/disk/mercury3/nacc/aimip_subission_1978"
 )
 
 # Discover all netcdf files in your submission directory
@@ -42,8 +42,3 @@ class TestAIMIPSubmission:
         validator = AIMIPValidator(filepath)
         success, msg = validator.check_pressure_units()
         assert success, msg
-    
-    def test_cf_compliance(self, filepath):
-        validator = AIMIPValidator(filepath)
-        status, msg = validator.run_cf_checker()
-        assert status, msg

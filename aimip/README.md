@@ -16,16 +16,18 @@ Forcing data was retrived from Ai2-curated [Zenodo store](https://zenodo.org/rec
 
 Output from the following experiments are provided: `aimip`, `aimip-p2k`, and `aimip-p4k`. Initial submission will include key variables surface temperature (`tas`), temperature (`ta`) at 850hPa, and geopotential height (`zg`) at 1000, 500, and 250hPa. Monthly averages for the full historical period, and daily averages for the first 15 months are included. 
 
-Five realizations were provided for each experiment resulting in 15 total simulations. Realizations were created using lagged initialization. Due to a limited data range in DLESyM's satellite derived outgoing longwave radiation data, simulations were started in 1983.
+Five realizations were provided for each experiment resulting in 15 total simulations. Realizations were created using lagged initialization. Due to a limited data range in DLESyM's satellite-derived outgoing longwave radiation (OLR) data, we use ERA5's `top_net_thermal_radiation` (TTR) field to initialize the simulations in 1978, as requested in the [AIMIP specifications] (https://github.com/ai2cm/AIMIP). The TTR field was fitted to OLR using an affine tranformation. Initializations were started on October 3, 1978 (extending to October 7th 1978) to allow for complete DLESyM initialization with available forcing data. 
 
 | Realization | Initialization |
 |------|-------------|
-| `r1` | 10/01/1983 |
-| `r2` | 10/02/1983 |
-| `r3` | 10/03/1983 |
-| `r4` | 10/04/1983 |
-| `r5` | 10/05/1983 |
+| `r1` | 10/03/1978 |
+| `r2` | 10/04/1978 |
+| `r3` | 10/05/1978 |
+| `r4` | 10/06/1978 |
+| `r5` | 10/07/1978 |
 ---
+
+NOTE:
 
 ## Directory Contents
 
@@ -33,34 +35,44 @@ Five realizations were provided for each experiment resulting in 15 total simula
 |------|-------------|
 | `retrieve_zenodo.sh` | Script to download required standard forcing data from Zenodo|
 | `preprocess_forcing.py` | process standardized forcing into a format compatible with DLESyM coupling scheme|
-|`forcedforecast_1983-2025_5member.sh`| batch script for running AIMIP basic simulations|
-|`forcedforecast_1983-2025_p2k.sh`| batch script for running AIMIP p2k simulations|
-|`forcedforecast_1983-2025_p4k.sh`| batch script for running AIMIP p4k simulations|
+|`forcedforecast_1978-2025_5member.sh`| batch script for running AIMIP basic simulations|
+|`forcedforecast_1978-2025_p2k.sh`| batch script for running AIMIP p2k simulations|
+|`forcedforecast_1978-2025_p4k.sh`| batch script for running AIMIP p4k simulations|
 |`cmortize_dlesym.py`| Routine for reformatting DLESyM output into CMIP-style output | 
 |`aimip_validator.py`| class for checking output format |
-|`test_submission.py`| test suite which invokes `cf-checker` and other basic validations of submission format| 
+|`test_submission.py`| test suite which invokes basic validations of submission format| 
+|`cfcheck.sh`| check for cf-compliant forecasts. | 
 
 ---
 
 ## Process
 
-1. **Retrieve Forcing Data**: get standard forcing data using: 
+1. **Retrieve Forcing Data:** get standard forcing data using: 
 
       `python retrieve_zenodo.py`
 
-2. **Prepare Forcing data**: prepare forcing data for ingestion into DLESyM atmosphere component: 
+2. **Prepare Forcing data:** prepare forcing data for ingestion into DLESyM atmosphere component:  
       `python preprocess_forcing.py`
 
-3. **Run Experiments**: run requested experiments from AIMIP phase-1 call: 
-      `bash forced_forecast_1983-2025_5member.sh`
-      `bash forced_forecast_1983-2025_p2k.sh`      
-      `bash forced_forecast_1983-2025_p4k.sh`
+3. **Run Experiments:** run requested experiments from AIMIP phase-1 call:  
+`bash forced_forecast_1978-2025_5member.sh`  
+`bash forced_forecast_1978-2025_p2k.sh`  
+`bash forced_forecast_1978-2025_p4k.sh`
 
-4. **"Cmortize" Output: enforce CMIP-style output: 
+4. **"Cmortize" Output:** enforce CMIP-style output:   
       `python cmortize_dlesym.py`
 
-...and check that output satisfies expected structure
+5. **Check output format:** check that output satisfies expected structure, variable names, etc...  
       `pytest test_submission.py -v`
 
-Once tests are passed, we're ready to submit!
+      ...also check cf-compliant files. This requires use of a seperate checker:  
+            `bash cfchecker.sh`
+
+6. **Submit forecasts:** Once tests are passed, we're ready to submit!  
+      `python submission_dkrz.py`
+
+7. **Optional Check for validity of upload:**  
+      `python verify_remote_submission.py`
+
+**Note:** you'll need to obtain DKRZ credientials for uploads and dowloads. 
 

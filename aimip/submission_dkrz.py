@@ -3,8 +3,8 @@ import s3fs
 
 fs_ice = s3fs.S3FileSystem(
     client_kwargs={'endpoint_url': 'https://s3.eu-dkrz-1.dkrz.cloud'},
-    key = 'PvUwMS8lvawlRecf5Bnp',
-    secret = 'NXrq2PGaBy2pig2Lhgmr85Bdk3tZtkYTsmsunrDh',
+    key = 'key',
+    secret = 'secret',
 )
 
 # 2) Define your local folder and target S3 prefix
