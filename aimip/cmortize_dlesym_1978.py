@@ -78,7 +78,7 @@ def _valid_times_to_cf_numeric(valid_times):
 
 def save_daily_average(ds, output_dir, experiment, r, variable, units, long_name, surface=False):
     # recursively make directory structure for output
-    path = os.path.join(output_dir, 'university_of_washington', 'DLESyM', experiment, f'r{r}i1p1f1', 'day', variable, 'gn', 'v20250825')
+    path = os.path.join(output_dir, 'university_of_washington', 'DLESyM', experiment, f'r{r}i1p1f1', 'day', variable, 'gn', 'v20260406')
     os.makedirs(path, exist_ok=True)
 
     # encoding instructions for netcdf
@@ -129,7 +129,7 @@ def save_daily_average(ds, output_dir, experiment, r, variable, units, long_name
 def save_monthly_average(ds, output_dir, experiment, r, variable, units, long_name, surface=False):
 
     # recursively make directory structure for output
-    path = os.path.join(output_dir, 'university_of_washington', 'DLESyM', experiment, f'r{r}i1p1f1', 'Amon', variable, 'gn', 'v20250825')
+    path = os.path.join(output_dir, 'university_of_washington', 'DLESyM', experiment, f'r{r}i1p1f1', 'Amon', variable, 'gn', 'v20260406')
     os.makedirs(path, exist_ok=True)
 
     # Resample to monthly mean with labels at middle of month (16th)
