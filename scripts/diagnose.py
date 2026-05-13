@@ -19,8 +19,8 @@ from dask.diagnostics import ProgressBar
 from training.dlwp.utils import to_chunked_dataset, encode_variables_as_int, configure_logging, get_best_checkpoint_path
 
 logger = logging.getLogger(__name__)
-logging.getLogger('cfgrib').setLevel(logging.ERROR)
-logging.getLogger('matplotlib').setLevel(logging.ERROR)
+logging.getLogger('cfgrib').setLevel(logging.INFO)
+logging.getLogger('matplotlib').setLevel(logging.INFO) # IN FOREGROUND
 
 
 def _convert_time_step(dt):  # pylint: disable=invalid-name
@@ -70,7 +70,7 @@ def inference(args: argparse.Namespace):
         cfg = compose('config.yaml')
     batch_size = cfg.batch_size if args.batch_size is None else args.batch_size
 
-    cfg.num_workers = 0
+    cfg.num_workers = 16
     batch_size = 1
     cfg.batch_size = batch_size
     cfg.data.prebuilt_dataset = True
@@ -117,7 +117,7 @@ def inference(args: argparse.Namespace):
         output_time_dim=output_time_dim,
         forecast_init_times=forecast_dates,
         shuffle=False,
-#        batch_size=batch_size,
+    #    batch_size=batch_size,
         **optional_kwargs
     )
     loader, _ = data_module.test_dataloader()
@@ -156,10 +156,10 @@ def inference(args: argparse.Namespace):
     # Allocate giant array. One extra time step for the init state.
     logger.info("allocating prediction array. If this fails due to OOM consider reducing lead times or "
                 "number of forecasts.")
-    prediction = np.empty((len(forecast_dates),
+    prediction = th.empty((len(forecast_dates),
                            output_time_dim,
                            len(data_module.output_variables)) + data_module.test_dataset.spatial_dims,
-                           dtype='float32')
+                           device=device, dtype=th.float32)
 
     # Iterate over model predictions
     pbar = tqdm(loader)
@@ -170,14 +170,14 @@ def inference(args: argparse.Namespace):
         #prediction[j*batch_size:(j+1)*batch_size][:, 0] = inputs[0].permute(0, 2, 3, 1, 4, 5)[:, -1]
         inputs = [i.to(device) for i in inputs]
         with th.no_grad():
-            prediction[j*batch_size:(j+1)*batch_size][:, 0:] = model(inputs).permute(0, 2, 3, 1, 4, 5).cpu().numpy()
+            prediction[j*batch_size:(j+1)*batch_size][:, 0:] = model(inputs).permute(0, 2, 3, 1, 4, 5)
 
     # Generate dataarray with coordinates
     meta_ds = data_module.test_dataset.ds
     if args.to_zarr:
-        prediction = dask.array.from_array(prediction, chunks=(1,) + prediction.shape[1:])
+        prediction = prediction.cpu()
     prediction_da = xr.DataArray(
-        prediction,
+        prediction.cpu().numpy(),
         dims=['time', 'step', 'channel_out', 'face', 'height', 'width'],
         coords={
             'time': forecast_dates,

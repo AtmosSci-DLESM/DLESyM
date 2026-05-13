@@ -31,6 +31,7 @@ class HEALPixUNet(th.nn.Module):
             enable_nhwc: bool = False,
             enable_healpixpad: bool = False,
             couplings: list = [],
+            is_diagnostic: Optional[bool] = None,
     ):
         """
         Deep Learning Weather Prediction (DLWP) UNet on the HEALPix mesh.
@@ -49,6 +50,9 @@ class HEALPixUNet(th.nn.Module):
         :param enable_nhwc: Model with [N, H, W, C] instead of [N, C, H, W] oder
         :param enable_healpixpad: Enable CUDA HEALPixPadding if installed
         :param coupings: sequence of dictionaries that describe coupling mechanisms
+        :param is_diagnostic: if True, the model outputs one time step per forward pass regardless of
+            output_time_dim, enabling autoregressive rollout without changing the model architecture.
+            If None, inferred as True when output_time_dim == 1 and input_time_dim > 1 (training-time default).
         """
         super().__init__()
         # add coupled fields to input channels for model initialization 
@@ -65,10 +69,14 @@ class HEALPixUNet(th.nn.Module):
         self.enable_nhwc = enable_nhwc
         self.enable_healpixpad = enable_healpixpad
 
-        #self.output_dim = self.output_channels*self.input_time_dim
-
-        # Number of passes through the model, or a diagnostic model with only one output time
-        self.is_diagnostic = self.output_time_dim == 1 and self.input_time_dim > 1
+        # Number of passes through the model, or a diagnostic model with only one output time step per pass.
+        # When is_diagnostic is explicitly provided (e.g. from the config), use it directly so that models
+        # trained with output_time_dim=1 remain diagnostic even when a larger output_time_dim is passed for
+        # autoregressive rollout at inference time.
+        if is_diagnostic is not None:
+            self.is_diagnostic = is_diagnostic
+        else:
+            self.is_diagnostic = self.output_time_dim == 1 and self.input_time_dim > 1
         if not self.is_diagnostic and (self.output_time_dim % self.input_time_dim != 0):
             raise ValueError(f"'output_time_dim' must be a multiple of 'input_time_dim' (got "
                              f"{self.output_time_dim} and {self.input_time_dim})")

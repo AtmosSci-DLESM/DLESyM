@@ -52,10 +52,14 @@ def create_prebuilt_zarr(
     remove_attrs = ['varlev', 'mean', 'std']
     for variable in all_variables:
         file_name = merged_dict[variable]
-        if "sample" in list(xr.open_dataset(file_name).dims.keys()):
-            ds = xr.open_dataset(file_name, chunks={'sample': batch_size}).rename({"sample": "time"})
+        # One open per variable — the old probe+open pattern leaked a Dataset per
+        # iteration and could leave many handles on the same path (e.g. tp6/tcwv0),
+        # which has provoked NetCDF segfaults.
+        ds = xr.open_dataset(file_name)
+        if "sample" in ds.dims:
+            ds = ds.chunk({"sample": batch_size}).rename({"sample": "time"})
         else:
-            ds = xr.open_dataset(file_name, chunks={"time": batch_size})
+            ds = ds.chunk({"time": batch_size})
         if "varlev" in ds.dims:
             ds = ds.isel(varlev=0)
         # Subset time

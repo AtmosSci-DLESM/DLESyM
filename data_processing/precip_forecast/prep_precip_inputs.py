@@ -100,7 +100,7 @@ def format_sst_file(input_file, output_prefix):
     
 def main(params):
     split_nc_file(params['atmos_input'], params['split_fc_prefix'])
-    format_stt_file(params['ocean_input'], params['split_fc_prefix'])
+    format_sst_file(params['ocean_input'], params['split_fc_prefix'])
     
     write_zarr.create_prebuilt_zarr(
     params["dst_directory"],
