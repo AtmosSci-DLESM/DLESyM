@@ -41,7 +41,8 @@ NOTE:
 |`cmortize_dlesym.py`| Routine for reformatting DLESyM output into CMIP-style output | 
 |`aimip_validator.py`| class for checking output format |
 |`test_submission.py`| test suite which invokes basic validations of submission format| 
-|`cfcheck.sh`| check for cf-compliant forecasts. | 
+|`cfcheck.sh`| check for cf-compliant forecasts. |
+|`precip_diagnosis/`| downstream pipeline for diagnosing precipitation from completed DLESyM simulations (see [Precipitation Diagnosis](#precipitation-diagnosis) below) |
 
 ---
 
@@ -75,4 +76,40 @@ NOTE:
       `python verify_remote_submission.py`
 
 **Note:** you'll need to obtain DKRZ credientials for uploads and dowloads. 
+
+---
+
+## Precipitation Diagnosis
+
+DLESyM's atmosphere component (DLWP) does not predict precipitation as a prognostic variable. Instead, precipitation is diagnosed *after* a simulation has completed using a separate diagnostic model that takes DLWP atmospheric state as input. The `precip_diagnosis/` directory contains a three-stage pipeline that takes a finished DLESyM forecast and produces CMIP-style precipitation output (`pr`) for AIMIP submission.
+
+The pipeline is orchestrated by `precip_pipeline.py`, which chains together three stages for a single (experiment, realization) pair:
+
+1. **`prep_precip_inputs`** — repackages the raw atmosphere + ocean forecast `.nc` files into a single zarr dataset on the HPX64 grid, with the variable set, scaling, and constants (land–sea mask, topography) expected by the precip diagnosis model.
+2. **`run_diagnosis`** — runs the trained precip diagnostic model (located at `models/precip`) on the prepared inputs to produce a precipitation forecast.
+3. **`cmortize_precip`** — converts the raw precip forecast to CMIP-style output (correct units, time coordinates, metadata, daily and monthly averages) ready to be merged into the AIMIP submission.
+
+Per-experiment driver scripts define the input/output paths and per-realization parameters for each of the three AIMIP experiments:
+
+| File | Description |
+|------|-------------|
+| `precip_pipeline.py` | core pipeline that runs the three stages in sequence for a single configuration |
+| `prep_precip_inputs.py` | stage 1: prepare zarr inputs from a completed DLESyM forecast |
+| `run_diagnosis.py` | stage 2: run the precip diagnostic model on prepared inputs |
+| `cmortize_dlesym_1978_precip.py` | stage 3: reformat diagnosed precip into CMIP-style output |
+| `historical_precip_pipelines.py` | driver: runs the pipeline for all `aimip` (historical) realizations |
+| `p2k_precip_pipelines.py` | driver: runs the pipeline for all `aimip-p2k` realizations |
+| `p4k_precip_pipelines.py` | driver: runs the pipeline for all `aimip-p4k` realizations |
+
+### Process
+
+After the main simulations and `cmortize_dlesym.py` step above have completed, diagnose precipitation for each experiment:
+
+```bash
+python precip_diagnosis/historical_precip_pipelines.py
+python precip_diagnosis/p2k_precip_pipelines.py
+python precip_diagnosis/p4k_precip_pipelines.py
+```
+
+The CMIP-style `pr` files produced by stage 3 are written into the submission directory and can then be validated and uploaded using the same `test_submission.py` / `submission_dkrz.py` steps described above.
 
